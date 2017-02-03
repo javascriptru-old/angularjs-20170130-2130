@@ -1,0 +1,84 @@
+<html ng-app="myApp">
+<body>{{1+1}}
+
+<app-root>
+
+!!!1111111111111!!!
+
+</app-root>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<script>
+angular.module('myApp', []);
+let app = angular.module('myApp');
+
+//directives
+   // components (1.5)
+   // attribute directives
+/*
+app.directive('appRoot', function() {
+    return {
+        template: '<h1>Hello, {{$ctrl.name}}!</h1>',
+        link: function(scope) {
+          scope.$ctrl = { name : 'John'};
+        },
+        // controller: function() {
+        //    this.name = 'John';
+        // },
+        // controllerAs: '$ctrl'
+    };
+});*/
+
+//1.6
+app.component('appRoot', {
+    templateUrl: 'app-root.html',
+    controller: function() {
+        this.myUser = {
+            name: 'Bob',
+            age: 23
+        };
+
+        this.name = 'John';
+        this.isShown = true;
+
+        this.checkMe = (show) => {
+            this.isShown = show
+        };
+
+        this.images = [
+              'portraits/thumb/men/1.jpg',
+              'portraits/thumb/men/3.jpg',
+              'portraits/thumb/men/5.jpg',
+              'portraits/thumb/men/6.jpg',
+              'portraits/thumb/men/78.jpg'
+        ];
+    }
+})
+
+app.component('userCard', {
+    templateUrl: 'user-card.html',
+    controller: function() {
+        //this.profile;
+        //this.callbackSwitchoff
+
+        this.dosomething = () => {
+            //this.callbackSwitchoff({})
+            //this.callbackSwitchon();
+        }
+    },
+    bindings: {
+       // < - one way  !!! 1.5
+       // = - two way
+       // @ - value
+       // & - callback
+       name: '<user',
+       callbackSwitchoff: '&switchoff',
+       callbackSwitchon: '&switchon'
+    }
+})
+
+
+</script>
+
+</body></html>
