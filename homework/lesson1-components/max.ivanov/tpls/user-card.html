@@ -2,7 +2,7 @@
     <div class="thumbnail" ng-class="{'highlighted' : ctrl.person.highlighted}">
         <div class="row">
             <div class="col-xs-3">
-                <img ng-src="{{ctrl.person.photo || ctrl.noimage}}" class="img-responsive" alt="{{ctrl.person.firstName}} {{ctrl.person.surname}}">
+                <user-card-img img="ctrl.person.photo" text="{{ctrl.person.firstName}} {{ctrl.person.surname}}"></user-card-img>
             </div>
             <div class="col-xs-9">
                 <user-card-param label="First name" value="ctrl.person.firstName"></user-card-param>

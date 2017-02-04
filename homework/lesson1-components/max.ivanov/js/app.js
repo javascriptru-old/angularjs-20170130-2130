@@ -1,6 +1,7 @@
 const app = 'app',
     mainConstructor = 'main',
     userCardComponent = 'userCard',
+    userCardImgComponent = 'userCardImg',
     userCardParamComponent = 'userCardParam';
 
 angular.module(app, [])
@@ -122,17 +123,24 @@ angular.module(app, [])
             onRemove : '&',
             onHighlight : '&'
         },
-        controller: function(){
-            this.noimage = 'http://i.imgur.com/YwKqbok.jpg';
-        },
         controllerAs: 'ctrl'
-
     })
     .component(userCardParamComponent, {
         templateUrl : 'tpls/user-card-param.html',
         bindings : {
             label : '@',
             value : '<'
+        },
+        controllerAs: 'ctrl'        
+    })
+    .component(userCardImgComponent, {
+        templateUrl: 'tpls/user-card-img.html',
+        bindings:{
+            image: '<img',
+            text: '@'
+        },
+        controller: function(){
+            this.noimage = 'http://i.imgur.com/YwKqbok.jpg';
         },
         controllerAs: 'ctrl'        
     });
