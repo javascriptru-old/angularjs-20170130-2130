@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html ng-app="userCards"> 
+<head>
+  <meta charset="UTF-8">
+  <title>Карточки пользователей</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <app-root></app-root>
+    </div>
+  </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script>
+  'use strict'
+
+  var app = angular.module('userCards', []);
+  
+  //get data from json 
+  var userlist = [];
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'users.json', false);
+  xhr.send();
+  if(xhr.status == 200) {
+    userlist = JSON.parse(xhr.responseText);
+  }
+  
+  //work with userlist
+  app.component('appRoot', {
+    templateUrl: 'app-root.html',
+    controller: function() { 
+        this.userlist = userlist; 
+
+        this.deleteUser = (usr) => {
+           for (var i = 0; i < this.userlist.length; i++) {
+             if (this.userlist[i] == usr) {
+               this.userlist.splice(i, 1);
+               break;
+             }
+           }
+         };
+
+         this.selectUser = (usr) => {
+           for (var i = 0; i < this.userlist.length; i++) {
+             this.userlist[i].selectedStyle = '';
+           }
+           usr.selectedStyle = 'panel-active';
+        };         
+    }
+  });
+
+  // user' card
+  app.component('userCard', {
+    templateUrl: 'user-card.html',
+    controller: function($scope) {      
+    },
+    bindings: {
+       user: '<user',
+       deleteUser: '&deleteuser',
+       selectUser:'&selectuser'
+    }
+  });
+
+</script>
+<style>
+  .panel-active{
+    -webkit-box-shadow: 0px 0px 6px rgba(15,148,175,0.7);
+    box-shadow: 0px 0px 6px rgba(15,148,175,0.7);
+  }
+</style>
+
+</body>
+</html>

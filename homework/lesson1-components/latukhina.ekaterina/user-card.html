@@ -1,0 +1,25 @@
+<div class="panel panel-info {{$ctrl.user.selectedStyle}}"  ng-click="$ctrl.selectUser({usr: $ctrl.user})"> 
+  <div class="panel-heading">
+    <h3 class="panel-title">{{$ctrl.user.firstName}} &nbsp; {{$ctrl.user.surname}}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class=" col-md-9 col-lg-9 ">
+        <table class="table table-user-information">
+          <tbody>
+          <tr>
+            <td><img ng-src="{{$ctrl.user.photo}}" alt="No photo" style="width:100px"></td> 
+            <td><button ng-click="$ctrl.deleteUser({usr: $ctrl.user});">X</button></td>
+          </tr>
+          <tr>
+            <td>Страна</td>
+            <td>{{$ctrl.user.country}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+  </div>
+</div> 
