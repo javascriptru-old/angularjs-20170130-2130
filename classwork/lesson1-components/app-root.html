@@ -1,0 +1,28 @@
+<div>
+   {{$ctrl.x}}
+    <span ng-bind="'John ' + $ctrl.name">322314343214324</span>
+    <!--<span ng-bind-html="'John ' + $ctrl.name">322314343214324</span>-->
+
+    <h1 ng-if="$ctrl.isShown">Hello, {{$ctrl.name}}!</h1>
+
+    <button ng-click="  $ctrl.checkMe(false) ">Hide!</button>
+    <button ng-click="  $ctrl.checkMe(true) ">Show!</button>
+    <input type="checkbox" ng-model="$ctrl.isShown">
+    <input type="text" ng-model="$ctrl.sometext">  {{$ctrl.sometext}}
+
+
+    <!--<ul>
+      <li ng-repeat="image in $ctrl.images">
+          <span ng-if="$first">FIRST!</span>
+          <img ng-src="https://randomuser.me/api/{{image}}" alt="">
+      </li>
+    </ul>-->
+
+
+    {{$ctrl.myUser.name}}
+    <user-card user="$ctrl.myUser.name"
+               switchoff="$ctrl.checkMe(x)"
+               switchon="$ctrl.checkMe(x)"
+    ></user-card>
+
+</div>

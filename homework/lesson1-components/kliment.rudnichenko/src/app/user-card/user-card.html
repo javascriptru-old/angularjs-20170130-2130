@@ -1,0 +1,39 @@
+<div class="panel panel-info card" ng-click="$ctrl.selectedUser=$ctrl.user" ng-class="{'selected': $ctrl.selectedUser===$ctrl.user}">
+  <div class="panel-heading">
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div>
+        <div class="col-md-3 col-lg-3">
+          <div ng-hide="$ctrl.user.photo" class="no-photo">Нет фото</div>
+          <img ng-src="{{$ctrl.user.photo}}" width=100%/>
+        </div>
+        <div class="col-md-9 col-lg-9">
+          <table class="table table-user-information">
+            <tbody>
+              <tr>
+                <td>Фамилия</td>
+                <td>{{$ctrl.user.surname}}</td>
+              </tr>
+              <tr>
+                <td>Имя</td>
+                <td>{{$ctrl.user.firstName}}</td>
+              </tr>
+              <tr>
+                <td>Страна</td>
+                <td>{{$ctrl.user.country}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="delete-button__container">
+      <button class="btn btn-default" type="button" ng-click="$ctrl.deleteUser({user: $ctrl.user})">
+        УДАЛИТЬ
+      </button>
+    </div>
+  </div>
+  <div class="panel-footer">
+  </div>
+</div>
