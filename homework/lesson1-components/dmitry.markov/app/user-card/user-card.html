@@ -1,12 +1,15 @@
 <div class="col-sm-6 col-md-4 m-b-lg">
-  <div class="panel panel-default panel-profile m-b-0">
-    <div class="panel-heading" style="background-image: url(//cdn.shopify.com/s/files/1/0691/5403/t/130/assets/insta-1.jpg?1331440162089783574);"></div>
+  <div class="panel panel-profile m-b-0"
+       ng-click="$ctrl.setActive()"
+       ng-class="$ctrl.active">
+    <div class="panel-heading" style="background-image: url(//cdn.shopify.com/s/files/1/0691/5403/t/130/assets/insta-1.jpg);"></div>
     <div class="panel-body text-center">
-      <img class="panel-profile-img" ng-src="{{ $ctrl.user.photo }}">
-      <h5 class="panel-title">{{ $ctrl.user.firstName }} {{ $ctrl.user.surname }}</h5>
-      <p class="m-b">Country: {{ $ctrl.user.country }}</p>
-      <button class="btn btn-primary-outline btn-sm m-b"
-              ng-click="$ctrl.deleteUser($ctrl.user.surname)">Delete from list</button>
+      <img class="panel-profile-img"
+           ng-src="{{ $ctrl.user.photo ? $ctrl.user.photo : 'https://top.kz/assets/empty-avatar-c8775f1f4a1c5f0be17dfe4ae0de5fad.png' }}">
+      <h5 class="panel-title">{{ ::$ctrl.fullName }}</h5>
+      <p class="m-b">{{ ::$ctrl.country }}</p>
+      <button class="btn btn-primary btn-sm m-b"
+              ng-click="$ctrl.deleteUser($event, $ctrl.index)">Попрощаться</button>
     </div>
   </div>
 </div>
