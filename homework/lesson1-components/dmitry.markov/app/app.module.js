@@ -15,13 +15,21 @@
                  <user-card ng-repeat="(index, user) in $ctrl.users"
                             user="user"
                             index="index"
-                            delete="$ctrl.deleteUserCard(index)"></user-card>
+                            delete="$ctrl.deleteUserCard(index)"
+                            active="$ctrl.deleteActiveCard(index)"></user-card>
                </div>`,
-    controller: function (usersService, backgroundService) {
-      this.users = usersService
+    controller: function (newUserService, backgroundService) {
+      newUserService.getUsers()
+        .then((response) => {
+        this.users = response
+      })
+
       this.backgrounds = backgroundService
       this.deleteUserCard = (index) => {
         this.users.splice(index, 1)
+      }
+      this.deleteActiveCard = (index) => {
+        console.log(index)
       }
     }
   })
@@ -34,8 +42,9 @@
         this.country = countryService[this.user.country]
       }
       this.active = 'panel-default'
-      this.setActive = () => {
+      this.setActive = (index) => {
         this.active = (this.active === 'panel-default') ? 'panel-primary' : 'panel-default'
+        this.callbackActive({index})
         // TODO: turn off all other active cards
       }
       this.deleteUser = ($event, index) => {
@@ -44,45 +53,28 @@
       }
     },
     bindings: {
-     user: '<user',
-     index: '<index',
-     callbackDelete: '&delete'
+     user: '<',
+     index: '<',
+     callbackDelete: '&delete',
+     callbackActive: '&active'
     }
   })
 
-  app.factory('usersService', function () {
-    const users = [{
-        "firstName": "Николай",
-        "surname": "Байбородин",
-        "photo": "http://i.imgur.com/vvzLtVG.jpg",
-        "country": "ru"
-      }, {
-        "firstName": "Дмитрий",
-        "surname": "Марков",
-        "photo": "http://i.imgur.com/MOHWnlL.png",
-        "country": "ru"
-      }, {
-        "firstName": "Юрий",
-        "surname": "Масьян",
-        "country": "ru"
-      }, {
-        "firstName": "Катерина",
-        "surname": "Латухина",
-        "photo": "http://i.imgur.com/vN6pxep.jpg",
-        "country": "ru"
-      }, {
-        "firstName": "Максим",
-        "surname": "Иванов",
-        "photo": "http://i.imgur.com/duePtdB.jpg",
-        "country": "ru"
-      }, {
-        "firstName": "Егор",
-        "surname": "Литвяков",
-        "photo": "http://i.imgur.com/Re2rrye.jpg",
-        "country": "ru"
-      }]
+  app.service('newUserService', function ($q, $http, $window) {
+    const url = 'app/data/users.json'
 
-    return users
+    this.getUsers = () => {
+      return $q((resolve, reject) => {
+        $http.get(url)
+          .then((response) => {
+          const users = response.data
+          resolve(users)
+        }, (error) => {
+          $window.console.log(error)
+          reject(error)
+        })
+      })
+    }
   })
 
   app.factory('backgroundService', function () {
