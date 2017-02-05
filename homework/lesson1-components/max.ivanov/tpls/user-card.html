@@ -1,0 +1,15 @@
+<div class="user-card col-xs-12 col-sm-6 col-md-4" ng-click="ctrl.onHighlight({item: ctrl.person})">
+    <div class="thumbnail" ng-class="{'highlighted' : ctrl.person.highlighted}">
+        <div class="row">
+            <div class="col-xs-3">
+                <user-card-img img="ctrl.person.photo" text="{{ctrl.person.firstName}} {{ctrl.person.surname}}"></user-card-img>
+            </div>
+            <div class="col-xs-9">
+                <user-card-param label="First name" value="ctrl.person.firstName"></user-card-param>
+                <user-card-param label="Last name" value="ctrl.person.surname"></user-card-param>
+                <user-card-param label="Country" value="ctrl.person.country"></user-card-param>
+                <p><button class="btn btn-danger" ng-click="ctrl.onRemove({item: ctrl.person})">Remove</button></p>
+            </div>
+        </div>
+    </div>
+</div>
