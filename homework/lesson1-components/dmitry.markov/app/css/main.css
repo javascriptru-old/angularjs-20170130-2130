@@ -11,11 +11,11 @@
 }
 
 .panel {
-  min-height: 320px;
+  min-height: 320px
 }
 
 .panel-primary {
-  box-shadow: 0 0 8px 0 #80b2dd;
+  box-shadow: 0 0 8px 0 #80b2dd
 }
 
 .panel-profile .panel-title {
@@ -47,14 +47,9 @@
 }
 
 .btn.focus,
-.btn:focus,
-.btn:hover {
+.btn:focus {
   color: #fff;
   background: #6b15a1
-}
-
-input.btn:focus {
-  outline: 0
 }
 
 .btn-sm {

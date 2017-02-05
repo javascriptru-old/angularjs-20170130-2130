@@ -2,10 +2,8 @@
 
 ### Задание
 
-###### Приложение "Список пользоватей"
-
+##### Приложение "Список пользоватей"
 1. Сделать статический компонент userCard (карточка пользователя)
-      - шаблон можно взять отсюда - http://plnkr.co/edit/7HrwHS9yVdyEEvsZGByj?p=preview
 2. Организовать передачу данных внутрь компонета userCard
 3. Вывести список карточек пользователя (ng-repeat) (используя данные из users.json)
 4. При клике(ng-click) на элемент списка подсвечивать его синими
@@ -21,7 +19,13 @@ http://plnkr.co/edit/HeLL6YaAH8CXu0rWVuss?p=preview
 - [x] default image
 - [x] country info
 - [x] http json service
-- [ ] turn off blue from other cards
+- [x] random change backgrounds
+- [x] remove blue selection from other cards
 - [ ] break into files
-- [ ] random change backgrounds
+- [ ] delete animation
 - [ ] country flags
+
+### Вопросы преподавателю
+* есть ли более простой способ передать данные http-запроса в контроллер?
+* можно ли было реализовать функционал сервиса usersService через фабрику?
+* как лучше прокинуть событие в соседние дочерние элементы (снятие активного класса)?
