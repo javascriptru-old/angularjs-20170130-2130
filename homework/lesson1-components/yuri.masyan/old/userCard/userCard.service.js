@@ -16,18 +16,11 @@ angular.module('userCards')
       })
         .then(function (response) {
           data.cards = response.data;
-          console.log(response.data);
         });
     };
-    data.selected = function (item, index) {
-     console.log("SELECTED");
-     console.log(item);
-     console.log(index);
 
-    };
     data.delete = function (item, index) {
       data.cards.splice(index, 1);
-      console.log(index);      
     };
     return data;
   })
