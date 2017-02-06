@@ -42,10 +42,16 @@ gulp.task('app', () => {
         loader: 'ngtemplate!html'
     };
 
+    const uglify = {
+        test: /\.js$/,
+        exclude: /src\/app/,
+        loader: 'uglify'
+    };
+
     let config = {
         devtool: 'sourcemap',
         module: {
-            loaders: [scripts, annotate, markup]
+            loaders: [uglify, scripts, annotate, markup]
         },
         plugins: [
             new webpack.NoErrorsPlugin()
