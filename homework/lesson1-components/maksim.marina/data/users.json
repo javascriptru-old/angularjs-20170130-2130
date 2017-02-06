@@ -1,0 +1,30 @@
+[{
+  "name"      : "Артур",
+  "birthday"  : "5 мая 1986",
+  "gender"    : "муж",
+  "address"   : "Ростов-на-Дону",
+  "email"     : "arab@mail.com"
+},
+  {
+    "name"      : "Майя",
+    "birthday"  : "7 ноября 1966",
+    "gender"    : "жен",
+    "address"   : "Москва",
+    "email"     : "maiy@mail.com"
+  },
+  {
+    "name"      : "Cемен",
+    "birthday"  : "25 августа 2001",
+    "gender"    : "муж",
+    "address"   : "Хабаровск",
+    "email"     : "habarov@mail.com"
+  },
+  {
+    "name"      : "Зина",
+    "birthday"  : "5 мая 1996",
+    "gender"    : "жен",
+    "address"   : "Сочи",
+    "email"     : "zina@mail.com"
+  }
+
+]
