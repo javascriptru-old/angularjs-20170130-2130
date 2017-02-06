@@ -69,6 +69,7 @@
     bindings: {
      user: '<',
      index: '<',
+     activeIndex: '<',
      callbackDelete: '&delete',
      callbackActive: '&active'
     }
