@@ -1,0 +1,17 @@
+.no-photo {
+  text-align: center;
+  color: red;
+}
+
+.card {
+  box-sizing: border-box;
+  border-width: 2px;
+}
+
+.selected {
+  border: 2px solid blue;
+}
+
+.delete-button__container {
+  text-align: right;
+}

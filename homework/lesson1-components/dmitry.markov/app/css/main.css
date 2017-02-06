@@ -1,0 +1,63 @@
+.m-b-lg {
+  margin-bottom: 45px !important
+}
+
+.p-b-0 {
+  padding-bottom: 0 !important
+}
+
+.m-b {
+  margin-bottom: 15px !important
+}
+
+.panel {
+  min-height: 320px
+}
+
+.panel-primary {
+  box-shadow: 0 0 8px 0 #80b2dd
+}
+
+.panel-profile .panel-title {
+  margin-bottom: 5px
+}
+
+.panel-profile .panel-heading {
+  height: 150px;
+  background-size: cover
+}
+
+.panel-profile-img {
+  min-width: 100px;
+  max-width: 100px;
+  margin-top: -70px;
+  margin-bottom: 5px;
+  border: 3px solid #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+}
+
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  padding: 7px 24px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 400
+}
+
+.btn.focus,
+.btn:focus {
+  color: #fff;
+  background: #6b15a1
+}
+
+.btn-sm {
+  font-size: 12px;
+  padding: 5px 15px
+}
+
+.row-padded {
+  padding-top: 80px;
+  padding-bottom: 90px
+}
