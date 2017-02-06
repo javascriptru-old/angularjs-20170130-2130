@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="userCards">
+<head>
+  <meta charset="UTF-8">
+  <title>Карточки пользователей</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    .selected {background-color: rgba(0, 120, 201, 0.4);}
+  </style>
+
+</head>
+<body>
+  <h2 class="text-primary">Список пользователей</h2>
+  <app-root></app-root>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script>
+ 
+  angular.module('userCards', []);
+  let app = angular.module('userCards');
+  var users = {};
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'users.json', true);
+  xhr.send();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState != 4) return;
+    users = JSON.parse(xhr.responseText);
+  }
+
+  app.component('appRoot', {
+    templateUrl: 'app-root.html',
+    controller: function() {
+        this.users = users;
+        this.deleteItem = (item) => {
+          for (var i = 0; i < this.users.length; i++) {
+            if (this.users[i] == item) {
+              this.users.splice(i, 1);
+              break;
+            }
+          }
+        };
+    }
+  })
+  app.component('userCard', {
+    templateUrl: 'user-card.html',
+    controller: function() {
+      this.pnlClass = 'panel-info';
+      this.setNewStyle = (x) => {
+        this.pnlClass = (this.pnlClass == 'panel-info'? 'panel-primary selected':'panel-info');
+      }
+    },
+    bindings: {
+      person: '<user',
+      deleteItem: '&delcard'
+    }
+  })
+
+</script>
+
+</body>
+</html>

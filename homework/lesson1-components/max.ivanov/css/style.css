@@ -1,0 +1,13 @@
+h3{
+    margin-top: 0;
+}
+
+.user-card{
+    cursor: pointer;
+}
+
+.user-card .highlighted
+{
+    color: #fff;
+    background-color: #337ab7;
+}

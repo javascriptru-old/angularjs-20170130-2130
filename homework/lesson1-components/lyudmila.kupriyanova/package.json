@@ -1,0 +1,7 @@
+{
+  "name": "example",
+  "version": "1.0.0",
+  "devDependencies": {
+	"http-server": "^0.9.0"
+  }
+}

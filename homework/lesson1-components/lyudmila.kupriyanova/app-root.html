@@ -1,0 +1,10 @@
+<div>
+  <div class="container" ng-repeat="student in $ctrl.users">
+    <div class="row">
+      <div class="col-md-6">
+        <user-card user="student" delcard="$ctrl.deleteItem(item)">
+        </user-card>
+      </div>
+    </div>
+  </div>
+</div>
