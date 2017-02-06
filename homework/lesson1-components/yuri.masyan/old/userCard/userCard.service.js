@@ -23,5 +23,4 @@ angular.module('userCards')
       data.cards.splice(index, 1);
     };
     return data;
-  })
-;
+  });
