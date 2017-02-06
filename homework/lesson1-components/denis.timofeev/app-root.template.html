@@ -1,0 +1,7 @@
+<div ng-repeat="user in $ctrl.contactsList">
+    <user-card data-user="user"></user-card>
+    <button ng-click="$ctrl.delete($index)">Delete</button>
+    <br/>
+    <br/>
+</div>
+
