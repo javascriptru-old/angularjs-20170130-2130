@@ -1,9 +1,3 @@
-/**
- * Created by y.masyan on 06.02.2017.
- */
-/**
- * Created by y.masyan on 25.10.2016.
- */
 'use strict';
 
 angular.module('userCards')
