@@ -1,3 +1,5 @@
+import templateUrl from './app-root.html';
+
 class UserRootController {
 
     $onInit() {
@@ -11,7 +13,7 @@ class UserRootController {
 }
 
 const appRoot = {
-    templateUrl: 'app/app-root.html',
+    templateUrl,
     controller: UserRootController
 };
 
