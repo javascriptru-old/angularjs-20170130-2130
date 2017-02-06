@@ -1,0 +1,23 @@
+<div class="panel panel-info" ng-class='{selected: ($ctrl.user === $ctrl.selected )}'
+ng-click='$ctrl.selected = $ctrl.user'>
+  <div class="panel-heading">
+    <h3 class="panel-title">{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-3 col-lg-3">
+          <img ng-src="{{$ctrl.user.photo}}" width=100%/>
+        </div>
+      <div class=" col-md-9 col-lg-9 ">
+        <table class="table table-user-information">
+          <tbody>
+          <tr><td>Country</td><td>{{$ctrl.user.country}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <button type="button" name="button" ng-click='$ctrl.remove({user: $ctrl.user})'>Удалить</button>
+  </div>
+</div>
