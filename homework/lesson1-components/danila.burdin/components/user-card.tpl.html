@@ -1,0 +1,14 @@
+<div ng-click="$ctrl.setActiveUser({index: $ctrl.index})" class="user-card__inner">
+	<div ng-if="$ctrl.user.photo" class="user-card__media">
+		<img ng-src="{{$ctrl.user.photo}}" class="user-card__avatar" alt="">
+	</div>
+	<div  ng-if="!$ctrl.user.photo" ng-else class="user-card__media" alt="">
+		<img ng-src="images/nophoto.png" class="user-card__avatar">
+	</div>
+	<div class="user-card__text">
+		<div class="user-card__name user-card__first-name">{{$ctrl.user.firstName}}</div>
+		<div class="user-card__name user-card__surname">{{$ctrl.user.surname}}</div>
+		<div class="user-card__location">{{$ctrl.user.country}}</div>
+	</div>
+	<button ng-click="$ctrl.detachUser({index: $ctrl.index})" class="user-card__detach">&times;</button>
+</div>
