@@ -1,5 +1,3 @@
-'use strict';
-
 angular.module('userCards')
   .factory('userCardService', function ($http) {
     var data = {cards: {}};
