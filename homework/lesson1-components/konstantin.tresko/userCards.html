@@ -1,5 +1,5 @@
-<div class="panel panel-info" ng-class='{selected: ($ctrl.user === $ctrl.selected )}'
-ng-click='$ctrl.selected = $ctrl.user'>
+<div class="panel panel-info"
+      ng-class='{selected: $ctrl.user == $ctrl.selected}' ng-click='$ctrl.onClick()'>
   <div class="panel-heading">
     <h3 class="panel-title">{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h3>
   </div>

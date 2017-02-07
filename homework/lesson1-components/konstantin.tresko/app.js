@@ -5,12 +5,24 @@ app.component('userCards', {
         remove: '&',
         selected: '='
     },
-    templateUrl: 'userCards.html'
+    templateUrl: 'userCards.html',
+    controller: userCardsController
 })
 app.component('rootApp', {
   templateUrl: 'rootApp.html',
   controller: rootCtrl,
 })
+function userCardsController() {
+  this.$onInit = function () {
+      this.onClick = function () {
+          this.selected = this.user;
+      }
+      // this.isSelected = function () {
+      //     let res = (this.user === this.selected);
+      //     return res;
+      // }
+  }
+}
 
 function rootCtrl() {
   this.$onInit = function () {
@@ -21,6 +33,5 @@ function rootCtrl() {
     this.selected = null;
   }
   this.$onChanges = function (obj) {
-    console.log();
   }
 }
