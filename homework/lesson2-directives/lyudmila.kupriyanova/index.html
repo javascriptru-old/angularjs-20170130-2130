@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html ng-app="mailbox">
+<head>
+  <meta charset="UTF-8">
+  <title>MailBox</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    .selected {background-color: rgba(0, 120, 201, 0.4);}
+    .grey {color: grey;}
+  </style>
+
+</head>
+<body>
+  <h2 class="text-primary"></h2>
+  <app-root></app-root>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script>
+ 
+  angular.module('mailbox', []);
+  let app = angular.module('mailbox');
+
+  var letters = {};
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'letters.json', true);
+  xhr.send();
+  xhr.onreadystatechange = function() {
+    if (xhr.readyState != 4) return;
+    letters = JSON.parse(xhr.responseText);
+  }
+
+  app.filter('datefilter', function() {
+    return function datefilter(recdate, ...args) {
+      var msecPerMinute = 1000 * 60;
+      var msecPerHour = msecPerMinute * 60;
+      var msecPerDay = msecPerHour * 24;
+      var today = new Date();
+      var startDate = new Date(recdate*1);
+      var interval = today.getTime() - startDate.getTime();
+      var days = Math.floor(interval / msecPerDay );
+      interval = interval - (days * msecPerDay );
+      var hours = Math.floor(interval / msecPerHour );
+      interval = interval - (hours * msecPerHour );
+      var minutes = Math.floor(interval / msecPerMinute );
+      interval = interval - (minutes * msecPerMinute );
+      var seconds = Math.floor(interval / 1000 );
+      var msg = "";
+      if (days>0) {
+        msg = days + (days%10 == 1 ? " день назад" : ((days%10<1 || days%10>4) ? " дней назад" : " дня назад"));
+      } else if (hours>0) {
+          msg = hours + (hours%10 == 1 ? " час назад" : ((hours%10<1 || hours%10>4) ? " часов назад" : " часа назад"));
+      } else if (minutes>0) {
+          msg = minutes + (minutes%10 == 1 ? " минуту назад" : ((minutes%10<1 || minutes%10>4) ? " минут назад" : " минуты назад"));
+      } else if (seconds>0){
+          msg = seconds + (seconds%10 == 1 ? " секунду назад" : ((seconds%10<1 || seconds%10>4) ? " секунд назад" : " секунды назад"));
+      }
+      return msg;
+    }
+  });
+
+  app.component('appRoot', {
+    templateUrl: 'app-root.html',
+    controller: function() {
+        this.letters = letters;
+        this.email = "petrov@mail.ru";
+        this.searchstr = "";
+        this.deleteItem = (item) => {
+          for (var i = 0; i < this.letters.length; i++) {
+            if (this.letters[i] == item) {
+              var msecPerMinute = 1000 * 60;
+              var msecPerHour = msecPerMinute * 60;
+              var msecPerDay = msecPerHour * 24;
+              var today = new Date();
+              var startDate = new Date(item.received*1);
+              var interval = today.getTime() - startDate.getTime();
+              var days = Math.floor(interval / msecPerDay );
+              interval = interval - (days * msecPerDay );
+              var hours = Math.floor(interval / msecPerHour );
+              interval = interval - (hours * msecPerHour );
+              var minutes = Math.floor(interval / msecPerMinute );
+              interval = interval - (minutes * msecPerMinute );
+              var seconds = Math.floor(interval / 1000 );
+              var msg = "Письмо жило: " + days + (days%10 == 1 ? " день, " : ((days%10<1 || days%10>4) ? " дней, " : " дня, "))  + hours + (hours%10 == 1 ? " час, " : ((hours%10<1 || hours%10>4) ? " часов, " : " часа, ")) 
+               + minutes + (minutes%10 == 1 ? " минуту, " : ((minutes%10<1 || minutes%10>4) ? " минут, " : " минуты, ")) + seconds + (seconds%10 == 1 ? " секунду." : ((seconds%10<1 || seconds%10>4) ? " секунд." : " секунды."));
+              console.log(msg);
+              this.letters.splice(i, 1);
+              break;
+            }
+          }
+        };
+    }
+  })
+  app.component('letter', {
+    templateUrl: 'letter.html',
+    controller: function() {
+      this.pnlClass = 'panel-success';
+    },
+    bindings: {
+      letter: '<letter',
+      deleteItem: '&delmail'
+    }
+  })
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<div ng-click="$ctrl.setNewStyle(this);" class="panel {{$ctrl.pnlClass}}">
+	<div class="panel-heading">
+		<div class="panel-title">
+			<div class="row">
+			<small>
+				<div class="col-xs-4 grey">{{$ctrl.letter.from}}</div>
+				<div class="col-xs-5 grey text-right">{{$ctrl.letter.received | date:"dd.MM.yyyy hh:mm:ss"}}</div>
+				<div class="col-xs-3 grey text-right">{{$ctrl.letter.received | datefilter}}</div>
+			</small>
+			</div>
+			<h4>{{$ctrl.letter.subject}}</h4>
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row">
+			<div class=" col-md-12 col-lg-12 ">
+				<div class="">{{$ctrl.letter.content}}</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel-footer">
+	<div class="text-right"><button ng-click="$ctrl.deleteItem({item: $ctrl.letter});" class="btn-danger ">X</button></div>
+	</div>
+</div>
