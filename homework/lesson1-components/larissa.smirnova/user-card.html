@@ -1,0 +1,14 @@
+{{$ctrl.activeIndex}}
+<div class="panel panel-info" ng-click="$ctrl.setActive({index: $ctrl.index})" ng-class="$ctrl.activeIndex == $ctrl.index ? 'active' : ''">
+    <div class="panel-heading">
+        <table>
+            <tbody>
+            <tr>
+                <td width="200"><h3 class="panel-title">{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h3></td>
+                <td width="100"><img ng-src="{{$ctrl.user.photo}}" width="50" height="50"></td>
+                <td width="50"><button ng-click="$ctrl.delete({index: $ctrl.index})">X</button></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

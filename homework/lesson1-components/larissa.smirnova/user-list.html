@@ -1,0 +1,8 @@
+<user-card
+        ng-repeat="user in $ctrl.users"
+        user="user"
+        index="$index"
+        delete="$ctrl.delete(index)"
+        setActive="$ctrl.setActive(index)"
+        activeIndex="$ctrl.activeIndex"
+></user-card>
