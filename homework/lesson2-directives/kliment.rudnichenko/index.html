@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Домашняя работа №2</title>
+    <style>
+        ul {
+            list-style-type: none;
+        }
+
+        li {
+            padding-bottom: 10px;
+        }
+
+        span {
+            display: inline-block;
+            width: 200px;
+        }
+
+        .delete{
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body ng-app="myApp">
+<h1>Домашняя работа №2</h1>
+<mail-box></mail-box>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script>
+    app = angular.module('myApp', []);
+
+    app.component('mailBox', {
+        template: `<div>
+                <div>
+                    <label for="filter">Фильтр: </label>
+                    <input type="text" id="filter" name="filter" ng-model="$ctrl.filterInput"/>
+                </div>
+                <ul>
+                    <li>
+                        <span>Email</span>
+                        <span>Автор</span>
+                        <span>Дата получения</span>
+                        <span>Время получения</span>
+                    </li>
+                    <li ng-repeat="mail in $ctrl.mailList | filter:$ctrl.filterInput">
+                        <mail mail="mail" on-delete="$ctrl.deleteMail(mail)"></mail>
+                    </li>
+                </ul>
+            </div>`,
+        controller: function () {
+            this.$onInit = function () {
+                this.mailList = [
+                    {
+                        _id: "589b72ce3192ce084eec3576",
+                        autor: "Walker Elliott",
+                        email: "walkerelliott@calcu.com",
+                        date: 1453759900489
+                    },
+                    {
+                        _id: "589b72cede523b82f44ea023",
+                        autor: "Newton Lowery",
+                        email: "newtonlowery@calcu.com",
+                        date: 1436109406711
+                    },
+                    {
+                        _id: "589b72cea4a4c44bc07ba15b",
+                        autor: "Kaitlin Hammond",
+                        email: "kaitlinhammond@calcu.com",
+                        date: 1426758863678
+                    },
+                    {
+                        _id: "589b72cea533dd3a152031f0",
+                        autor: "Wallace Snyder",
+                        email: "wallacesnyder@calcu.com",
+                        date: 1462806540395
+                    },
+                    {
+                        _id: "589b72ce604b87d15924f239",
+                        autor: "Pugh Macdonald",
+                        email: "pughmacdonald@calcu.com",
+                        date: 1466486411498
+                    },
+                    {
+                        _id: "589b72ceafb6a921824f9fb7",
+                        autor: "Rebecca Wall",
+                        email: "rebeccawall@calcu.com",
+                        date: 1431727888480
+                    },
+                    {
+                        _id: "589b72ce90e5c1add08805be",
+                        autor: "Lorene Thornton",
+                        email: "lorenethornton@calcu.com",
+                        date: 1436109406711
+                    }
+                ];
+            }
+
+            this.deleteMail = function (mail) {
+                this.mailList = this.mailList.filter(item => item !== mail);
+            }
+        }
+    });
+
+    app.component('mail', {
+        template: `
+         <span>{{$ctrl.mail.email}}</span>
+         <span>{{$ctrl.mail.autor}}</span>
+         <span>{{$ctrl.mail.date | date:'dd.MM.yyyy'}}</span>
+         <span>{{$ctrl.mail.date | date:'HH:mm'}}</span>
+         <span class="delete" ng-click="$ctrl.onDelete({mail: $ctrl.mail})">Удалить</span>`,
+        bindings:{
+            mail:'<',
+            onDelete:'&'
+        },
+        controller: function ($filter) {
+            this.$onDestroy = function(){
+                var dt = new Date();
+                console.log('Письмо пришло: '+$filter('date')(this.mail.date, 'dd.MM.yyyy'));
+                console.log('Письмо удалено: '+$filter('date')(dt, 'dd.MM.yyyy'));
+            }
+        }
+    })
+</script>
+</body>
+</html>

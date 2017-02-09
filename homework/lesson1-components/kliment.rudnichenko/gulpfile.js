@@ -9,7 +9,7 @@ let clean = require('gulp-clean');
 let browserSync = require('browser-sync');
 
 gulp.task('html', () => {
-    gulp.src('src/**/*.html')
+    gulp.src('src/index.html')
         .pipe(gulp.dest('dist'));
 });
 
@@ -23,14 +23,35 @@ gulp.task('css', () => {
 });
 
 gulp.task('app', () => {
+    const scripts = {
+        test: /\.js$/,
+        exclude: [/src\/app/, /node_modules/],
+        query:{
+            presets: ['es2015']
+        },
+        loader: 'babel-loader'
+    };
+
+    const annotate = {
+        test: /\.js$/,
+        loader: 'ng-annotate'
+    }
+
+    const markup = {
+        test: /\.html$/,
+        loader: 'ngtemplate!html'
+    };
+
+    const uglify = {
+        test: /\.js$/,
+        exclude: /src\/app/,
+        loader: 'uglify'
+    };
+
     let config = {
         devtool: 'sourcemap',
         module: {
-            loaders: [{
-                test: /\.js$/,
-                exclude: [/src\/app/, /node_modules/],
-                loader: 'babel-loader?presets[]=es2015'
-            }]
+            loaders: [uglify, scripts, annotate, markup]
         },
         plugins: [
             new webpack.NoErrorsPlugin()
