@@ -4,11 +4,12 @@
     </div>
     <div class="panel-body">
         <div class="row">
-            <div class=" col-md-9 col-lg-9 ">
+            <div>
                 <table class="table table-user-information">
                     <tbody>
-                    <tr><td width="200">Фотография</td><td><img ng-src="{{$ctrl.user.photo}}" width="200" /></td>
+                    <tr><td width="200">Фотография</td><td><img ng-src="{{$ctrl.user.photo}}" width="200" height="200" /></td>
                     <tr><td>Страна</td><td>{{$ctrl.user.country}}</td></tr>
+                    <tr><td></td><td><button ng-click="$ctrl.deleteFunc()">Удалить</button></td></tr>
                     </tbody>
                 </table>
             </div>
