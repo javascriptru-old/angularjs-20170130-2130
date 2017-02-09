@@ -1,1 +1,3 @@
 node_modules
+homework/lesson1-components/*
+!homework/lesson1-components/timur.turchaninov

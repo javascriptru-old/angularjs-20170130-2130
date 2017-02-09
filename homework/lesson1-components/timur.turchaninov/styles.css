@@ -9,7 +9,7 @@ body {
     background-size: cover;
 }
 
-header img {
+.profile-card__header img {
     border-radius: 50%;
     margin: 24px auto;
     display: block;
@@ -19,7 +19,7 @@ header img {
 .is-profile-card_active {
     border-color: #337ab7;
 }
-header img:not([src]) {
+.profile-card__header img:not([src]) {
     visibility: hidden;
 }
 .profile-card {
@@ -54,16 +54,17 @@ header img:not([src]) {
     box-shadow: 0 0 70px 10px #fff;
 }
 
-.profile-card__content:hover header img {
+.profile-card__content:hover .profile-card__header img {
+    min-height: 200px;
     animation: profile_image 2000ms linear both;
     animation-delay: 0.5s;
 }
 
-header {
+.profile-card__header {
     text-align: center;
 }
 
-header h1 {
+.profile-card__header h1 {
     position: relative;
     text-align: center;
     color: #fff;
@@ -77,14 +78,14 @@ header h1 {
     border-bottom: 1px solid #fff;
 }
 
-aside:hover header h1 {
+.profile-card__content:hover .profile-card__header h1 {
     margin-top: 0px;
     outline: 0 solid #fff;
     border-top: 0px solid #fff;
     border-bottom: 1px solid #fff;
 }
 
-header h2 {
+.profile-card__header h2 {
     text-align: center;
     color: #fff;
     text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
@@ -94,7 +95,7 @@ header h2 {
     margin: 0;
 }
 
-.profile-bio {
+.profile-card__bio {
     margin-top: 20px;
     padding: 1px 20px 10px 20px !important;
     transition: all linear 1.5s;
@@ -105,16 +106,16 @@ header h2 {
     background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.42) 49%, rgba(0, 0, 0, 0.61) 100%);
 }
 
-aside:hover .profile-bio {
+.profile-card__content:hover .profile-bio {
     opacity: 1;
 }
 
-.profile-bio p:first-child {
+.profile-card__bio p:first-child {
     text-align: center;
     font-size: 16px;
 }
 
-.profile-social-links {
+.profile-card__btn-block {
     position: relative;
     margin-top: -440px;
     margin-left: -100px;
@@ -123,12 +124,12 @@ aside:hover .profile-bio {
     transition: all ease 0.5s;
 }
 
-aside:hover .profile-social-links {
+.profile-card__content:hover .profile-card__btn-block {
     margin-left: -30px;
     opacity: 1;
 }
 
-.profile-social-links li img {
+.profile-card__btn-block li img {
     width: 30px;
     background: #fff;
     border-radius: 50%;
@@ -218,7 +219,7 @@ aside:hover .profile-social-links {
 }
 /*NAME ANIMATE */
 
-aside:hover header h1 {
+.profile-card__content:hover .profile-card__header h1 {
     animation: name_and_job 1500ms linear both;
     animation-delay: 0.4s;
 }
@@ -283,17 +284,17 @@ aside:hover header h1 {
     }
 }
 
-aside:hover ul li:first-child {
+.profile-card__content:hover ul li:first-child {
     animation: social_animation 2000ms ease-in-out both;
     animation-delay: 0.75s;
 }
 
-aside:hover ul li:nth-child(2) {
+.profile-card__content:hover ul li:nth-child(2) {
     animation: social_animation 2000ms ease-in-out both;
     animation-delay: 1s;
 }
 
-aside:hover ul li:nth-child(3) {
+.profile-card__content:hover ul li:nth-child(3) {
     animation: social_animation 2000ms ease-in-out both;
     animation-delay: 1.25s;
 }
