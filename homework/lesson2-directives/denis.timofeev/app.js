@@ -28,7 +28,15 @@ angular.module('contactsList', [])
                 this.deleteItem();
             };
             this.$onDestroy = function() {
-                console.log('$onDestroy', this.item);
+                var lifeTime = (new Date() - this.item.date);
+                let years = moment.duration(lifeTime).years();
+                let months = moment.duration(lifeTime).months();
+                let days = moment.duration(lifeTime).days();
+                let hours = moment.duration(lifeTime).hours();
+                let minutes = moment.duration(lifeTime).minutes();
+                let seconds = moment.duration(lifeTime).seconds();
+
+                console.log('Письмо прожило ' + years + ' лет ' + months + ' мес. ' + days + ' дней ' + hours + ' часов ' + minutes + ' минут ' + seconds + ' секунд');
             }
         },
         bindings: {
@@ -38,7 +46,35 @@ angular.module('contactsList', [])
     })
     .filter('dateDecorator', function() {
         return function(dateParam) {
-            return "**" + dateParam + "**";
+
+            var lifeTime = (new Date() - dateParam);
+            let years = moment.duration(lifeTime).years();
+            let months = moment.duration(lifeTime).months();
+            let days = moment.duration(lifeTime).days();
+            let hours = moment.duration(lifeTime).hours();
+            let minutes = moment.duration(lifeTime).minutes();
+            let seconds = moment.duration(lifeTime).seconds();
+
+            let retVal = "";
+            if (years > 0) {
+                retVal += years + ' лет ';
+            }
+            if (months > 0) {
+                retVal += months + ' месяцев ';
+            }
+            if (days > 0) {
+                retVal += days + ' дней ';
+            }
+            if (hours > 0) {
+                retVal += hours + ' часов ';
+            }
+            if (minutes > 0) {
+                retVal += minutes + ' минут ';
+            }
+            if (seconds > 0) {
+                retVal += seconds + ' секунд ';
+            }
+            return retVal + ' назад';
         }
     })
     .filter('searchFilterFunc', function () {
