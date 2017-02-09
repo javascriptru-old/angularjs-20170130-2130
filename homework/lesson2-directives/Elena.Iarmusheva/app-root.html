@@ -1,0 +1,18 @@
+<div class="panel panel-info m-2">
+
+    <div  class="row">
+        <div class="col-sm-6"> </div>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" id = "searchText" placeholder="Search..." ng-model="$ctrl.searchText" />
+        </div>
+    </div>
+
+    <div class="panel-body list-group">
+        <email-line
+            ng-repeat = "email in $ctrl.emails | containsTextFilter: $ctrl.searchText"
+            email = "email"
+            delete-email = "$ctrl.deleteEmail(email)">
+        </email-line>
+    </div>
+
+</div>

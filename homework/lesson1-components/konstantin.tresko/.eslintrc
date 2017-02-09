@@ -1,0 +1,87 @@
+ {
+ "globals": {
+        "jquery" : true,
+        "$": true,
+        "angular": true,
+        "moment": true,
+        "_": true,
+        "d3": true,
+        "kendo": true,
+        "sha256": true,
+        "nv": true,
+        "c3": true,
+        "joint": true,
+
+        "protractor": true,
+        "jasmine": true,
+        "element": true,
+        "by": true,
+        "browser": true,
+        "describe": true,
+        "it": true,
+        "expect": true,
+        "beforeEach": true,
+
+
+        "ace":true,
+        "word":true,
+        "score":true,
+
+        "GanttMaster": true,
+        "GridEditor": true,
+        "Ganttalendar": true,
+        "TaskFactory": true,
+        "computeEndByDuration": true,
+        "computeStartDate": true,
+        "computeEndDate": true,
+        "isHoliday": true,
+
+        "toSystemCase": true,
+        "$nocase": true,
+        "idea": true,
+
+        "numberWithCommas": true,
+        "isNumber": true,
+        "isInt": true,
+        "replaceAll": true,
+        "isEmpty": true,
+        "isDefined": true,
+        "toDate": true,
+        "isNull": true,
+
+        "getCookie": true,
+        "setCookie": true,
+        "deleteCookie": true,
+        "getCookieSecurity": true,
+        "setCookieSecurity": true,
+        "deleteCookieSecurity": true
+    },
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module"
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "es6": true
+    },
+    "rules": {
+        "no-mixed-spaces-and-tabs": 1,
+        "no-undef": 1,
+        "no-extra-semi": 1,
+        "no-extra-boolean-cast": 0,
+        "no-unused-vars": 0,
+        "no-unreachable": 1,
+        "no-empty": 1,
+        "quotes": [0, "single"],
+
+        "no-debugger": 0,
+        "no-console": 0,
+        "new-cap": 0,
+        "strict": 1,
+        "no-underscore-dangle": 0,
+        "no-use-before-define": 0,
+        "eol-last": 0
+    }
+  }

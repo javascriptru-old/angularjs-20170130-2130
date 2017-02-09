@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="userCards">
+<head>
+  <meta charset="UTF-8">
+  <title>Карточки пользователей</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+  <style type="text/css">
+    .onfocus {
+      outline: blue outset 2px;
+    }
+  </style>
+</head>
+<body>
+
+Filters:
+<pre>
+{{'user' |  myFilter:5:10:15 |  myFilter  |  myFilter  |  myFilter }}
+</pre>
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6" ng-init="show=true; userName = 'John'">
+      <user-card ng-if="show" del-elem-parent="y+x" user="userName"></user-card>
+      <button ng-click="show=!show">show/hide</button>
+      <input type="text" ng-model="userName">
+    </div>
+  </div>
+</div>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script>
+  'use strict';
+
+  var app = angular.module('userCards', []);
+
+   app.filter('myFilter', function() {
+      return function myFilter(name, ...args) {
+        console.log(args);
+        return `Hello ${name}`;
+      }
+   });
+
+  app.component('userCard', {
+      template: 'template',
+      bindings: {
+        user: '<',
+        delElem: '&delElemParent'
+      },
+      controller: function($element) {
+
+        //this.delElem = (locals) => $parse(attrs.delElemParent)(scope.$parent, locals);
+
+        this.$onInit = function() {
+            console.log('$onInit');
+        }
+
+        this.$onChanges = function(changes) {
+             console.log('$onChanges');
+        }
+
+        this.$postLink = function() {
+            console.log('$postLink');
+        }
+
+        this.$onDestroy = function() {
+            console.log('$onDestroy');
+        }
+      }
+  });
+</script>
+</body>
+</html>

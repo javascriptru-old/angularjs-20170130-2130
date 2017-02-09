@@ -1,0 +1,140 @@
+[{
+		"from": "melkart2@infsys.ru",
+		"to": "petrov@mail.ru",
+		"received": "1486558469932",
+		"subject": "Уведомление КПИ по подписке",
+		"content": "Уведомление КПИ по подписке - новое сообщение в конференции (WebT)"
+	}, {
+		"from": "melkart2@infsys.ru",
+		"to": "petrov@mail.ru",
+		"received": "1486558400000",
+		"subject": "Уведомление КПИ по подписке",
+		"content": "Уведомление КПИ по подписке - создан новый документ."
+	}, {
+		"from": "kpi@kpi.ru",
+		"to": "petrov@mail.ru,maximum@mail.ru",
+		"received": "1486500000000",
+		"subject": "Тестподписка_20170202",
+		"content": "КПИ информирует Вас о появлении нового сообщения в конференции, на которую Вами оформлена подписка."
+	}, {
+		"from": "maximum@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1484400000000",
+		"subject": "Проект ГГТ",
+		"content": "Совещание по проекту в 10:00"
+	}, {
+		"from": "egor@mail.ru",
+		"to": "petrov@mail.ru,maximum@mail.ru",
+		"received": "1484000000000",
+		"subject": "Проект ГГТ",
+		"content": "Совещание по проекту в 12:00"
+	}, {
+		"from": "elene@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483900000000",
+		"subject": "Проект ГГТ",
+		"content": "Совещание по проекту в 10:30"
+	}, {
+		"from": "Aibulat@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483800000000",
+		"subject": "Тестовое сообщение",
+		"content": "Тест. Тест. Тест..."
+	}, {
+		"from": "maxim@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483700000000",
+		"subject": "Обсуждение взаимодействия по проекту",
+		"content": "Обсуждение взаимодействия по проекту"
+	}, {
+		"from": "fedor@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483600000000",
+		"subject": "Обсуждение взаимодействия по проекту",
+		"content": "Обсуждение взаимодействия по проекту"
+	}, {
+		"from": "andrey@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483500000000",
+		"subject": "Автоматика",
+		"content": "Автоматика. Автоматика. Автоматика."
+	}, {
+		"from": "nic@mail.ru",
+		"to": "petrov@mail.ru",
+		"subject": "Карусель",
+		"received": "1483400000000",
+		"content": "Карусель. Карусель. Карусель."
+	}, {
+		"from": "dimitr@mail.ru",
+		"to": "petrov@mail.ru",
+		"subject": "С новым годом!",
+		"received": "1483300000000",
+		"content": "Поздравляю с Новым Годом!"
+	}, {
+		"from": "yuri@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483280000000",
+		"subject": "С Новым Годом",
+		"content": "Поздравляю с Новым Годом!"
+	}, {
+		"from": "timur@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483240000000",
+		"subject": "С Новым 2017!",
+		"content": "Поздравляю с Новым 2017 Годом!"
+	}, {
+		"from": "tresko@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483238000000",
+		"subject": "С Новым Годом!",
+		"content": "Поздравляю с Новым Годом! Всего тебе самого наилучшего!"
+	}, {
+		"from": "vasya@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483230000000",
+		"subject": "Поздравляю с Новым Годом!",
+		"content": "Поздравляю с Новым Годом! Успехов в новом году!"
+	}, {
+		"from": "andrey@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483220000000",
+		"subject": "С Новым Годом!",
+		"content": "С Новым Годом! Успехов в новом году!"
+	}, {
+		"from": "Cliff@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483200000000",
+		"subject": "С наступающим Новым Годом!",
+		"content": "С наступающим Новым Годом!"
+	}, {
+		"from": "Larisa@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1483000000000",
+		"subject": "С Наступающим!",
+		"content": "Петр! Поздравляю тебя с Наступающим Новым Годом! Лариса."
+	}, {
+		"from": "info@smartbearmail.com",
+		"to": "petrov@mail.ru",
+		"received": "1482000000000",
+		"subject": "Welcome to your LoadComplete Trial!",
+		"content": "Thank you for signing up for the free version of LoadComplete. We are excited to introduce this stress and load performance testing tool from SmartBear to you. This message will help you get started."
+	}, {
+		"from": "Valery@mail.ru",
+		"to": "petrov@mail.ru",
+		"received": "1481200000000",
+		"subject": "Совещание",
+		"content": "Информация о совещании..."
+	}, {
+		"from": "nic@mail.ru",
+		"to": "petrov@mail.ru",
+		"subject": "Перераспределение задач",
+		"received": "1481000000000",
+		"content": "Запросы Антона разбрасываем между Людмилой и Алексеем. Определяем запросы, которые нужно сделать и протестировать в первую очередь. Определяем конкретные формы и сроки 2 этапа."
+	}, {
+		"from": "nic@mail.ru",
+		"to": "petrov@mail.ru",
+		"subject": "Обсуждение готовности функционала",
+		"received": "1480000000000",
+		"content": "Завтра в 15:00 слушаем о результатах нагрузочного тестирования. Обсуждаем полученные цифры."
+	}
+]
