@@ -28,8 +28,9 @@
       this.deleteUserCard = (index) => {
         this.users.splice(index, 1)
       }
+
       this.removeActiveClass = (index) => {
-        // set to turn off all other active cards (how to it without rootScope?)
+        // set to turn off all other active cards (how to do it without rootScope?)
         $rootScope.activeCard = index
       }
     }
@@ -45,30 +46,32 @@
         // set default avatar if no avatar
         this.avatar = this.user.photo ? this.user.photo : 'https://top.kz/assets/empty-avatar-c8775f1f4a1c5f0be17dfe4ae0de5fad.png'
       }
+
+      this.active = 'panel-default'
       $rootScope.$watch('activeCard', (activeIndex) => {
         // clear selection
         if (activeIndex !== this.index) this.active = 'panel-default'
       })
 
-      // set random background on card
-      const backgrounds = backgroundService
-      const randomPhoto = backgrounds[Math.round(Math.random() * (backgrounds.length - 1))]
-      this.background = { 'background-image': 'url(' + randomPhoto + ')' }
-
-      this.active = 'panel-default'
-
       this.setActive = (index) => {
         this.active = (this.active === 'panel-default') ? 'panel-primary' : 'panel-default'
         this.callbackActive({index})
       }
+
       this.deleteUser = ($event, index) => {
         $event.stopPropagation()
         this.callbackDelete({index})
       }
+
+      // set random background on card
+      const backgrounds = backgroundService
+      const randomPhoto = backgrounds[Math.round(Math.random() * (backgrounds.length - 1))]
+      this.background = { 'background-image': 'url(' + randomPhoto + ')' }
     },
     bindings: {
      user: '<',
      index: '<',
+     activeIndex: '<',
      callbackDelete: '&delete',
      callbackActive: '&active'
     }

@@ -1,0 +1,29 @@
+.mail-time {
+  display: inline-block;
+  font-size: 0.9em;
+  color: #777777;
+}
+
+.mail-from {
+  font-weight: bold;
+  display: inline-block;
+  width: 150px;
+}
+
+.mail-subject {
+  white-space: nowrap;
+  font-size: 0.9em;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+}
+
+form {
+  margin-top: 15px;
+  padding: 15px;
+  background-color: lightgray;
+}
+
+li:hover {
+  background-color: #cee8ff;
+}

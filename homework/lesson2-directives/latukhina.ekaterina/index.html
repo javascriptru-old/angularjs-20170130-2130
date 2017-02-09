@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Mail Box</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet"> 
+    <link rel="stylesheet" href="css/main.css">
+  </head>
+  <body >
+     <mail-box></mail-box>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script>
+  'use strict';
+
+  var app = angular.module('myApp', []);
+
+  app.component('mailBox', {
+      template: ` 
+      <div class="container-fluid">
+        <header class="row">
+          <div class="search-bar col-sm-6">
+            <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search for..." ng-model="$ctrl.searchWord">
+            </div>
+          </div>
+        </header>
+
+        <div class="mail row">
+          <div class="inbox col-sm-10">
+                  <ul class="list-unstyled">
+                    <div ng-repeat="email in $ctrl.emails| filterBySearchword:$ctrl.searchWord"> 
+                      <email-line email="email" deleteline="$ctrl.deleteLine(email)"></email-line>
+                    </div>            
+                  </ul>
+          </div>
+        </div>
+      </div>      
+      `,
+      controller: function() {
+        this.searchWord = '';
+        this.emails = [{created: new Date(new Date().getTime() - 1*60000), from:'Alexander', subject:'About books', body:'Замысел, так или иначе, дает символ. Возрождение, как бы это ни казалось парадоксальным, потенциально. '},
+        {created: new Date(new Date().getTime() - 32*60000), from:'Mr Korovkin', subject:'About books', body:'Драматизм неустойчив. Наш современник стал особенно чутко относиться к слову '},
+        {created: new Date(new Date().getTime() - 3*60*60000), from:'Andrew', subject:'About books', body:'Глауберова соль заканчивает фотосинтетический гидрогенит в полном соответствии с законом сохранения энергии. '},
+        {created: new Date(new Date().getTime() - 2*24*60*60000), from:'Alexander', subject:'About books', body:'Соль облучает векторный комплекс рения с саленом.  '},
+        {created: new Date(new Date().getTime() - 5*24*60*60000), from:'Mr Korovkin', subject:'About books', body:'Замысел, так или иначе'},];
+        this.deleteLine  = (eml) => {
+           for (var i = 0; i < this.emails.length; i++) {
+             if (this.emails[i] == eml) {
+               this.emails.splice(i, 1);
+               break;
+             }
+           }
+         };
+      }
+  });
+
+  app.filter('filterBySearchword', function(){
+    return function(items, sw){
+      var result = [];
+      angular.forEach(items, function(item){
+        if (((item.subject.toLowerCase().indexOf(sw.toLowerCase()) != -1) || (item.body.toLowerCase().indexOf(sw.toLowerCase()) != -1)) || (sw == '') ){
+              result.push(item);
+          
+        }
+      });
+      return result;
+    };
+  });
+
+  app.filter('dateAgo', function() {
+      return function dateAgo(date_p) {
+        var now_date = new Date();
+        var diff = now_date.getTime() - date_p.getTime();
+        if ( diff <= 120000){ // 2min
+            return 'Just now';
+        }
+        if ( diff <= 60*60000){ // min
+           return Math.floor(diff / 60000) + ' minutes ago';
+        }
+        if ( diff <= 24*60*60000){
+            return Math.floor(diff / 3600000) + ' hours ago';
+        }
+        //days
+        return Math.floor(diff / 24 / 3600000) + ' days ago';
+      }
+   });
+
+  app.component('emailLine', {
+    template: `  
+            <li class="email-item row">
+              <div class="people col-sm-3">
+                <ul class="mail-icons list-inline">
+                  <li>
+                    <input type="button" value="Del" ng-click="$ctrl.deleteLine({eml: $ctrl.email});">
+                  </li>
+                </ul>
+
+                <span class="people-names">
+                  {{$ctrl.email.from}}
+                </span>
+              </div>
+              <div class="message col-sm-7">
+                <div class="clipper">
+                  <h3>{{$ctrl.email.subject}}</h3>
+                  -
+                  <p>{{$ctrl.email.body}}</p>
+                </div>
+              </div><!-- message -->
+
+              <div class="date col-sm-2">
+                <date class="pull-right">{{$ctrl.email.created | dateAgo}}</date>
+              </div><!-- date -->
+            </li>
+    `,
+    controller: function($element) { 
+      this.$onDestroy = function() {
+        var now_time = new Date().getTime();
+        console.log('Time of living: ' + (now_time - this.email.created) + ' microseconds');
+      }   
+       
+    },
+    bindings: {
+       email: '<email',
+       deleteLine:'&deleteline'
+    }
+  });
+</script>
+  </body>
+</html>

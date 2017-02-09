@@ -1,0 +1,21 @@
+<div class="row">
+  <form>
+    <div class="form-group">
+      <label for="search">Поиск</label>
+      <input type="text"
+             class="form-control"
+             id="search"
+             placeholder="Начните поиск"
+             ng-model="$ctrl.search"
+             autofocus />
+    </div>
+  </form>
+</div>
+<div class="row">
+  <ul class="list-group">
+   <mail-header ng-repeat="(index, mail) in $ctrl.mailList | mySearch:$ctrl.search"
+                mail="mail"
+                index="index"
+                delete="$ctrl.deleteMessage(index)"></mail-header>
+  </ul>
+</div>
