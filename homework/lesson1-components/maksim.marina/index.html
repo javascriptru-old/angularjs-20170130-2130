@@ -33,17 +33,18 @@
               this.users = JSON.parse(xhr.responseText);
           }
 
-          this.deleteUser = (index) => {
-              this.users.splice(index, 1);
+          this.deleteUser = (item) => {
+              for (var i = 0; i < this.users.length; i++) {
+                  if (this.users[i] == item) {
+                      this.users.splice(i, 1);
+                      break;
+                  }
+              }
           }
 
           this.selectUser = (user) => {
               user.selectedStyle = "panel-active";
-              console.log(user);
-              console.log(123);
           }
-
-
       }
   });
 
@@ -58,7 +59,6 @@
       }
   });
 
-
 </script>
 <style>
     .panel-active{
@@ -66,7 +66,6 @@
         box-shadow: 0px 0px 6px rgba(15,148,175,0.7);
     }
 </style>
-
 
 </body>
 </html>
