@@ -96,7 +96,7 @@ app.component('eMail', {
 			this.calculatedTime = this.email.created
 
 			interval = $interval(() => {
-				this.calculatedTime = moment().milliseconds() + this.calculatedTime
+				this.calculatedTime = moment().milliseconds() + this.email.created
 			}, 1000)
 		}
 
@@ -159,36 +159,36 @@ const mailBoxData =
 			id: 98,
 			author: 'William Mayer',
 			message: ' Sint excepteur ut incididunt velit consequat reprehenderit aliqua Lorem. Laborum aliquip excepteur in aute reprehenderit in. Consectetur nisi tempor et cupidatat occaecat.',
-			created: 1486509210826
+			created: moment().subtract(1, 'days')
 		},
 		{
 			id: 21312,
 			author: 'Summer Kramer',
 			message: 'Sint et cupidatat cillum proident commodo veniam amet eu non nisi occaecat velit. Duis dolore enim cupidatat nisi consequat. Sit eu elit labore do velit deserunt voluptate laboris aliqua dolor eu.',
-			created: Date.now() - (Date.now()/1000)
+			created: moment().subtract(17, 'days')
 		},
 		{
 			id: 757,
 			author: 'Debbie Galloway',
 			message: 'Hello, Lillie! In dolore culpa voluptate pariatur ipsum sit ullamco magna nostrud. Pariatur deserunt dolore amet exercitation. Ad dolore velit nisi occaecat sint id labore labore culpa aute aute duis. Aliqua proident fugiat Lorem amet eu qui Lorem in non anim culpa consequat.',
-			created: Date.now()
+			created: moment().subtract(43, 'seconds')
 		},
 		{
 			id: 4545,
 			author: 'Juarez Craig',
 			message: 'Magna velit ipsum voluptate est ad ipsum adipisicing est incididunt. Minim officia sunt minim minim ea ea officia deserunt exercitation exercitation veniam ad ullamco consectetur. Est tempor voluptate dolor dolor ut reprehenderit culpa proident reprehenderit irure id. Excepteur cupidatat irure consectetur reprehenderit ea nostrud. Laboris pariatur tempor enim pariatur consequat fugiat exercitation.',
-			created: 1486387359306.7573
+			created: moment().subtract(2, 'minutes')
 		},
 		{
 			id: 4564,
 			author: 'Lana Roach',
 			message: 'Ea laborum anim reprehenderit eiusmod. Aliquip minim cillum dolore aliquip in et. Tempor ut et tempor velit enim fugiat proident velit cupidatat labore amet.',
-			created: Date.now() - (Date.now()/500)
+			created: moment().subtract(7, 'days').subtract(15, 'minutes')
 		},
 		{
 			id: 34234,
 			author: 'Cabrera Guy',
 			message: 'Commodo dolor pariatur sunt qui enim voluptate non. Enim pariatur labore irure duis eiusmod. Consequat elit exercitation ut amet elit sunt cillum occaecat. Sint excepteur ut incididunt velit consequat reprehenderit aliqua Lorem. Laborum aliquip excepteur in aute reprehenderit in. Consectetur nisi tempor et cupidatat occaecat.',
-			created: Date.now() - (Date.now()/30)
+			created: moment().subtract(2, 'years')
 		}
 	]
