@@ -1,0 +1,102 @@
+<html ng-app="mailApp">
+<title>Mail App</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+
+<body>
+
+<div class="container">
+    <app-root>
+    </app-root>
+</div>
+
+<script>
+    'use strict';
+
+    angular.module('mailApp', []);
+    let app = angular.module('mailApp');
+
+
+    app.component('appRoot', {
+        templateUrl: 'app-root.html',
+
+        controller: function ($http) {
+
+            $http.get("emails.json")
+                .then((response) => {
+                    this.emails = angular.fromJson(response.data);
+                });
+
+            this.deleteEmail = function (email) {
+                this.emails = this.emails.filter((a) => {
+                    return a !== email
+                });
+            };
+
+            this.searchText = '';
+
+        }
+    });
+
+
+
+    app.component('emailLine', {
+        templateUrl: 'email-line.html',
+        controller: function () {
+
+            this.$onDestroy = function(){
+                                let diff = new Date() - this.email.dateReceived;
+                                console.log('Email has been removed in age: ' + Math.floor(diff / 60000 / 60 / 24) + ' days');
+                            }
+        },
+        bindings: {
+            email: '<email',
+            deleteEmail: '&deleteEmail'
+        }
+    });
+
+
+
+    app.filter('emailNameFilter', function () {
+        return function (emailFrom) {
+            return emailFrom.indexOf("'") > -1 ? emailFrom.split("'")[1] : "";
+        }
+    });
+
+
+    app.filter('timeAgoFilter', function () {
+        return function (date) {
+            let diff = new Date() - date;
+
+            let minutes = Math.floor(diff / 60000);
+            if (minutes < 60) {
+                return minutes + ' minutes ago';
+            }
+
+            let hours = Math.floor(diff / 60000 / 60);
+            if (hours < 24) {
+                return hours + ' hours ago';
+            }
+
+            let days = Math.floor(diff / 60000 / 60 / 24);
+            return days + ' days ago';
+        }
+    });
+
+    app.filter('containsTextFilter', function () {
+        return function (emails, text) {
+            let filteredEmails = [];
+            if (emails && emails.length > 0) {
+                filteredEmails = emails.filter((a) => {
+                    return a.subject.toLowerCase().includes(text.toLowerCase())
+                        || a.from.toLowerCase().includes(text.toLowerCase())
+                        || a.text.toLowerCase().includes(text.toLowerCase());
+                });
+            }
+            return filteredEmails;
+        };
+    });
+
+</script>
+</body>
+</html>

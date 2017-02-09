@@ -1,0 +1,37 @@
+[
+  {
+    "from": "'Charlotte Jennings' <CharlotteRJennings@armyspy.com>",
+    "to": "'Elena I' <elena-i@gmail.com>",
+    "subject": "Check out new photos",
+    "text": "Hello! I updated profile picture",
+    "dateReceived": 1486591250000
+  },
+  {
+    "from": "'George  Jackson' <GeorgeVJackson@rhyta.com>",
+    "to": "'Elena I' <elena-i@gmail.com>",
+    "subject": "Interview with Bruce Brown",
+    "text": "Hello! I'd like to remind you about the interview this Friday",
+    "dateReceived": 1486418450000
+  },
+  {
+    "from": "'Jessica Martin' <JessicaBMartin@armyspy.com>",
+    "to": "'Elena I' <elena-i@gmail.com>",
+    "subject": "Specification has been updated",
+    "text": "Hello! Please review updates ",
+    "dateReceived": 1483740050000
+  },
+  {
+    "from": "'Gary Layton' <GaryMLayton@rhyta.com>",
+    "to": "'Elena I' <elena-i@gmail.com>",
+    "subject": "Notifications: Please Confirm Subscription",
+    "text": "Hello! Please Confirm Subscription",
+    "dateReceived": 1481061658000
+  },
+  {
+    "from": "'Gary Layton' <GaryMLayton@rhyta.com>",
+    "to": "'Elena I' <elena-i@gmail.com>",
+    "subject": "Notifications: Please Confirm Subscription",
+    "text": "Hello! Please Confirm Subscription",
+    "dateReceived": 1481061658000
+  }
+]
