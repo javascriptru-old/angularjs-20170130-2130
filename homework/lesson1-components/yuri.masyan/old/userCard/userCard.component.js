@@ -10,3 +10,9 @@ angular.module('userCards')
       scope: true
     }
   });
+
+// ЗЛО:
+// ng-include
+// ng-controller
+// directive + template (должен быть component)
+// scope: false | true
