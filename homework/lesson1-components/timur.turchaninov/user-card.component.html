@@ -1,0 +1,24 @@
+<aside class="profile-card__content">
+    <header>
+        <a href="#">
+            <img src="{{$ctrl.user.photo}}" ng-click="clicked = !clicked" ng-class="{'is-profile-card_active': clicked}">
+        </a>
+        <h1>{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h1>
+        <h2>- {{$ctrl.user.country}} -</h2>
+    </header>
+    <div class="profile-bio">
+
+        <p>Hello there!</p>
+        <p>I am a full stack web developer. I mainly work with PHP, HTML, CSS, JS and WordPress.
+            <br />I also play well with Photoshop, Corel Draw, After Effects and other cool stuff.</p>
+
+    </div>
+    <ul class="profile-social-links">
+        <li>
+            <a href="#" ng-click="$ctrl.deleteUser($event, $ctrl.index)">
+                <img src="http://icons.iconarchive.com/icons/graphicloads/100-flat/256/close-icon.png">
+            </a>
+        </li>
+    </ul>
+
+</aside>
