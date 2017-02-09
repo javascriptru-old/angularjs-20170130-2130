@@ -12,3 +12,6 @@ this.deleteMail = (item) => {
         }
     }
 }
+
+
+ this.mails.splice( this.mails.indexOf(item), 1);

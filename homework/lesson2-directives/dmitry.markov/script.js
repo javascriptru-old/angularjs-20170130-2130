@@ -80,6 +80,7 @@
 
   app.filter('myDate', function () {
     return (date) => {
+      console.log('CALL')
       let formattedDate
       const now = (Date.now() - date) / 1000
 
