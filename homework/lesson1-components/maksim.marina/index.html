@@ -10,7 +10,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-6">
-      <user-card></user-card>
+      <app-root></app-root>
     </div>
   </div>
 </div>
@@ -18,37 +18,54 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 <script>
-  'use strict'
+  'use strict';
   var app = angular.module('userCards', []);
-  var indexGlobal = undefined;
 
+  app.component('appRoot', {
+      templateUrl: 'app-root.html',
+      controller: function ($http) {
+          this.users = [];
 
-
-  app.component('userCard',{
-      templateUrl: 'user-card.html',
-      controller: function ( $http ) {
-          this.arrUsers = [];
-
-
-          this.deleteUser = (index) => {
-              this.arrUsers.splice(index, 1)
+          var xhr = new XMLHttpRequest();
+          xhr.open('GET', 'data/users.json', false);
+          xhr.send();
+          if(xhr.status == 200) {
+              this.users = JSON.parse(xhr.responseText);
           }
 
-          this.selectUser = (element)=> {
-              element.target.parentNode.style.backgroundColor = '#00f3ff'
+          this.deleteUser = (item) => {
+              for (var i = 0; i < this.users.length; i++) {
+                  if (this.users[i] == item) {
+                      this.users.splice(i, 1);
+                      break;
+                  }
+              }
           }
 
-          $http.get('data/users.json').then((response) => {
-              this.arrUsers = response.data
-          });
-
+          this.selectUser = (user) => {
+              user.selectedStyle = "panel-active";
+          }
       }
-
   });
 
+  app.component('userCard', {
+      templateUrl: 'user-card.html',
+      controllers: function () {
+      },
+      bindings: {
+          user: '<user',
+          deleteUser: '&deleteuser',
+          selectUser:'&selectuser'
+      }
+  });
 
 </script>
-
+<style>
+    .panel-active{
+        -webkit-box-shadow: 0px 0px 6px rgba(15,148,175,0.7);
+        box-shadow: 0px 0px 6px rgba(15,148,175,0.7);
+    }
+</style>
 
 </body>
 </html>

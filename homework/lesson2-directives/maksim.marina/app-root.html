@@ -1,0 +1,12 @@
+<div class="container">
+    <div class="row">
+        <div class="form-group col-md-6">
+            <input ng-model="searcSubjectMail" type="text" class="form-control" placeholder="Поис по теме письма"/>
+        </div>
+    </div>
+</div>
+
+<mail-box ng-repeat="mail in $ctrl.mails | filter:searcSubjectMail:strict"
+          mail="mail"
+          deletemail="$ctrl.deleteMail(index)"
+></mail-box>
