@@ -1,0 +1,12 @@
+<div class="col-md-12">
+    <div class="panel panel-info" ng-class="$ctrl.getClass()" ng-click="$ctrl.toggleColor()">
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-2">{{$ctrl.item.date | dateDecorator}}</div>
+                <div class="col-md-3">{{$ctrl.item.from}}</div>
+                <div class="col-md-6">{{$ctrl.item.text}}</div>
+                <div class="col-md-1">[*]</div>
+            </div>
+        </div>
+    </div>
+</div>
