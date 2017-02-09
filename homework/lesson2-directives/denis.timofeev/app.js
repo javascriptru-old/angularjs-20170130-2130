@@ -9,7 +9,7 @@ angular.module('contactsList', [])
                 {"date": new Date(2017, 1, 6, 18, 5, 17), "from": "Olga@gmail.com", "text": "Olga's mail. Some text for Kate"},
                 {"date": new Date(2017, 1, 7, 16, 3, 14), "from": "angular@gmail.com", "text": "Angular's mail. Some text for Olga"}
             ];
-            this.deleteUser = function (index) {
+            this.deleteMail = function (index) {
                 this.mail.splice(index, 1);
             }
         }
@@ -25,12 +25,15 @@ angular.module('contactsList', [])
                 return this.active ? 'active' : '';
             };
             this.delete = function () {
-                this.deleteFunc();
+                this.deleteItem();
+            };
+            this.$onDestroy = function() {
+                console.log('$onDestroy', this.item);
             }
         },
         bindings: {
             item: '=',
-            deleteFunc: '&deleteUser'
+            deleteItem: '&'
         }
     })
     .filter('dateDecorator', function() {

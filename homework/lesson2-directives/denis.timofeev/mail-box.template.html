@@ -4,6 +4,6 @@
     </div>
 </div>
 <div ng-repeat="item in $ctrl.mail | searchFilterFunc : $ctrl.searchFilter" class="row">
-    <mail-item item="item"></mail-item>
+    <mail-item item="item" delete-item="$ctrl.deleteMail($index)"></mail-item>
 </div>
 
