@@ -1,0 +1,20 @@
+<div class="mail-list">
+  <table class="table table-hover table-condensed">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Title</th>
+        <th>Date</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="mail-item" ng-repeat="item in ctrl.list | filter:ctrl.token">
+        <td></td>
+        <td>{{item.title}}</td>
+        <td>{{item.receiveDate | fromNow}}</td>
+        <td><button class="btn btn-default glyphicon glyphicon-trash" ng-click="ctrl.remove({item: item})"></button></td>
+      </tr>
+    </tbody>
+  </table>
+</div>

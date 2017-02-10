@@ -1,0 +1,29 @@
+[{
+  "from"      : "maksim@mail.ru",
+  "to"        : "egor@mail.ru",
+  "subject"   : "Акция мВидео",
+  "body"      : "описание письма",
+  "datetime"  : "1486654549108"
+},
+{
+  "from"      : "lidia@mail.ru",
+  "to"        : "olga@mail.ru",
+  "subject"   : "Купите велосипед",
+  "body"      : "описание письма",
+  "datetime"  : "1486647127924"
+},
+{
+  "from"      : "petrov@mail.ru",
+  "to"        : "ivanov@mail.ru",
+  "subject"   : "Продам велотренажор",
+  "body"      : "описание письма",
+  "datetime"  : "1486621127924"
+},
+{
+  "from"      : "kristi@mail.ru",
+  "to"        : "stas@mail.ru",
+  "subject"   : "Анонимное письмо",
+  "body"      : "описание письма",
+  "datetime"  : "1486117127924"
+}
+]

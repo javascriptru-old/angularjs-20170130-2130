@@ -1,0 +1,59 @@
+<html ng-app="myApp">
+<head>
+    <title>Карточки пользователей</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .active {
+            box-shadow: 0 0 12px 1px blue;
+        }
+    </style>
+</head>{{1+1}}
+
+<user-list></user-list>
+
+<script>
+    var app = angular.module('myApp', []);
+
+    app.component('userList', {
+        templateUrl: 'user-list.html',
+        controller: function ($http) {
+
+            this.users = []
+            this.activeIndex = null
+
+            $http.get('users.json').then((response) => {
+                this.users = response.data;
+            })
+
+            this.delete = function (index) {
+                this.users.splice(index, 1);
+                this.activeIndex = null;
+                console.log(index);
+            }
+
+            this.setActive = function (index) {
+                this.activeIndex = index;
+                console.log(this.activeIndex);
+            }
+        }
+    })
+
+    app.component('userCard', {
+        templateUrl: 'user-card.html',
+        controller: function () {
+            //this.user
+
+        },
+        bindings: {
+            user: '<',
+            index: '=',
+            delete: '&',
+            setActive: '&',
+            activeIndex: '='
+        }
+    })
+</script>
+
+</body>
+</html>

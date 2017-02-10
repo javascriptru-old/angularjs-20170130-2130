@@ -1,5 +1,7 @@
+import templateUrl from './user-card.html';
+
 const userCard = {
-    templateUrl: 'app/user-card/user-card.html',
+    templateUrl,
     bindings: {
         user: '<',
         selectedUser: '=',

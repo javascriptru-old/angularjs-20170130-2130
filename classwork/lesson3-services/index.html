@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html ng-app="userCards">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Карточки пользователей</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+  <user-card></user-card>
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  <script>
+    //Directives
+    //Componets
+    //Filters
+
+    //Services
+
+    var app = angular.module('userCards', []);
+/*
+    app.config(($httpProvider) => {
+      httpProvider.set('sadfds');
+    });
+
+    app.run((UserService) => {
+      UserService.setDefaultUser(true);
+    });
+*/
+    app.service('UserService', function () {
+      this.random = Math.random();
+
+      this.getOne = (id) => { };
+      this.getAll = () => { };
+      this.getUser = () => ({ name: 'Bob' });
+
+      this.setRandomUser = function () {
+
+      }
+
+      this.x = 5;
+    });
+    /*
+        app.service('CarService', function(WeelService) {
+          this.random = Math.random();
+        });
+
+        app.service('WeelService', function() {
+          this.random = Math.random();
+        });
+    */
+    app.component('userCard', {
+      template: '<div>{{$ctrl.random}}{{$ctrl.getRandom()}}</div>',
+      controller: function () {
+
+        this.getRandom = () => Math.random();
+
+        //fetch()
+        //Promise()
+        /*
+                $http.get('http://ya.ru').then((data) => {
+                  this.users = data;
+                });
+                this.random = UserService.random;
+                UserService.x  = 10;*/
+      }
+    });
+
+
+
+    /*
+       Dependency Injection
+
+       - short form (with ngAnnoration)
+       - full form
+       - 'inject' form
+
+       Service-providers types:
+       - .service/ .factory !!! одно и тоже !!!
+       - .value / .constant
+       - .provider  !!! для 3rd party настройки !!!
+
+       Configuration:
+       - .config  (for providers)
+       - .run   (for services)
+
+       Out of box:
+       - $http/$q
+       - $timeout/$interval
+    */
+  </script>
+</body>
+
+</html>

@@ -1,3 +1,11 @@
+/**
+ * Created by y.masyan on 06.02.2017.
+ */
+/**
+ * Created by y.masyan on 25.10.2016.
+ */
+'use strict';
+
 angular.module('userCards')
   .factory('userCardService', function ($http) {
     var data = {cards: {}};
@@ -15,4 +23,5 @@ angular.module('userCards')
       data.cards.splice(index, 1);
     };
     return data;
-  });
+  })
+;

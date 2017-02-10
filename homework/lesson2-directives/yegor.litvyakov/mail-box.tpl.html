@@ -1,0 +1,12 @@
+<main class="mailBox">
+    <input class="mailBox__search" ng-model="$ctrl.searchPattern"/>
+    <ul class="mailBox__letters">
+        <li ng-repeat="letter in $ctrl.letters | searchPatternFilter:$ctrl.searchPattern track by $index">
+            <p>
+                <strong ng-bind="letter.title"></strong>
+                <time ng-bind="letter.recievedDate | formatDateFilter"></time>
+                <button ng-click="$ctrl.remove(letter)">Удалить</button>
+            </p>
+        </li>
+    </ul>
+</main>
