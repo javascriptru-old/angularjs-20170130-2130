@@ -23,3 +23,4 @@ http://plnkr.co/edit/aK1w6SSsBLX1LbJuBxDq?p=preview
 - [x] index always 0, incorrect deletion
 - [x] toaster console log
 - [ ] pluralize data output
+- [ ] auto Update

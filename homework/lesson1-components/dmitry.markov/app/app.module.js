@@ -77,19 +77,15 @@
     }
   })
 
-  app.service('userService', function ($q, $http, $window) {
+  app.service('userService', function ($http, $window) {
     const url = 'app/data/users.json'
 
     this.getUsers = () => {
-      return $q((resolve, reject) => {
-        $http.get(url)
-          .then((response) => {
-          const users = response.data
-          resolve(users)
-        }, (error) => {
-          $window.console.log(error)
-          reject(error)
-        })
+      return $http.get(url)
+        .then((response) => {
+        return response.data
+      }, (error) => {
+        $window.console.log(error)
       })
     }
   })
