@@ -1,16 +1,26 @@
 <html ng-app="myApp">
 <head>
-    <title>Карточки пользователей</title>
+    <title>Contacts</title>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        .active {
-            box-shadow: 0 0 12px 1px blue;
+        .active1 {outline:blue outset 2px;}
+        .active {box-shadow: 0 0 12px 1px blue;}
+        .lavender {background-color: lavender;}
+        .blue {color: royalblue}
+        .grey {color: darkslategrey}
+        .user-card {
+            display: block;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 1px;
         }
     </style>
-</head>{{1+1}}
+</head>{{1+0}}
 
-<user-list></user-list>
+<div class="container">
+    <user-list></user-list>
+</div>
 
 <script>
     var app = angular.module('myApp', []);
@@ -19,22 +29,23 @@
         templateUrl: 'user-list.html',
         controller: function ($http) {
 
-            this.users = []
-            this.activeIndex = null
+            this.users = [];
+            this.activeIndex = null;
 
             $http.get('users.json').then((response) => {
                 this.users = response.data;
             })
 
             this.delete = function (index) {
-                this.users.splice(index, 1);
                 this.activeIndex = null;
-                console.log(index);
+                this.users.splice(index, 1)
+                console.log("deleted Index " + index);
+                console.log("active Index " + this.activeIndex);
             }
 
-            this.setActive = function (index) {
+            this.set = function (index) {
                 this.activeIndex = index;
-                console.log(this.activeIndex);
+                console.log("active Index " + this.activeIndex);
             }
         }
     })
@@ -43,14 +54,16 @@
         templateUrl: 'user-card.html',
         controller: function () {
             //this.user
+            //this.index
+            //this.activeIndex
 
         },
         bindings: {
             user: '<',
-            index: '=',
+            index: '<',
             delete: '&',
-            setActive: '&',
-            activeIndex: '='
+            set: '&',
+            activeIndex: '<'
         }
     })
 </script>
