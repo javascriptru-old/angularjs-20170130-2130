@@ -1,0 +1,12 @@
+<h3>Конвертер Валют</h3>
+<div class="converter" ng-class=" $ctrl.loading ? 'loading' : '' ">
+	<div class="converter__left">
+		<select ng-change="$ctrl.getRates( $ctrl.leftCurrency )" ng-model="$ctrl.leftCurrency" ng-options="item for item in $ctrl.currencyCodes"></select>
+		<input type="number" min="0" step="0.1" ng-model=" $ctrl.leftValue " ng-change="$ctrl.convert()"/>
+	</div>
+	<button ng-click="$ctrl.changeInputs()">&rlarr;</button>
+	<div class="converter__right">
+		<select ng-change="$ctrl.convert()" ng-model="$ctrl.rightCurrency" ng-options="item for item in $ctrl.currencyCodes"></select>
+		<input type="number" min="0" step="0.1" ng-model=" $ctrl.rightValue " ng-change="$ctrl.convert(true)" />
+	</div>
+</div>

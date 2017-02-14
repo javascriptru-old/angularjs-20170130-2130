@@ -1,0 +1,12 @@
+<label>
+	<input type="radio" ng-model="$ctrl.tab" ng-value="1">
+	Конвертер Валют
+</label>
+
+<label>
+	<input type="radio" ng-model="$ctrl.tab" ng-value="2">
+	Список пользователей
+</label>
+
+<div ng-if="$ctrl.tab == 1"><currency-converter></currency-converter></div>
+<div ng-if="$ctrl.tab == 2"><user-list></user-list></div>
