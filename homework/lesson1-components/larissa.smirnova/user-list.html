@@ -1,8 +1,19 @@
-<user-card
-        ng-repeat="user in $ctrl.users"
-        user="user"
-        index="$index"
-        delete="$ctrl.delete(index)"
-        setActive="$ctrl.setActive(index)"
-        activeIndex="$ctrl.activeIndex"
-></user-card>
+<div class="panel panel-info m-2">
+    <div  class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-5 grey"><h3>Contacts</h3></div>
+        <div class="col-sm-6"></div>
+    </div>
+    <div class="panel-body list-group">
+        <user-card class="panel-heading"
+                ng-repeat="user in $ctrl.users"
+                user="user"
+                index="$index"
+                set="$ctrl.set(index)"
+                delete="$ctrl.delete(index)"
+                activeIndex="$ctrl.activeIndex"
+                ng-class="$ctrl.activeIndex == $index ? 'user-card active' : 'user-card'"
+        ></user-card>
+    </div>
+</div>
+

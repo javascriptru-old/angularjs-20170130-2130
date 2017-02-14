@@ -1,0 +1,26 @@
+<div class="panel panel-info m-2">
+    <div  class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-2 grey"><h3>Inbox</h3></div>
+        <div class="col-sm-9"></div>
+    </div>
+    <div  class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" ng-model="$ctrl.searchCriteria" id = "searchCriteria" placeholder="Search Mail..." autofocus />
+        </div>
+        <div class="col-sm-3"></div>
+    </div>
+    <div class="panel-body list-group">
+        <com-email class="panel-heading"
+            ng-repeat = "email in $ctrl.emails | containsFilter: $ctrl.searchCriteria"
+            email = "email"
+            index="$index"
+            delete-email = "$ctrl.deleteEmail(email)"
+            set="$ctrl.setActiveIndex(index)"
+            activeIndex="$ctrl.activeIndex"
+            ng-class="$ctrl.activeIndex == $index ? 'user-card active' : 'user-card'"
+        ></com-email>
+    </div>
+
+</div>

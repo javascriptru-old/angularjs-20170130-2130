@@ -1,0 +1,11 @@
+<div ng-click="$ctrl.setActiveIndex({index: $ctrl.index})">
+    <div class="row list-group-item lavender">
+        <div class="col-sm-2 grey" >{{$ctrl.email.from}}</div>
+        <div class="col-sm-5 blue">{{$ctrl.email.subject}}</div>
+        <div class="col-sm-2 grey text-right">{{$ctrl.email.dateReceived | date:"dd.MM.yyyy hh:mm:ss"}}</div>
+        <div class="col-sm-2 grey text-right">{{$ctrl.email.dateReceived | emailLifetime}}</div>
+        <div class="col-sm-1 text-right">
+            <a href="#" class="btn btn-sm btn-default" ng-click="$ctrl.deleteEmail({email: $ctrl.email})"><span class="glyphicon glyphicon-trash"></span> </a>
+        </div>
+    </div>
+</div>

@@ -1,14 +1,11 @@
-{{$ctrl.activeIndex}}
-<div class="panel panel-info" ng-click="$ctrl.setActive({index: $ctrl.index})" ng-class="$ctrl.activeIndex == $ctrl.index ? 'active' : ''">
-    <div class="panel-heading">
-        <table>
-            <tbody>
-            <tr>
-                <td width="200"><h3 class="panel-title">{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h3></td>
-                <td width="100"><img ng-src="{{$ctrl.user.photo}}" width="50" height="50"></td>
-                <td width="50"><button ng-click="$ctrl.delete({index: $ctrl.index})">X</button></td>
-            </tr>
-            </tbody>
-        </table>
+<div ng-click="$ctrl.set({index: $ctrl.index})">
+    <div class="row list-group-item lavender blue">
+        <div class="col-sm-2"><img ng-src="{{$ctrl.user.photo}}" width="50" height="50"></div>
+        <div class="col-sm-9"><h3 class="panel-title">{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h3></div>
+        <div class="col-sm-1">
+            <a href="#" class="btn btn-sm btn-default" ng-click="$ctrl.delete({index: $ctrl.index})"><span class="glyphicon glyphicon-trash"></span> </a>
+        </div>
     </div>
 </div>
+
+<!--ng-click="$ctrl.setActive({index: $ctrl.index})"   panel-heading  -->
