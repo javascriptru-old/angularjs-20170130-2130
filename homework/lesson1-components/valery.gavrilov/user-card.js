@@ -6,18 +6,21 @@ m.component('userCard', {
     {{$ctrl.profile.firstName}}
     {{$ctrl.profile.lastName}}
     [{{$ctrl.idx}}]
+    
     </div>
-    <span ng-click='$ctrl.delete($ctrl.idx)'>
+
+    <span ng-click='$ctrl.doDelete({i: $ctrl.idx})'>
     X
     </span>
     
     `
     , controller: function(){
         this.highlight = false;
-        this.delete =idx=>{ alert(idx); return false;}
+        
     },
     bindings: {
         profile: '<user',
-        idx: '<idx'
+        idx: '<idx',
+        doDelete: '&deleteAction'
     }
 });

@@ -6,10 +6,16 @@
 <script>
     let m1 = angular.module('hw1', []);
     m1.controller('indexController', function($scope){
+
         $scope.users = [{firstName: 'shshsh-1', lastName: '23542304032-1'}, 
         {firstName: 'shshsh-2', lastName: '23542304032-2'}, 
         {firstName: 'shshsh-3', lastName: '23542304032-3'}, 
         {firstName: 'shshsh-4', lastName: '23542304032-4'}, ];
+      
+        $scope.ddd = function(i){
+            alert(i);
+            $scope.users.splice(i, 1);
+        };
     });
     
     
@@ -24,7 +30,7 @@
 </script>
 
 <div ng-controller="indexController">
-    <user-card ng-repeat="user in users" user="user" idx=$index>
+    <user-card ng-repeat="user in users" user="user" idx=$index delete-action="ddd(i)">
         
     </user-card>
 </div>
