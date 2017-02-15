@@ -1,0 +1,10 @@
+		.photo {
+			width: 100px !important;
+			max-width: 100px !important;
+		}
+	    .selected {
+	    	background-color: rgba(0, 120, 201, 0.4);
+	    }
+	    .grey {
+	    	color: grey;
+	    }

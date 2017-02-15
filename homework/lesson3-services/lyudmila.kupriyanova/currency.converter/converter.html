@@ -1,0 +1,31 @@
+<div>&nbsp;</div>
+<div class="col-md-12">
+<div class="cc_main">
+	<div class="cc_header">Конвертер валют</div>
+	<div class="">
+		<div class="row">
+		<div>
+			<div ng-repeat="rate in $ctrl.rates">
+			<div class="cc_item col-xs-12">
+				<div class="col-xs-1 ">
+					<img title="Доллар США" ng-src="{{rate.flag}}" class="cc_flag">
+				</div>
+				<div title="{{rate.Name}}" class="col-xs-7"> {{rate.CharCode}} - {{rate.Name}}
+				</div>
+				<div style="" title="{{rate.sign}}" class="col-xs-1"> {{rate.sign}}
+					
+				</div>
+				
+				<div class="col-xs-3">
+					<input class="cc_input" type="text" ng-blur="$ctrl.blurInput(rate)" ng-change="$ctrl.changeInput(rate)" ng-model="rate.current" title="{{rate.Name}}">
+				</div>
+			</div>
+			</div>
+        </div>
+		</div>
+	</div>
+	<div>
+		<div class="cc_refresh" title="Обновить" ng-click="$ctrl.dateUpdate()">{{$ctrl.date | date:"dd.MM.yyyy hh:mm:ss"}}</div>
+	</div>
+</div>
+</div>
