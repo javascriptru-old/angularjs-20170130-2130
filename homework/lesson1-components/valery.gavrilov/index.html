@@ -1,0 +1,32 @@
+<html ng-app='hw1'>
+    <body>
+<script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js'></script>
+
+{{1 + 1}}
+<script>
+    let m1 = angular.module('hw1', []);
+    m1.controller('indexController', function($scope){
+        $scope.users = [{firstName: 'shshsh-1', lastName: '23542304032-1'}, 
+        {firstName: 'shshsh-2', lastName: '23542304032-2'}, 
+        {firstName: 'shshsh-3', lastName: '23542304032-3'}, 
+        {firstName: 'shshsh-4', lastName: '23542304032-4'}, ];
+    });
+    
+    
+
+</script>
+
+<style>
+    .highlight {background-color: blue;    }
+</style>
+
+<script src='user-card.js'>
+</script>
+
+<div ng-controller="indexController">
+    <user-card ng-repeat="user in users" user="user" idx=$index>
+        
+    </user-card>
+</div>
+</body>
+</html>
