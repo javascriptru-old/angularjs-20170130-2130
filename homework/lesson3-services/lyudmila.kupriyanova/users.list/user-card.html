@@ -1,0 +1,24 @@
+<div class="panel {{$ctrl.pnlClass}}"  ng-click='$ctrl.setNewStyle(this);'>
+  <div class="panel-heading">
+    <h3 class="panel-title">{{$ctrl.person.surname}} {{$ctrl.person.firstName}}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class="col-md-6 col-lg-6">
+        <table >
+          <tbody>
+          <tr>
+            <td>
+                <img class="photo" ng-src="{{$ctrl.person.photo}}">
+            </td>
+          </tr>
+          <tr><td>{{$ctrl.person.country}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <button ng-click="$ctrl.deleteItem({item: $ctrl.person});">Удалить карточку</button>
+  </div>
+</div>
