@@ -2,18 +2,20 @@
     <body>
 <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js'></script>
 
-{{1 + 1}}
+<!--{{1 + 1}}-->
 <script>
     let m1 = angular.module('hw1', []);
     m1.controller('indexController', function($scope){
 
-        $scope.users = [{firstName: 'shshsh-1', lastName: '23542304032-1'}, 
-        {firstName: 'shshsh-2', lastName: '23542304032-2'}, 
-        {firstName: 'shshsh-3', lastName: '23542304032-3'}, 
-        {firstName: 'shshsh-4', lastName: '23542304032-4'}, ];
+        $scope.users = [
+            {firstName: 'shshsh-1', lastName: '23542304032-1', dob: '08/08/2018', sex: 'Male', address: '3 xxx GGG 0505', email: '1@email.ru'}, 
+            {firstName: 'shshsh-2', lastName: '23542304032-2', dob: '01/01/2011', sex: 'Male', address: '4-15 fff GGSGSGS 0707', email: '2@email.com'}, 
+            {firstName: 'shshsh-3', lastName: '23542304032-3', dob: '02/02/2012', sex: 'Male', address: '1, auau, AAA 794', email: '3@email.com'}, 
+            {firstName: 'shshsh-4', lastName: '23542304032-4',  dob: '03/03/2013', sex: 'Female', address: '8-8-8-8', email: '4@email.com'}
+        ];
       
-        $scope.ddd = function(i){
-            alert(i);
+        $scope.deleteItem = function(i){
+            // alert(i);
             $scope.users.splice(i, 1);
         };
     });
@@ -30,7 +32,7 @@
 </script>
 
 <div ng-controller="indexController">
-    <user-card ng-repeat="user in users" user="user" idx=$index delete-action="ddd(i)">
+    <user-card ng-repeat="user in users" user="user" idx=$index delete-action="deleteItem(i)">
         
     </user-card>
 </div>

@@ -2,15 +2,27 @@ let m = angular.module('hw1');
 
 m.component('userCard', {
     template: `
-    <div ng-class='$ctrl.highlight ? "highlight" : ""' ng-click='$ctrl.highlight=!$ctrl.highlight'><h1>haha</h1>
-    {{$ctrl.profile.firstName}}
+    <div ng-class='$ctrl.highlight ? "highlight" : ""' ng-click='$ctrl.highlight=!$ctrl.highlight'>
+    
+    <h3>{{$ctrl.profile.firstName + ' ' + $ctrl.profile.lastName}}</h3>
+    <table>
+    <tbody>
+    <tr>    <td>{{$ctrl.profile.dob}}</td> </tr>
+    <tr>    <td>{{$ctrl.profile.sex}}</td></tr>
+    <tr>    <td>{{$ctrl.profile.address}}</td></tr>
+    <tr>    <td>{{$ctrl.profile.email}}</td></tr>
+
+    </tbody>
+    </table>
+    <!--
     {{$ctrl.profile.lastName}}
     [{{$ctrl.idx}}]
+    -->
     
     </div>
 
     <span ng-click='$ctrl.doDelete({i: $ctrl.idx})'>
-    X
+    [X DELETE]
     </span>
     
     `
