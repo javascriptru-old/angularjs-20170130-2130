@@ -1,8 +1,24 @@
 <div class="row">
-Конвертер валют
+Currency converter
 </div>
 <div class="row">
-Формочка
-<pre><code>{{ $ctrl.data }}</code></pre>
-<pre><code>{{ $ctrl.names }}</code></pre>
+  <form name="currForm">
+    <label for="curr_from"> from: </label>
+    <select name="curr_from" ng-model="$ctrl.from" ng-change="$ctrl.result = $ctrl.to[1] / $ctrl.from[1]">
+      <option ng-repeat="(key, option) in $ctrl.data.rates" ng-value="[key, option]">{{ $ctrl.names[key].name }}</option>
+    </select>
+    <label for="curr_to"> to: </label>
+    <select name="curr_to" ng-model="$ctrl.to" ng-change="$ctrl.result = $ctrl.to[1] / $ctrl.from[1]">
+      <option ng-repeat="(key, option) in $ctrl.data.rates" ng-value="[key, option]">{{ $ctrl.names[key].name }}</option>
+    </select>
+  </form>
+  <div ng-show="$ctrl.result">1 {{ $ctrl.names[$ctrl.from[0]].name }} = {{ $ctrl.result | currency:$ctrl.names[$ctrl.to[0]].symbol:$ctrl.names[$ctrl.to[0]].decimal_digits }} {{ $ctrl.names[$ctrl.to[0]].name_plural }}</div>
+<!--  <hr>
+  <pre>from = {{ $ctrl.from }}
+to = {{ $ctrl.to }}
+result = {{ $ctrl.result }}</pre><br/>-->
+<!--  {"USD":{"symbol":"$","name":"US Dollar","symbol_native":"$","decimal_digits":2,"rounding":0,"code":"USD","name_plural":"US dollars" }-->
+
+<!--<pre><code>{{ $ctrl.data }}</code></pre>-->
+<!--<pre><code>{{ $ctrl.names }}</code></pre>-->
 </div>

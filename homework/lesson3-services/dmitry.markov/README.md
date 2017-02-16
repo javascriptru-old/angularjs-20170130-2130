@@ -10,11 +10,11 @@
 
 #### Приложение "Список пользователей"
 
-1. Написать сервис UserService для получения пользователей по http(https://learn.javascript.ru/courses/groups/api/participants?key=1gvlw0r)
-2. Используя сервис из (1) вывести список.
+4. Написать сервис UserService для получения пользователей по http(https://learn.javascript.ru/courses/groups/api/participants?key=1gvlw0r)
+5. Используя сервис из (1) вывести список.
 
 #### Бонус:
-1. реализовать свою директиву ng-show, ng-hide, ng-click, ng-change (на чистом javascript, без использования Angular)
+6. реализовать свою директиву ng-show, ng-hide, ng-click, ng-change (на чистом javascript, без использования Angular)
 
 ### Demo
 http://plnkr.co/edit/aK1w6SSsBLX1LbJuBxDq?p=preview
@@ -26,6 +26,9 @@ http://plnkr.co/edit/aK1w6SSsBLX1LbJuBxDq?p=preview
 - [ ] currency widget history
 - [ ] currency widget choose date
 - [ ] currency widget proper currency names (+plural)
+- [ ] currency widget popular curr shortcuts
+- [ ] currency widget auto amount (1,10, 100) if result too small
+- [ ] currency widget internationalisation
 - [ ] userService http service
 - [ ] userService list component
 - [ ] nrg-show
