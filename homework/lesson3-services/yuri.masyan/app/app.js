@@ -43,7 +43,8 @@ angular.module('app', [])
       age: 23
     };
     this.currentTime = new Date();
-    this.cards = inboxService;
+    this.cards = inboxService.getdata();
+
 
     this.deleteItem = (index) => {
           this.cards.data.splice(this.cards.data.indexOf(index), 1)
@@ -81,7 +82,7 @@ angular.module('app', [])
       });
     };
     data.getData();
-    
+
 
 
     return data;

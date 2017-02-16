@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="userCards">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Router</title>
+  <style>
+    .active {
+      color: red;
+    }
+  </style>
+  <base href="/">
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+
+  <ui-view></ui-view>
+
+  <a ui-sref="home"  ui-sref-active="active">Home</a>
+  <a ui-sref="user"  ui-sref-active="active">User</a>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+  <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js">
+  </script>
+  <script>
+    var app = angular.module('userCards', ['ui.router']);
+
+    app.config(($stateProvider, $urlRouterProvider) => {
+       $stateProvider.state({
+        // abstract: true,
+        // reloadOnSearch: false,
+        // data: { title: 'Home' },
+        resolve: {
+          user: function(UserService) {
+            return UserService.getOne(1);
+          }
+        },
+
+
+         name: 'home',
+         url: '',
+         template: '<home></home>', //templateUrl
+       });
+       $stateProvider.state({
+         name: 'user',
+         url: '/user/:userId',
+         template: '<user user-id="userId" user="user"></user>', //templateUrl
+         controller: function($stateParams, user) {
+           $scope.userId = $stateParams.userId;
+           $scope.user = user;
+         }
+       });
+
+       $stateProvider.state({
+         name: 'user.profile',
+         url: '/user',
+         template: '<user></user>', //templateUrl
+       });
+
+       $stateProvider.state({
+         name: 'settings',
+         parent: 'user',
+         url: '/user',
+         template: '<user></user>', //templateUrl
+       });
+
+       $urlRouterProvider.otherwise('users');
+    });
+
+    app.component('home', {
+      template: 'homeComponent',
+      controller: function() {}
+    });
+
+    app.component('user', {
+      bindings: {
+        userId: '<',
+        user: '<'
+      },
+      template: 'userComponent',
+      controller: function($state) {
+        //$state.current.data.title
+        //$state.go('home');
+        //$state.go('^');
+        //$state.go('^.settings');
+      }
+    });
+
+  </script>
+</body>
+
+</html>

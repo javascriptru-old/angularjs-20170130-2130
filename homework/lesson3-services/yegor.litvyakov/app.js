@@ -32,21 +32,14 @@ function userService($http, $q) {
     };
 
     function _getAll() {
-        let deferred = $q.defer();
-
         if (users) {
-            deferred.resolve(users);
-        } else {
-            $http.get(URL)
-                .then((res) => {
-                    users = res.data;
-                    deferred.resolve(users);
-                }, (err) => {
-                    deferred.reject(err);
-                })
+            return $q.resolve(users);
         }
 
-        return deferred.promise;
+        return $http.get(URL)
+
+
+        .then(res => res.data);
     }
 }
 
