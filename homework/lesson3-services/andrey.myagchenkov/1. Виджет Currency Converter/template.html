@@ -1,0 +1,19 @@
+<div class="center">
+		<h3>Конвертер валют</h3>
+		<hr>
+		<div>
+			<select ng-model="$ctrl.rateFrom" ng-change="$ctrl.myChange()">
+				<option>RUB</option>
+				<option>USD</option>
+				<option>EUR</option>
+			</select>	
+			<input type="number" ng-model="$ctrl.rubSum" ng-change="$ctrl.myChange()">
+			<select ng-model="$ctrl.rateTo" ng-change="$ctrl.myChange()">
+				<option>RUB</option>
+				<option>USD</option>
+				<option>EUR</option>
+			</select>
+			<span class=" rubl" ng-bind-html="$ctrl.curSign[$ctrl.rateTo]"></span>
+			<span>{{$ctrl.curSum}}</span>
+		</div>
+</div>
