@@ -20,12 +20,12 @@
 http://plnkr.co/edit/aK1w6SSsBLX1LbJuBxDq?p=preview
 
 ### TODO:
-- [ ] currency widget component
-- [ ] currency widget service
-- [ ] currency widget http api
+- [x] currency widget component
+- [x] currency widget service
+- [x] currency widget http api
 - [ ] currency widget history
 - [ ] currency widget choose date
-- [ ] currency widget proper currency names (+plural)
+- [x] currency widget proper currency names (+plural)
 - [ ] currency widget popular curr shortcuts
 - [ ] currency widget auto amount (1,10, 100) if result too small
 - [ ] currency widget internationalisation
