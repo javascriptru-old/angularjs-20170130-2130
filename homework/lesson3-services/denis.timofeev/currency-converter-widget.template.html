@@ -1,0 +1,33 @@
+<div class="panel">
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label for="from" class="control-label">Сумма</label>
+                <input type="text" class="form-control" id="from" ng-model="$ctrl.ammount">
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <label for="fromCurrency" class="control-label">Из валюты</label>
+            <select id="fromCurrency" class="form-control"
+                    ng-options="item as item for item in $ctrl.currencyCodes"
+                    ng-model="$ctrl.fromCurrencyCode"></select>
+        </div>
+
+        <div class="col-md-4">
+            <label for="toCurrency" class="control-label">В валюту</label>
+            <select id="toCurrency" class="form-control"
+                    ng-options="item as item for item in $ctrl.currencyCodes"
+                    ng-model="$ctrl.toCurrencyCode"></select>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <label for="result" class="control-label">Результат</label>
+            <input type="text" class="form-control" id="result" value="{{$ctrl.result()}}" disabled>
+        </div>
+    </div>
+
+</div>
