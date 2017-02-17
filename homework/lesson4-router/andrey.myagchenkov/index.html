@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html ng-app="usersList">
+<head>
+	<title>Список пользователей</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet">
+	<base href="/">
+</head>
+<body>
+
+	<ui-view></ui-view>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script>
+	let app = angular.module('usersList', ['ui.router']);
+
+	app.config(($stateProvider, $urlRouterProvider) => {
+		$stateProvider.state({
+			name: 'home',
+			url: '',
+			template: `
+			<div class="home">
+				<button ng-click="getUsersList()">Вывести список пользователей</button>
+				<button ng-click="toLogin()">Login</button>
+			</div>
+			`,
+			controller: function($scope, $state) {
+				$scope.getUsersList = () => {
+					$state.go('usersList');
+				};
+
+				$scope.toLogin = () => {
+					$state.go('login');
+				};
+			}
+		});
+
+		$stateProvider.state({
+			name: 'usersList',
+			url: '/usersList/:userId',
+			template: `
+				<users-list users-init="usersInit" user-id="userId"></users-list>`
+			,
+
+			resolve: {
+				usersInit: function(loadUsers) {
+					return loadUsers.getUsers().then((data) => { 
+						return data.data });
+				}
+			},
+
+			controller: function($state, $scope, usersInit, $stateParams) {
+				$scope.usersInit = usersInit;
+				$scope.userId = $stateParams.userId;
+			}
+		});
+
+		$stateProvider.state({
+			name: 'login',
+			url: '/login',
+			template: `
+				<div class="login">
+					<span>Login:</span><input type="text">
+					<br><br>
+					<span>Password:</span><input type="password">
+					<br><br>
+					<button>Log in</button>
+				</div>
+			`,
+		});
+
+		$stateProvider.state({
+			name: '404',
+			url: '/404',
+			template: `
+				<h1>404: ЗАПРАШИВАЕМАЯ СТРАНИЦА НЕ НАЙДЕНА</h1>
+			`,
+		});
+
+		$urlRouterProvider.otherwise('404');
+	});
+
+	app.service('loadUsers', function ($http) {
+		let url = 'https://learn.javascript.ru/courses/groups/api/participants?key=1gvlw0r';
+
+		this.getUsers = () => $http.get(url);
+	});
+
+	app.component('usersList', {
+		template: `
+			<div class="main">
+				<p ng-hide="$ctrl.userId">Добавьте в конец url номер пользователя для отображения его профиля</p>
+				<user-card ng-show="$ctrl.userId" user="$ctrl.usersInit[+$ctrl.userId-1]"></user-card>	
+				<user-card ng-hide="$ctrl.userId" ng-repeat="item in $ctrl.usersInit" user="item"></user-card>	
+			</div>
+		`,
+		bindings: {
+			usersInit: '<',
+			userId: '<'
+		},
+		controller: function() {
+		}
+		
+	});
+
+	app.component('userCard', {
+		template: `
+			<p ng-hide="$ctrl.user">Пользователя с таким id не найдено</p>
+			<div ng-show="$ctrl.user">
+				<img class="image" ng-src="{{$ctrl.user.photo || 'avatar.png'}}">
+				<div>Фамилия: {{$ctrl.user.surname}}</div>
+				<div>Имя: {{$ctrl.user.firstName}}</div>
+				<div>Гражданство: {{$ctrl.user.country.toUpperCase()}}</div>
+				<hr>
+			</div>
+		`,
+
+		controller: function() {
+
+		},
+
+		bindings: {
+			user: '<',
+		}
+	})
+</script>
+</body>
+</html>
