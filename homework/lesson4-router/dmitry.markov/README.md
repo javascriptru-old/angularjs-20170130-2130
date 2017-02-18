@@ -13,15 +13,15 @@ http://plnkr.co/edit/?p=preview
 
 ### TODO:
 - [x] routing user/
-- [ ] routing user/:id
+- [x] routing user/:id
 - [x] routing resolve
 - [x] routing login/
 - [ ] auth to localStorage
 - [ ] spinner service
-- [ ] back button ^parent
-- [ ] jsdoc
 - [ ] login form hooks
 - [ ] es6 classes components
 - [ ] ladda button and settimeout login
 - [ ] ui-bootstrap collapse
 - [ ] logout
+- [x] cashing users in service
+- [ ] state transitions

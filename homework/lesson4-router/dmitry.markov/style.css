@@ -1,3 +1,7 @@
+.clicable {
+  cursor: pointer
+}
+
 .m-b-lg {
   margin-bottom: 45px !important
 }
@@ -11,7 +15,12 @@
 }
 
 .panel {
-  min-height: 320px
+  min-height: 320px;
+  border-color: #ccc !important;
+  box-shadow: 0 0 14px 0px rgba(0, 0, 0, 0.3)
+}
+
+.panel-default {
 }
 
 .panel-primary {

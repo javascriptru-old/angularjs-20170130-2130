@@ -15,10 +15,11 @@
          <th>Country</th>
        </tr>
      </thead>
-     <tbody>
+     <tbody class="clicable">
        <tr ng-repeat="(index, user) in $ctrl.users"
            user="user"
-           index="index">
+           index="index"
+           ng-click="$ctrl.goUserCard(index)">
          <td><img ng-src="{{ user.photo ? user.photo : 'https://top.kz/assets/empty-avatar-c8775f1f4a1c5f0be17dfe4ae0de5fad.png' }}"
                   alt="{{ user.firstName }}"
                   width="50"
