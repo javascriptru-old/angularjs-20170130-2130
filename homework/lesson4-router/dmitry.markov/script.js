@@ -3,16 +3,23 @@
   'use strict'
 
   angular.module('userList', ['ngAnimate',
+                              'ngStorage',
                               'toastr',
                               'ui.bootstrap',
                               'ui.router'])
   let app = angular.module('userList')
 
   app.config(($stateProvider, $urlRouterProvider, toastrConfig) => {
+    /**
+     * @desc Задаем дефолтные стили для toastr
+     */
     angular.extend(toastrConfig, {
       positionClass: 'toast-bottom-center',
       timeOut: 3500
     })
+    /**
+     * @desc Роутинг приложения
+     */
     $stateProvider
       .state('user', {
         abstract: true,
@@ -59,13 +66,44 @@
 
   app.component('appNav', {
     templateUrl: 'app-nav.html',
-    controller () {
+    controller (authService) {
+      this.isNavCollapsed = true
+      this.isAuthed = authService.isAuthorized()
+
+      this.logout = ($event) => {
+        $event.stopPropagation()
+        authService.logout()
+      }
     }
   })
 
   app.component('appLogin', {
     templateUrl: 'app-login.html',
-    controller () {
+    controller ($state, authService) {
+      this.login = null
+      this.password = null
+
+      /**
+       * @desc Отправляем данные формы в сервис authService
+       */
+      this.doLogin = () => {
+        const loginFormData = {
+          login: this.login,
+          password: this.password
+        }
+        const status = authService.login(loginFormData)
+
+        if (status === 200) {
+          console.log('login success')
+          $state.go('user.list')
+        }
+        else if (status == 403) {
+          console.log('login failed')
+        }
+        else {
+          console.log('general login failure')
+        }
+      }
     }
   })
 
@@ -75,6 +113,9 @@
       users: '<'
     },
     controller ($state) {
+      /**
+       * @desc Переходим на userCard по клику на строку таблицы
+       */
       this.goUserCard = (index) => {
         $state.go('user.card', { id: index })
       }
@@ -89,15 +130,19 @@
     },
     controller ($state, backgroundService, countryService, userService) {
       this.$onInit = () => {
+        // получаем полное имя
         this.fullName = this.user.firstName + ' ' + this.user.surname
-        // get country name by code
+        // получаем название страны по коду
         this.country = countryService[this.user.country]
-        // set default avatar if no avatar
+        // задаем аватар по-умолчанию, если нет фото
         this.avatar = this.user.photo ? this.user.photo : 'https://top.kz/assets/empty-avatar-c8775f1f4a1c5f0be17dfe4ae0de5fad.png'
-        // set random background on card
+        // задаем рандомный беграунд
         this.background = { 'background-image': 'url(' + backgroundService.getRandom() + ')' }
       }
 
+      /**
+       * @desc Удаление пользователя через сервис и переход на список пользователй
+       */
       this.deleteUser = ($event, index) => {
         $event.stopPropagation()
         userService.deleteUser(index)
@@ -106,16 +151,29 @@
     }
   })
 
+  /**
+   * @name userService
+   * @desc Сервис для работы с данными пользователей
+   */
   app.service('userService', function ($http, $q, toastr) {
     const url = 'https://learn.javascript.ru/courses/groups/api/participants?key=1gvlw0r'
     let users = null
 
+    /**
+     * @desc Получение списка всех пользователей
+     * @returns {Promise}
+     */
     this.getUsers = () => {
       if (users) { return $q.resolve(users) }
       return $http.get(url)
                   .then((res) => users = res.data,
                         (err) => { toastr.info(err.data) })
     }
+
+    /**
+     * @desc Получение данных пользователя. Если нет в кэше, делаем запрос и сохраняем
+     * @returns {Promise}
+     */
     this.getUser = (id) => {
       if (users) { return $q.resolve(users[id]) }
       return $http.get(url)
@@ -124,10 +182,57 @@
                     return users[id]
                   }, (err) => { toastr.info(err.data) })
     }
+
+    /**
+     * @desc Удаление пользователя из локального массива
+     */
     this.deleteUser = (id) => {
       const deleted = users.splice(id, 1)
       toastr.error(`Пользователь ${deleted[0].firstName} удален`)
     }
+  })
+
+  /**
+   * @name authService
+   * @desc Сервис авторизации
+   */
+  app.service('authService', function ($localStorage, toastr) {
+    let auth = $localStorage.auth || null
+    const userCredentials = {
+      login: 'admin',
+      password: 'admin'
+    }
+
+    /**
+     * @desc Возвращает объект авторизации или null если неавторизован
+     * @returns {Object|null}
+     */
+    this.isAuthorized = () => auth
+
+    /**
+     * @desc Пытаемся залогиниться с данными формы и сохраняем в localStorage и auth
+     * @returns {Number} статус
+     */
+    this.login = (loginFormData) => {
+      if (loginFormData.login === userCredentials.login &&
+          loginFormData.password === userCredentials.password) {
+        $localStorage.auth = auth = loginFormData
+        toastr.success(`Вы успешно авторизовались`)
+        return 200
+      }
+      toastr.error(`Логин или пароль не подходят`)
+      return 403
+    }
+
+    /**
+     * @desc Деавтоизация пользователя
+     */
+    this.logout = () => {
+      auth = null
+      delete $localStorage.auth
+      toastr.success(`Вы успешло вышли из системы`)
+    }
+
   })
 
   /**
@@ -156,7 +261,12 @@
                          '//mark.addmin.ru/images/background-1695799_960_720.jpg',
                          '//cdn.shopify.com/s/files/1/0691/5403/t/130/assets/insta-2.jpg',
                          '//mark.addmin.ru/images/background-1709785_960_720.jpg']
-
+    /**
+     * @name getRandom
+     * @kind function
+     * @desc Выбирает случайный элемент из массива backgrounds
+     * @returns {String}
+     */
     this.getRandom = () => backgrounds[Math.round(Math.random() * (backgrounds.length - 1))]
   })
 

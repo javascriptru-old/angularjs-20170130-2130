@@ -18,10 +18,11 @@ http://plnkr.co/edit/?p=preview
 - [x] routing login/
 - [ ] auth to localStorage
 - [ ] spinner service
-- [ ] login form hooks
+- [ ] login form validation
 - [ ] es6 classes components
-- [ ] ladda button and settimeout login
-- [ ] ui-bootstrap collapse
+- [ ] ladda button and setTimeout login
+- [x] ui-bootstrap collapse
 - [ ] logout
 - [x] cashing users in service
 - [ ] state transitions
+- [ ] change page title
