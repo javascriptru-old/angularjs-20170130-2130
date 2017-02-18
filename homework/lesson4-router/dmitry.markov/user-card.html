@@ -1,0 +1,24 @@
+<div class="row">
+  <div class="col-xs-12">
+    <a href="/user"><span class="glyphicon glyphicon-chevron-left"></span> Вернуться</a>
+  </div>
+  <div class="col-xs-12 text-center">
+    <h1>User details</h1>
+  </div>
+  <div class="col-xs-12 col-md-4 col-md-offset-4 text-center">
+    <div class="panel panel-profile m-b-0"
+         ng-click="$ctrl.setActive($ctrl.index)"
+         ng-class="$ctrl.active">
+      <div class="panel-heading"
+           ng-style="::$ctrl.background"></div>
+      <div class="panel-body text-center">
+        <img class="panel-profile-img"
+             ng-src="{{ ::$ctrl.avatar }}">
+        <h5 class="panel-title">{{ ::$ctrl.fullName }}</h5>
+        <p class="m-b">{{ ::$ctrl.country }}</p>
+        <button class="btn btn-primary btn-sm m-b"
+                ng-click="$ctrl.deleteUser($event, $ctrl.index)">Удалить</button>
+      </div>
+    </div>
+  </div>
+</div>
