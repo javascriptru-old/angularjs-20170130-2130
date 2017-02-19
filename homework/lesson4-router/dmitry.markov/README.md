@@ -26,6 +26,6 @@ http://plnkr.co/edit/?p=preview
 - [x] cashing users in service
 - [x] state transitions
 - [x] change page title
-- [ ] update nav button on login
+- [x] update nav button on login
 - [x] update nav button on logout
 - [x] redirect to login if not authed

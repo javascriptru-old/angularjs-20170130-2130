@@ -95,6 +95,9 @@
   app.component('appNav', {
     templateUrl: 'app-nav.html',
     controller ($state, authService) {
+      this.$doCheck = () => {
+        this.isAuthed = authService.isAuthorized()
+      }
       this.isNavCollapsed = true
       this.isAuthed = authService.isAuthorized()
 

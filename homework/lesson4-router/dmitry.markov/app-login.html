@@ -28,11 +28,11 @@
                required />
       </div>
       <button ng-click="$ctrl.doLogin()"
+              ng-disabled="!($ctrl.login && $ctrl.password)"
               type="submit"
               class="btn btn-primary"
               ladda="$ctrl.loginLoading"
-              data-style="expand-left"
-              ng-disabled="!$ctrl.ligin && !$ctrl.password">Login</button>
+              data-style="expand-left">Login</button>
     </form>
   </div>
   <div ng-if="$ctrl.isAuthed"
