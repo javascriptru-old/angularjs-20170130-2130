@@ -14,7 +14,8 @@
                id="login"
                name="login"
                placeholder="admin"
-               required />
+               required
+               autofocus />
       </div>
       <div class="form-group">
         <label for="password">Password</label>
@@ -30,7 +31,8 @@
               type="submit"
               class="btn btn-primary"
               ladda="$ctrl.loginLoading"
-              data-style="expand-left">Login</button>
+              data-style="expand-left"
+              ng-disabled="!$ctrl.ligin && !$ctrl.password">Login</button>
     </form>
   </div>
   <div ng-if="$ctrl.isAuthed"

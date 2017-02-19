@@ -30,6 +30,7 @@
       .state('user.list', {
         name: 'userList',
         url: '/user',
+        data : { pageTitle: 'User List' },
         component: 'userList',
         resolve: {
           users: userService => userService.getUsers()
@@ -38,6 +39,7 @@
       .state('user.card', {
         name: 'userCard',
         url: '/user/{id}',
+        data : { pageTitle: 'User Details' },
         component: 'userCard',
         resolve: {
           user: (userService, $transition$) => userService.getUser($transition$.params().id),
@@ -47,6 +49,7 @@
       .state('login', {
         name: 'login',
         url: '/login',
+        data : { pageTitle: 'Login' },
         component: 'appLogin',
         resolve: {
           isAuthed: authService => authService.isAuthorized()
@@ -57,7 +60,9 @@
       .otherwise('/user')
   })
 
-  app.run(($transitions) => {
+  app.run(($rootScope, $state, $transitions) => {
+    // Чтобы менять <title> страницы
+    $rootScope.$state = $state
     /**
      * @desc Если пользователь не залогинен, посылаем на логин
      */
@@ -82,7 +87,7 @@
     template: `
       <div class="container">
         <app-nav></app-nav>
-        <ui-view></ui-view>
+        <div ui-view></div>
       </div>
     `
   })
