@@ -1,0 +1,16 @@
+<form id="loginForm">
+
+	<div class="field">
+		<label for="login">Имя входа</label>
+		<input class="input" id="login" ng-model="loginId" placeholder="Имя входа" type="text" />
+	</div>
+	<div class="field">
+		<label for="pwd">Пароль</label>
+		<input class="input" id="pwd" ng-model="pwd" placeholder="Пароль" type="password" />
+	</div>
+
+	<div class="submit">
+		<button type="submit" ng-click="$ctrl.go();">Войти</button>
+		<label id="remember"><input name="" type="checkbox" value="" /> Запомнить меня</label>
+	</div>
+</form>
