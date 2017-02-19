@@ -17,7 +17,7 @@ http://plnkr.co/edit/?p=preview
 - [x] routing resolve
 - [x] routing login/
 - [x] auth to localStorage
-- [ ] spinner service
+- [x] spinner service
 - [ ] login form validation (+disabled state)
 - [ ] es6 classes components
 - [x] ladda button and setTimeout login
@@ -28,3 +28,4 @@ http://plnkr.co/edit/?p=preview
 - [ ] change page title
 - [ ] update nav button on login
 - [x] update nav button on logout
+- [x] redirect to login if not authed

@@ -57,7 +57,26 @@
       .otherwise('/user')
   })
 
-  app.run(() => {})
+  app.run(($transitions) => {
+    /**
+     * @desc Если пользователь не залогинен, посылаем на логин
+     */
+    $transitions.onStart({ to: 'user.**' }, (trans) => {
+      let auth = trans.injector().get('authService')
+      if (!auth.isAuthorized()) {
+        return trans.router.stateService.target('login')
+      }
+    })
+
+    /**
+     * @desc Показываем спиннер, пока route грузится (и резолвится)
+     */
+    $transitions.onStart({ }, (trans) => {
+      let SpinnerService = trans.injector().get('spinnerService')
+      SpinnerService.transitionStart()
+      trans.promise.finally(SpinnerService.transitionEnd)
+    })
+  })
 
   app.component('appRoot', {
     template: `
@@ -70,7 +89,7 @@
 
   app.component('appNav', {
     templateUrl: 'app-nav.html',
-    controller (authService) {
+    controller ($state, authService) {
       this.isNavCollapsed = true
       this.isAuthed = authService.isAuthorized()
 
@@ -79,7 +98,10 @@
        */
       this.logout = $event => {
         $event.stopPropagation()
-        if (authService.logout()) this.isAuthed = null
+        if (authService.logout()) {
+          this.isAuthed = null
+          $state.go('login')
+        }
       }
     }
   })
@@ -104,13 +126,11 @@
         this.loginLoading = true
         authService.login(loginFormData)
           .then(status => {
-          console.log(`Login success: ${status}`)
-          $state.go('user.list')
-          this.loginLoading = false
+            $state.go('user.list')
+            this.loginLoading = false
 
         }).catch(status => {
-          console.log(`Login failed with error: ${status}`)
-          this.loginLoading = false
+            this.loginLoading = false
         })
       }
 
@@ -256,13 +276,48 @@
      * @returns {Boolean}
      */
     this.logout = () => {
-      auth = null
-      delete $localStorage.auth
-      toastr.success(`Вы успешло вышли из системы`)
-      // TODO: return status to header (try/catch)
-      return true
+      try {
+        auth = null
+        delete $localStorage.auth
+        toastr.success(`Вы успешло вышли из системы`)
+        return true
+      } catch (e) {
+        return false
+      }
+    }
+  })
+
+  /**
+   * @name spinnerService
+   * @desc Возвращает спиннер
+   * @returns {Object}
+   */
+  app.service('spinnerService', function () {
+    let count = 0
+
+    function showSpinner () {
+      let elem = angular.element(document.querySelector('body'))
+      elem.append(`
+        <div class="text-center" id="mySpinner">
+          <div class="spinner">
+            <div class="bounce1"></div>
+            <div class="bounce2"></div>
+            <div class="bounce3"></div>
+          </div>
+          <div class="loading-text">Загрузка</div>
+        </div>
+      `)
     }
 
+    function hideSpinner () {
+      let elem = angular.element(document.querySelector('#mySpinner'))
+      elem.detach()
+    }
+
+    return {
+      transitionStart () { if (++count > 0) showSpinner() },
+      transitionEnd () { if (--count <= 0) hideSpinner() }
+    }
   })
 
   /**
