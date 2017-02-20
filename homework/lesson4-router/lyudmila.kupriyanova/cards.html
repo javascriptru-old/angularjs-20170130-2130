@@ -1,0 +1,31 @@
+    <div class="container-fluid">
+      <header class="row">
+        <div class="logo col-sm-2">
+  <h4>Список пользователей</h4>
+        </div><!-- logo -->
+        <div class="search-bar col-sm-6">
+          <div class="input-group">
+            <input class="form-control" placeholder="Поиск..." type="text" ng-model="searchstr">
+            <span class="input-group-btn">
+              <button class="btn btn-main">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div><!-- /input-group -->
+          <span class="arrow caret"></span>
+        </div><!-- search-bar -->
+  <div class="profile col-sm-4"></div><!-- profile -->
+        <!-- profile -->
+      </header>
+      <!-- control-bar -->
+      <div class="mail row" ng-if="$ctrl.visible">
+        <!-- sidebar -->
+        <div class="inbox col-sm-12">
+          <ul class="list-unstyled" ng-repeat="student in $ctrl.users | filter:searchstr">
+        <user-card user="student" delcard="$ctrl.deleteItem(item)">
+        </user-card>          
+          </ul>
+        </div><!-- inbox -->
+      </div><!-- mail -->
+      <p ng-if="!($ctrl.visible)">Загрузка данных...</p>
+    </div>
