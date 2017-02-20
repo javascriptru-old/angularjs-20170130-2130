@@ -1,0 +1,5 @@
+<ul class="list-group">
+    <li class="list-group-item" ng-repeat="user in users track by $index">
+        <a ui-sref="user({userId: $index})" ng-bind="user.firstName + ' ' + user.surname"></a>
+    </li>
+</ul>
