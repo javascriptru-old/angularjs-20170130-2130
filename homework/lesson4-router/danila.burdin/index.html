@@ -16,7 +16,7 @@
 		const app = angular.module('app', [ 'ui.router' ]);
 
 		app.component('root', {
-			template: 
+			template:
 			`
 				<header>
 					<div class="center-block">
@@ -25,7 +25,11 @@
 				</header>
 				<main>
 					<div class="center-block">
-						<ui-view></ui-view>
+						<ui-view>
+
+<loding-indicator></loding-indicator>
+
+						</ui-view>
 					</div>
 				</main>
 			`
@@ -36,7 +40,7 @@
 		});
 
 		app.component('appNav', {
-			template: 
+			template:
 			`
 				<a ui-sref="home" ui-sref-active="active">Home</a>
 				<a ui-sref="users" ui-sref-active="active">Users</a>
@@ -50,7 +54,7 @@
 				users: '<',
 				filterUsers: '&'
 			},
-			template: 
+			template:
 			`
 				<div class="filter-user">
 					<input type="text" ng-model="string" ng-change=" $ctrl.filterUsers({ string: string}) " placeholder="Filter" class="filter-user__input"/>
@@ -59,7 +63,7 @@
 		});
 
 		app.component('userList', {
-			template: 
+			template:
 			`
 				<spinner ng-if=" $ctrl.loading "></spinner>
 				<div ng-if="!$ctrl.loading">
@@ -222,7 +226,7 @@
 			$urlRouterProvider.rule(function($injector, $location) {
 				let path = $location.path();
 				if(path[ path.length - 1 ] === '/') {
-					return path.substr(0, path.length - 1); 
+					return path.substr(0, path.length - 1);
 				}
 			});
 
@@ -297,7 +301,7 @@
 					return 1;
 				else if (a[val] < b[val])
 					return -1;
-				else 
+				else
 					return 0;
 			});
 			if( desc ){

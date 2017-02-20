@@ -6,15 +6,8 @@ app.config(function ($stateProvider) {
     let userListState = {
         name: 'users',
         url: '/users',
-        templateUrl: 'usersList.tpl.html',
-        controller: function ($scope, users) {
-            $scope.users = users;
-        },
-        resolve: {
-            users: function (UserService) {
-                return UserService.getAll();
-            }
-        }
+        template: '<usersList users="users"></usersList>',
+        //component: 'usersList'  // ui-router 1.+ beta/rc
     };
 
     let loginState = {
@@ -37,9 +30,10 @@ app.config(function ($stateProvider) {
         }
     };
 
-    $stateProvider.state(loginState);
-    $stateProvider.state(userListState);
-    $stateProvider.state(userState);
+    $stateProvider
+      .state(loginState)
+      .state(userListState)
+      .state(userState);
 });
 
 //////////

@@ -6,42 +6,32 @@ app.config(($stateProvider, $urlRouterProvider) => {
         name: 'home',
         url: '',
         template: '<home></home>',
-    });
-
-    $stateProvider.state({
+    }).state({
         name: 'login',
         url: '/login',
         template: '<login></login>',
-    });
-
-    $stateProvider.state({
+    }).state({
         name: 'user',
         abstract: true,
         template: '<ui-view/>',
         url: '/user',
         resolve: {
             usersData: function (UserService) {
-                //Нужно получить список пользователей при помощи сервиса UserService, метод UserService.getUsers()
+                return UserService.getUsers();
             }
         },
         controller: function($scope, $stateParams, usersData) {
-            //$scope.usersData = usersData;
+            $scope.usersData = usersData;
         }
-    });
-
-    $stateProvider.state({
+    }).state({
         name: 'user.list',
         url: '/list',
-        template: '<users></users>',
-    });
-
-    $stateProvider.state({
+        template: '<users user-data="usersData"></users>'
+    }).state({
         name: 'user.detail',
         url: '/:userId',
-        template: '<user></user>',
-    });
-
-    $stateProvider.state({
+        template: '<user  user-data="usersData"></user>',
+    }).state({
         name: 'error',
         url: '/404',
         template: 'Error 404',
@@ -61,8 +51,16 @@ app.component('login', {
 });
 
 app.component('users', {
+    bindings: {
+      userData: '<'
+    },
     templateUrl: 'template/users.tmp.html',
     controller: function (UserService, $state) {
+
+        this.$onInit = function() {  //1.6
+           console.log(this.userData);
+        }
+
         this.users = [];
         UserService.getUsers().then( (data)  => {
             this.users = data;
@@ -76,6 +74,9 @@ app.component('users', {
 });
 
 app.component('user', {
+    bindings: {
+      userData: '<'
+    },
     templateUrl: 'template/user.tmp.html',
     controller: function (UserService, $state) {
         //Делаем выборку данных по пользователю с указанным ID
