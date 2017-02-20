@@ -1,0 +1,124 @@
+<html ng-app="myApp">
+<head>
+    <title>User List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet">
+    <base href="/angularjs-20170130-2130/homework/lesson4-router/larissa.smirnova/">
+    <style>
+        .logout {float: right; margin-right: 20px; color: royalblue;}
+        .active-link {color: red;}
+        .active {box-shadow: 0 0 12px 1px blue}
+        .lavender {background-color: lavender}
+        .blue {color: royalblue}
+        .grey {color: darkslategrey}
+        .padding{padding: 20px}
+        .user-card {
+            display: block;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 1px;
+        }
+    </style>
+</head>{{1+1}}
+
+<ui-view></ui-view>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script>
+    let app = angular.module('myApp', ['ui.router']);
+
+    app.config(($stateProvider, $urlRouterProvider) => {
+
+        $stateProvider.state({
+            name: 'login',
+            url: '',
+            templateUrl: 'login.html',
+
+            controller: function($scope, $state) {
+                $scope.login = () => {
+                    $state.go('userList');
+                };
+            }
+        });
+
+        $stateProvider.state({
+            name: 'userList',
+            url: '/userList',
+            resolve: {
+                users: function(UserService) {
+                    return UserService.getAll();
+                }
+            },
+            template: '<user-list users="users"></user-list>',
+            controller: function($stateParams, $scope, users) {
+                $scope.users = users;
+            }
+        });
+    });
+
+    app.service('UserService', function( $http ){
+        const URL = 'https://learn.javascript.ru/courses/groups/api/participants?key=1gvlw0r';
+        this.getAll = () => {
+            return $http.get( URL ).then((response) => response.data, () => []);
+        }
+    });
+
+    app.component('userList', {
+        bindings: {
+            users: '<',
+            logout: '<'
+        },
+        templateUrl: 'user-list.html',
+        controller: function (){
+            this.activeIndex = null;
+            this.openIndex = null;
+            this.openCard = false;
+
+            this.setActiveIndex = function (index) {
+                if (!this.openCard) {
+                    this.activeIndex = index;
+                    console.log("active card Index " + this.activeIndex);
+                }
+            }
+
+            this.resetOpenIndex = function () {
+                this.openIndex = null;
+                this.activeIndex = null;
+                this.openCard = false;
+                console.log("open card Index is Null");
+            }
+
+            this.setOpenIndex = function (index) {
+                this.openIndex = index;
+                this.activeIndex = null;
+                this.openCard = true;
+                console.log("open card Index " + this.openIndex);
+            }
+
+            this.deleteCard = function (index) {
+                console.log("delete card Index " + index);
+                this.activeIndex = null;
+                this.users.splice(index, 1)
+            }
+        },
+    });
+
+    app.component('userCard', {
+        bindings: {
+            user: '<',
+            index: '<',
+            activeIndex: '<',
+            setActiveIndex: '&',
+            deleteCard: '&',
+            setOpenIndex: '&',
+            resetOpenIndex: '&',
+            openIndex: '<',
+            openCard: '<'
+        },
+        templateUrl: 'user-card.html',
+        controller: function (){},
+    })
+</script>
+</body>
+</html>
