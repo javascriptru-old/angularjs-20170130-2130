@@ -4,7 +4,7 @@
     <div class="navbar-header">
       <button ng-click="isNavCollapsed = !isNavCollapsed"
               type="button"
-              class="navbar-toggle collapsed">Menu</button>
+              class="navbar-toggle collapsed">Меню</button>
       <a ui-sref="user.list"
          class="navbar-brand">UserList App</a>
     </div>
@@ -13,19 +13,19 @@
          class="collapse navbar-collapse">
       <ul class="nav navbar-nav navbar-right">
         <li ui-sref-active="active"
-            title="Show users">
-          <a ui-sref="user.list"><span class="glyphicon glyphicon-user"></span> Users</a>
+            title="Показать пользователей">
+          <a ui-sref="user.list"><span class="glyphicon glyphicon-user"></span> Пользователи</a>
         </li>
         <li ng-if="!$ctrl.isAuthed"
             ui-sref-active="active"
-            title="Login">
-          <a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Login</a>
+            title="Войти">
+          <a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Логин</a>
         </li>
         <li ng-if="$ctrl.isAuthed"
             ui-sref-active="active"
-            title="Logout">
+            title="Выйти">
           <a ng-click="$ctrl.logout($event)"
-             href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+             ui-sref="login"><span class="glyphicon glyphicon-log-out"></span> Выйти</a>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

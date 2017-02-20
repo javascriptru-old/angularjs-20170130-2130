@@ -2,6 +2,10 @@
 ;(function () {
   'use strict'
 
+  angular.element(document).ready(() => {
+    angular.element(document.querySelector('#mySpinner')).detach()
+  })
+
   angular.module('userList', ['angular-ladda',
                               'ngAnimate',
                               'ngStorage',
@@ -18,6 +22,7 @@
       positionClass: 'toast-bottom-center',
       timeOut: 3500
     })
+
     /**
      * @desc Роутинг приложения
      */
@@ -30,7 +35,7 @@
       .state('user.list', {
         name: 'userList',
         url: '/user',
-        data : { pageTitle: 'User List' },
+        data: { pageTitle: 'User List' },
         component: 'userList',
         resolve: {
           users: userService => userService.getUsers()
@@ -39,7 +44,7 @@
       .state('user.card', {
         name: 'userCard',
         url: '/user/{id}',
-        data : { pageTitle: 'User Details' },
+        data: { pageTitle: 'User Details' },
         component: 'userCard',
         resolve: {
           user: (userService, $transition$) => userService.getUser($transition$.params().id),
@@ -49,7 +54,7 @@
       .state('login', {
         name: 'login',
         url: '/login',
-        data : { pageTitle: 'Login' },
+        data: { pageTitle: 'Login' },
         component: 'appLogin',
         resolve: {
           isAuthed: authService => authService.isAuthorized()
@@ -60,15 +65,17 @@
       .otherwise('/user')
   })
 
-  app.run(($rootScope, $state, $transitions) => {
+  app.run(($rootScope, $state, $transitions, toastr) => {
     // Чтобы менять <title> страницы
     $rootScope.$state = $state
+
     /**
      * @desc Если пользователь не залогинен, посылаем на логин
      */
-    $transitions.onStart({ to: 'user.**' }, (trans) => {
+    $transitions.onStart({ to: 'user.**' }, trans => {
       let auth = trans.injector().get('authService')
       if (!auth.isAuthorized()) {
+        toastr.warning(`Пожалуйста, залогиньтесь`)
         return trans.router.stateService.target('login')
       }
     })
@@ -76,7 +83,7 @@
     /**
      * @desc Показываем спиннер, пока route грузится (и резолвится)
      */
-    $transitions.onStart({ }, (trans) => {
+    $transitions.onStart({ }, trans => {
       let SpinnerService = trans.injector().get('spinnerService')
       SpinnerService.transitionStart()
       trans.promise.finally(SpinnerService.transitionEnd)
@@ -95,11 +102,15 @@
   app.component('appNav', {
     templateUrl: 'app-nav.html',
     controller ($state, authService) {
+      this.isNavCollapsed = true
+      this.isAuthed = authService.isAuthorized()
+
+      /**
+       * @desc Проверяем, не залогинился ли пользователь, чтобы сменить Login на Logout
+       */
       this.$doCheck = () => {
         this.isAuthed = authService.isAuthorized()
       }
-      this.isNavCollapsed = true
-      this.isAuthed = authService.isAuthorized()
 
       /**
        * @desc Отправляем команду выхода из системы в authService
@@ -122,6 +133,7 @@
     controller ($state, authService) {
       this.login = null
       this.password = null
+      this.loginSuccess = false
 
       /**
        * @desc Отправляем данные формы в сервис authService
@@ -135,6 +147,7 @@
         authService.login(loginFormData)
           .then(status => {
             $state.go('user.list')
+            this.loginSuccess = true
             this.loginLoading = false
 
         }).catch(status => {
@@ -259,7 +272,7 @@
     /**
      * @desc Пытаемся залогиниться с данными формы и сохраняем в localStorage и auth
      * @param {Object} loginFormData - содержит логин и пароль
-     * @returns {Promise} иммитация запроса к backend
+     * @returns {Promise} имитация запроса к backend
      */
     this.login = loginFormData => {
       let deferred = $q.defer()
@@ -288,8 +301,10 @@
         auth = null
         delete $localStorage.auth
         toastr.success(`Вы успешло вышли из системы`)
+
         return true
       } catch (e) {
+        toastr.error(`Неожиданный поворот`)
         return false
       }
     }
@@ -303,6 +318,9 @@
   app.service('spinnerService', function () {
     let count = 0
 
+    /**
+     * @desc Добавляет спиннер на страницу при смене раута
+     */
     function showSpinner () {
       let elem = angular.element(document.querySelector('body'))
       elem.append(`
@@ -317,6 +335,9 @@
       `)
     }
 
+    /**
+     * @desc Удаляет спиннер при смене раута
+     */
     function hideSpinner () {
       let elem = angular.element(document.querySelector('#mySpinner'))
       elem.detach()
