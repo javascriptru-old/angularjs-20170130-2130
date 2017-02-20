@@ -1,0 +1,19 @@
+<div><h3>Список пользователей доступен только после входа</h3></div>
+
+<div ng-if="!$ctrl.authUser">
+    <button ng-click="$ctrl.auth(true)">Вход</button>
+</div>
+
+
+<div ng-if="$ctrl.authUser">
+    <button ng-click="$ctrl.auth(false)">Выход</button>
+    <span>Вы вошли</span>
+</div>
+
+<div>
+    <a ui-sref="currency" ui-sref-active="active">Валюта</a>
+    <a ui-sref="users" ui-sref-active="active">Пользователи</a>
+</div>
+
+
+<div ui-view></div>
