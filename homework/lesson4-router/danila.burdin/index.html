@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Lesson 4 - router</title>
+	<link rel="stylesheet" href="assets/style.css">
+	<base href="/">
+</head>
+<body>
+
+	<root></root>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+	<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+	<script>
+		const app = angular.module('app', [ 'ui.router' ]);
+
+		app.component('root', {
+			template: 
+			`
+				<header>
+					<div class="center-block">
+						<app-nav></app-nav>
+					</div>
+				</header>
+				<main>
+					<div class="center-block">
+						<ui-view></ui-view>
+					</div>
+				</main>
+			`
+		});
+
+		app.component('spinner', {
+			template: '<div class="spinner"><span></span></div>'
+		});
+
+		app.component('appNav', {
+			template: 
+			`
+				<a ui-sref="home" ui-sref-active="active">Home</a>
+				<a ui-sref="users" ui-sref-active="active">Users</a>
+				<button ui-sref="login" ui-sref-active="active" class="right">Log In</button>
+				<button ui-sref="signup" ui-sref-active="active" class="main">Sign Up</button>
+			`
+		});
+
+		app.component('userSearch', {
+			bindings: {
+				users: '<',
+				filterUsers: '&'
+			},
+			template: 
+			`
+				<div class="filter-user">
+					<input type="text" ng-model="string" ng-change=" $ctrl.filterUsers({ string: string}) " placeholder="Filter" class="filter-user__input"/>
+				</div>
+			`
+		});
+
+		app.component('userList', {
+			template: 
+			`
+				<spinner ng-if=" $ctrl.loading "></spinner>
+				<div ng-if="!$ctrl.loading">
+					<div class="toolbar">
+						<user-search users="$ctrl.users" filter-users=" $ctrl.filterUsers(string) "></user-search>
+						<button ng-click="$ctrl.sort()"><span ng-if=" $ctrl.sortDesc ">&uarr;</span><span ng-if=" !$ctrl.sortDesc ">&darr;</span></button>
+					</div>
+					<div class="user-list">
+						<div ng-repeat="user in $ctrl.users | filter: $ctrl.search" class="user-list__user">
+							<a ui-sref="user.profile({userId: user._id})">
+								{{user.fullName}}
+							</a>
+						</div>
+					</div>
+				</div>
+			`,
+			controller: function( UserService ){
+
+				this.loading = true
+
+				this.filterUsers = (string) => {
+					this.search = string
+				}
+
+				this.$onInit = () => {
+					return UserService.get()
+						.then(response => {
+							return sortByVal( response, 'fullName' )
+						})
+						.then( response => {
+							this.users = response
+							this.loading = false
+						});
+				}
+
+				this.sortDesc = false
+
+				this.sort = () => {
+					this.sortDesc = !this.sortDesc
+					return sortByVal( this.users, 'fullName', this.sortDesc )
+				}
+			}
+		});
+
+		app.component('userProfile', {
+			bindings: {
+				userId: '<',
+			},
+			template:
+			`
+				<ui-view>
+					<spinner ng-if=" $ctrl.loading "></spinner>
+					<div ng-if=" !$ctrl.loading ">
+						<h4>User profile</h4>
+						<div class="user-profile__row">id: {{ $ctrl.user._id }}</div>
+						<div class="user-profile__row">name: {{ $ctrl.user.fullName }}</div>
+						<div class="user-profile__row">email: {{ $ctrl.user.email }}</div>
+						<button class="main" ng-click="$ctrl.back()">Go back</button>
+					</div>
+				</ui-view>
+			`,
+			controller: function(UserService, $state){
+				this.loading = true
+
+				this.back = () => {
+					$state.go('users');
+				}
+
+				this.$onInit = () => {
+					return UserService.getOne( this.userId ).then( response => {
+						this.user = response
+						this.loading = false
+					});
+				}
+			}
+		});
+
+		app.component('login', {
+			template:
+			`
+				<div class="user-form">
+					<label class="user-form__row">
+						<div>Email</div>
+						<input type="text" ng-model="$ctrl.email"/>
+					</label>
+					<label class="user-form__row">
+						<div>Password</div>
+						<input type="password" ng-model="$ctrl.password"/>
+					</label>
+					<button class="main user-form__button" ng-click=" $ctrl.login() ">Log in</button>
+				</div>
+			`,
+			controller: function(){
+				this.login = () => {
+					if( !this.email || !this.password ){
+						return alert('Fill in all the fields')
+					} else {
+						return alert(`{ email: "${this.email}", password: "${this.password}" }` )
+					}
+				}
+			}
+		});
+
+		app.component('signup', {
+			template:
+			`
+				<div class="user-form">
+					<label class="user-form__row">
+						<div>Name</div>
+						<input type="text" ng-model="$ctrl.username"/>
+					</label>
+					<label class="user-form__row">
+						<div>Email</div>
+						<input type="text" ng-model="$ctrl.email"/>
+					</label>
+					<label class="user-form__row">
+						<div>Password</div>
+						<input type="password" ng-model="$ctrl.password"/>
+					</label>
+					<button class="main user-form__button" ng-click=" $ctrl.register() ">Register Me</button>
+				</div>
+			`,
+			controller: function(){
+				this.register = () => {
+					if( !this.username || !this.email || !this.password ){
+						return alert('Fill in all the fields')
+					} else {
+						return alert(`{ username: "${this.username}", email: "$"{this.email}", password: "${this.password}" }` )
+					}
+				}
+			}
+		});
+
+		app.service('UserService', function( $http, $state ){
+
+			this.get = () => {
+				return $http.get(`http://test-api.javascript.ru/v1/burdin/users?delay=700`)
+					.then( response => response.data, () => {
+						$state.go('home')
+					});
+			}
+
+			this.getOne = ( userId ) => {
+				return $http.get(`http://test-api.javascript.ru/v1/burdin/users/${ userId }?delay=250`)
+					.then( response => response.data, () => {
+						$state.go('home')
+					});
+			}
+		});
+
+		app.config(function($stateProvider, $locationProvider, $urlRouterProvider){
+
+			$locationProvider.html5Mode(true);
+			$urlRouterProvider.otherwise('/');
+
+			/**
+			 * trailing slashes
+			 * https://github.com/angular-ui/ui-router/wiki/URL-routing
+			*/
+			$urlRouterProvider.rule(function($injector, $location) {
+				let path = $location.path();
+				if(path[ path.length - 1 ] === '/') {
+					return path.substr(0, path.length - 1); 
+				}
+			});
+
+
+			/**
+			 * Home
+			 */
+			$stateProvider.state('home', {
+				url: '/',
+				template: '<h4>Home</h4>'
+			});
+
+			/**
+			 * List
+			 */
+			$stateProvider.state( 'users', {
+				url: '/users',
+				template: `<user-list></user-list>`
+			});
+
+			/**
+			 * Abstract user
+			 */
+			$stateProvider.state( 'user', {
+				abstract: true,
+				url: '/user',
+				/**
+				 * https://github.com/angular-ui/ui-router/wiki/Nested-States-&-Nested-Views
+				 * template родительского state должен содержать <ui-view> для рендера в нем шаблона дочернего state?
+				*/
+				template: '<ui-view></ui-view>'
+			});
+
+			/**
+			 * User profile
+			 */
+			$stateProvider.state( 'user.profile', {
+				/*
+					здесь мог быть resolve,
+					но для прелоадера передаю userId в компонент ниже
+				*/
+				url: '/:userId',
+				template: '<user-profile user-id="userId"></user-profile>',
+				controller: function( $scope, $stateParams ) {
+					$scope.userId = $stateParams.userId;
+				}
+			});
+
+			/**
+			 * Log in
+			 */
+			$stateProvider.state({
+				name: 'login',
+				url: '/login',
+				template: '<login></login>'
+			});
+
+			/**
+			 * Sign up
+			 */
+			$stateProvider.state({
+				name: 'signup',
+				url: '/signup',
+				template: '<signup></signup>'
+			});
+
+		});
+
+		function sortByVal( arr, val, desc ){
+			arr = arr.sort(function(a, b) {
+				if (a[val] > b[val] )
+					return 1;
+				else if (a[val] < b[val])
+					return -1;
+				else 
+					return 0;
+			});
+			if( desc ){
+				arr.reverse()
+			}
+			return arr
+		}
+	</script>
+</body>
+</html>
