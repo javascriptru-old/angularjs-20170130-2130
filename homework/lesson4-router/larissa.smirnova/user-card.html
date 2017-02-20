@@ -1,0 +1,12 @@
+<div ng-mouseover="$ctrl.setActiveIndex({index: $ctrl.index})">
+    <div class="row list-group-item lavender blue">
+        <div class="col-sm-2"><img ng-src="{{$ctrl.user.photo}}" width="50" height="50"></div>
+        <div class="col-sm-9">
+            <span ng-hide="$ctrl.openCard"><a ng-click="$ctrl.setOpenIndex({index: $ctrl.index})"><h3 class="panel-title">{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h3></a></span>
+            <span ng-show="$ctrl.openCard"><h3 class="panel-title">{{$ctrl.user.firstName}} {{$ctrl.user.surname}}</h3></span>
+        </div>
+        <div class="col-sm-1">
+            <a ng-hide="$ctrl.openCard" ng-click="$ctrl.deleteCard({index: $ctrl.index})" class="btn btn-sm btn-default" ><span class="glyphicon glyphicon-trash"></span></a>
+        </div>
+    </div>
+</div>

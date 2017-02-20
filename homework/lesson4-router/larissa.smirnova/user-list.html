@@ -1,0 +1,26 @@
+<div class="panel panel-info m-2">
+    <div  class="row">
+        <div class="col-sm-1"></div>
+        <div class="col-sm-4 grey">
+            <h3 ng-hide="$ctrl.openCard">User List</h3>
+            <a class="active-link" ng-if="$ctrl.openCard" ng-click="$ctrl.resetOpenIndex()">back to User List</a>
+        </div>
+        <div class="col-sm-7"></div>
+    </div>
+    <div class="panel-body list-group">
+        <user-card class="panel-heading"
+                ng-repeat="user in $ctrl.users"
+                user="user"
+                index="$index"
+                set-active-index="$ctrl.setActiveIndex(index)"
+                activeIndex="$ctrl.activeIndex"
+                ng-class="$ctrl.activeIndex == $index ? 'user-card active' : 'user-card'"
+                delete-card="$ctrl.deleteCard(index)"
+                set-open-index="$ctrl.setOpenIndex(index)"
+                open-index="$ctrl.openIndex"
+                open-card="$ctrl.openCard"
+                ng-show="$ctrl.openIndex == null || $ctrl.openIndex == $index ? true : false"
+        ></user-card>
+    </div>
+</div>
+
