@@ -48,20 +48,16 @@
 
     function getRates () {
       return $http.get(ratesUrl)
-          .then((response) => {
-            return response.data
-          }, (error) => {
-            toastr.info(error)
-          })
+            .then((response) => response.data,
+                  (error) => {
+                    toastr.info(error)
+                  })
     }
 
     function getNames () {
       return $http.get(namesUrl)
-          .then((response) => {
-            return response.data
-          }, (error) => {
-            toastr.info(error)
-          })
+                  .then((response) => response.data,
+                        (error) => { toastr.info(error) })
     }
 
     let service = {
@@ -88,13 +84,8 @@
   app.service('userService', function ($http, toastr) {
     const url = 'https://learn.javascript.ru/courses/groups/api/participants?key=1gvlw0r'
 
-    this.getUsers = () => {
-      return $http.get(url)
-        .then((response) => {
-          return response.data
-        }, (error) => {
-          toastr.info(error)
-        })
-    }
+    this.getUsers = () => $http.get(url)
+                               .then((res) => res.data,
+                                     (err) => { toastr.info(err.data) })
   })
 })()
