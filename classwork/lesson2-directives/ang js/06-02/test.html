@@ -1,0 +1,102 @@
+<html>
+<head>
+<script src='../angular.js'></script>
+
+<script>
+var m = angular.module('mmm', []);
+
+m.filter('myfilter', function(){ 
+	return function f(a){ 
+		return `hello,  + ${a}`;
+	};
+});
+
+m.filter('timePart', function(){
+	return function(t){	
+		return t.substr(11);
+	};
+});
+
+m.filter('receivedAgo', function(){
+return function(t){
+// need to calculate number of milliseconds
+
+var ms1 = (new Date()).getTime();
+var ms2 = (new Date(t)).getTime();
+var msd = ms1 - ms2;
+var hours = Math.floor(msd / (1000 * 3600) );
+
+var days = Math.floor(hours / 24);
+
+hours = hours - days * 24;
+
+//Math.floor(((((new Date).getTime() -(new Date(t)).getTime())/1000)/3600)/24)
+
+return {days: days, hours: hours};
+//debugger
+
+
+};
+});
+
+m.filter('criterion', function(){
+return function(v, a){
+	return v===a;
+}
+});
+
+m.component('appRoot', {
+		template: `
+		<mail-box></mail-box>
+		`
+});
+
+
+m.component('mailBox', {
+	template: `
+	<h2>Inbox</h2>
+	<pre>
+	{{$ctrl.mailItems | json}}
+	</pre>
+
+	<div ng-repeat='e in $ctrl.mailItems'>
+	{{e.from}}
+	</div>
+	
+
+	`,
+	controller: function(){
+		this.mailItems = [
+			{from: 'aaa', receivedOn: '02/01/2017 10:59'},  
+			{from: 'vvv', receivedOn: '01/01/2017 12:17'},
+			{from: 'ttt', receivedOn: '02/24/2017 01:00'}];
+	}
+});
+
+// m.component('mailItem', {
+// 	template: `<!--td>{{$ctrl.letter.from}}</td>
+// 		<td>{{item.receivedOn | timePart}}</td>
+// 		<td>{{item.receivedOn | receivedAgo}}</td-->
+// 		aaa
+		
+// 		`
+// 		, controller: function(){
+
+// 		}
+		
+// });
+
+
+// dateformat is mm/dd/yyyy
+
+
+
+</script>
+
+</head>
+<body ng-app='mmm'>
+
+<app-root></app-root>
+
+</body>
+</html>
