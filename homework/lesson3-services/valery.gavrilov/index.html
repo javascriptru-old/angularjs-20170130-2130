@@ -1,0 +1,28 @@
+<html>
+    <head>
+        <script src='angular.js'></script>
+        <script> 
+            const m =angular.module('mmm', []);
+
+            m.component('currencyConverter', {
+                template: `
+                <h3>Currency Converter</h3>
+
+                <input type='text' ng-model=$ctrl.fromAmount></input>
+
+                <!-- dropdown for currency list --> 
+
+                {{$ctrl.fromAmount}}
+                `
+                ,controller: function(){
+                    this.fromAmount = 0;
+
+                }
+
+            });
+        </script>
+    </head>
+    <body ng-app='mmm'>
+        <currency-converter></currency-converter>
+    </body>
+    </html>
