@@ -4,10 +4,7 @@ angular.module('routeApp', [
     'usersApp',
     'auth',
 ])
-    .config(myConfig)
-    .config(($httpProvider) => {
-        $httpProvider.interceptors.push('AuthInterceptor');
-    });
+    .config(myConfig);
 
 function myConfig($stateProvider, $urlRouterProvider) {
 
@@ -38,31 +35,5 @@ function myConfig($stateProvider, $urlRouterProvider) {
         });
 }
 
-angular.module('routeApp')
-    .service('userService', authService);
-
-function authService() {
-    let _authUser = true;
-
-    this.getAuth = function () {
-        return _authUser;
-    };
-
-    this.setAuth = function (auth) {
-        _authUser = auth;
-    };
-}
-
-angular.module('routeApp')
-    .service('AuthInterceptor', LoginInterceptorService);
 
 
-function LoginInterceptorService($location, userService) {
-
-    this.response = (response) => {
-        if (!userService.getAuth()) {
-            $location.path('/auth');
-        }
-        return response;
-    };
-}

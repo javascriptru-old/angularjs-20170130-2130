@@ -1,1 +1,40 @@
-<div>Тут будет авторизация</div>
+<div ng-if="$ctrl.authUser">
+    <button ng-click="$ctrl.auth(false)">Выход</button>
+    <span>Вы вошли</span>
+</div>
+
+<form name="$ctrl.loginForm" ng-if="!$ctrl.authUser">
+    <div class="form-group">
+        <label for="email">Почта<span class="red">*</span></label>
+        <input type="text"
+               id="email"
+               name="email"
+               ng-model="$ctrl.email"
+               ng-minlength="7"
+               ng-pattern="$ctrl.regexp.email"
+               ng-required="true">
+    </div>
+    <div class="red" ng-show="$ctrl.loginForm.email.$invalid && $ctrl.loginForm.email.$touched">
+        некоректный адресс почты
+    </div>
+
+    <div class="form-group">
+        <label for="password">Пароль<span class="red">*</span></label>
+        <input type="password"
+               id="password"
+               name="password"
+               ng-minlength="8"
+               ng-model="$ctrl.password"
+               ng-required="true">
+    </div>
+    <div class="red" ng-show="$ctrl.loginForm.password.$invalid && $ctrl.loginForm.password.$touched">
+        длинна пароля должна быть больше восьми символов
+    </div>
+
+    <div ng-if="!$ctrl.authUser">
+        <button ng-click="$ctrl.auth(true)" ng-disabled="$ctrl.loginForm.$invalid">Вход</button>
+    </div>
+</form>
+
+
+

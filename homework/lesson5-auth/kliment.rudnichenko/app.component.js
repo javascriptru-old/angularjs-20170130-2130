@@ -4,17 +4,17 @@ angular.module('routeApp')
         controller: RouteAppController
     });
 
-function RouteAppController(userService, $state) {
+function RouteAppController(authService, $state) {
     this.$onInit = function () {
-        this.authUser = userService.getAuth();
+        this.authUser = authService.getAuth();
     };
 
     this.auth = function (auth) {
-        userService.setAuth(auth);
-        this.authUser = userService.getAuth();
+        authService.setAuth(auth);
+        this.authUser = authService.getAuth();
 
         if(!auth){
-            $state.go('currency')
+            $state.go('auth')
         }
     }
 }
