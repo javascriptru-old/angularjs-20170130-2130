@@ -6,12 +6,11 @@ angular.module('routeApp')
 
 function RouteAppController(authService, $state) {
     this.$onInit = function () {
-        this.authUser = authService.getAuth();
+        this.authUser = authService;
     };
 
     this.auth = function (auth) {
-        authService.setAuth(auth);
-        this.authUser = authService.getAuth();
+        this.authUser.auth = auth;
 
         if(!auth){
             $state.go('auth')

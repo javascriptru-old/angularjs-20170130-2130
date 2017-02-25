@@ -8,7 +8,7 @@ angular.module('routeApp')
 function LoginInterceptorService($location, authService) {
 
     this.response = (response) => {
-        if (!authService.getAuth()) {
+        if (!authService.auth && $location.path() !== '/reg') {
             $location.path('/auth');
         }
         return response;

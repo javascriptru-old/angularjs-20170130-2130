@@ -1,9 +1,7 @@
-<div ng-if="$ctrl.authUser">
-    <button ng-click="$ctrl.auth(false)">Выход</button>
-    <span>Вы вошли</span>
-</div>
+<form name="$ctrl.loginForm" ng-if="!$ctrl.authUser.auth">
 
-<form name="$ctrl.loginForm" ng-if="!$ctrl.authUser">
+    <h2>Авторизуйтесь</h2>
+
     <div class="form-group">
         <label for="email">Почта<span class="red">*</span></label>
         <input type="text"
@@ -13,9 +11,9 @@
                ng-minlength="7"
                ng-pattern="$ctrl.regexp.email"
                ng-required="true">
-    </div>
-    <div class="red" ng-show="$ctrl.loginForm.email.$invalid && $ctrl.loginForm.email.$touched">
-        некоректный адресс почты
+        <div class="red" ng-show="$ctrl.loginForm.email.$invalid && $ctrl.loginForm.email.$touched">
+            некоректный адресс почты
+        </div>
     </div>
 
     <div class="form-group">
@@ -26,14 +24,15 @@
                ng-minlength="8"
                ng-model="$ctrl.password"
                ng-required="true">
-    </div>
-    <div class="red" ng-show="$ctrl.loginForm.password.$invalid && $ctrl.loginForm.password.$touched">
-        длинна пароля должна быть больше восьми символов
+        <div class="red" ng-show="$ctrl.loginForm.password.$invalid && $ctrl.loginForm.password.$touched">
+            длинна пароля должна быть больше восьми символов
+        </div>
     </div>
 
-    <div ng-if="!$ctrl.authUser">
+    <div ng-if="!$ctrl.authUser.auth">
         <button ng-click="$ctrl.auth(true)" ng-disabled="$ctrl.loginForm.$invalid">Вход</button>
     </div>
+    <a ui-sref="reg">Регистрация</a>
 </form>
 
 

@@ -1,10 +1,10 @@
-angular.module('auth')
-    .component('auth', {
-        templateUrl: 'auth/auth.component.html',
-        controller: AuthCtrl
+angular.module('reg')
+    .component('reg', {
+        templateUrl: 'reg/reg.component.html',
+        controller: regCtrl
     });
 
-function AuthCtrl(authService, $state) {
+function regCtrl(authService, $state) {
     this.$onInit = function () {
         this.authUser = authService;
 
@@ -19,5 +19,9 @@ function AuthCtrl(authService, $state) {
         if (auth) {
             $state.go('currency')
         }
+    }
+
+    this.reg = function () {
+        this.authUser.auth = true;
     }
 }

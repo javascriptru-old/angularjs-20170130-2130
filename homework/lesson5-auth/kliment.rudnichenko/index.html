@@ -18,20 +18,28 @@
         .red{
             color: red;
         }
+
+        label{
+            display: block;
+        }
+
+        .homer div{
+            font-size: 10px;
+            padding: 0;
+        }
     </style>
 </head>
 <body ng-app="routeApp">
 
-<root>
+<route-app>
     Загрузка...
-</root>
+</route-app>
 
 <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
 <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
 
 <script src="app.module.js"></script>
 <script src="app.component.js"></script>
-<script src="root.component.js"></script>
 <script src="auth.service.js"></script>
 <script src="authInterceptor.service.js"></script>
 <script src="currencyConverter/main.js"></script>
@@ -40,6 +48,8 @@
 <script src="usersApp/main.js"></script>
 <script src="auth/auth.module.js"></script>
 <script src="auth/auth.component.js"></script>
+<script src="reg/reg.module.js"></script>
+<script src="reg/reg.component.js"></script>
 
 </body>
 </html>
