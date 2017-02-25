@@ -1,6 +1,6 @@
 <div ng-if="$ctrl.authUser.auth">
     <button ng-click="$ctrl.auth(false)">Выход</button>
-    <span>Вы вошли</span>
+    <span>Вы вошли как {{$ctrl.authUser.user.email}}</span>
 </div>
 
 <div ng-show="$ctrl.authUser.auth">

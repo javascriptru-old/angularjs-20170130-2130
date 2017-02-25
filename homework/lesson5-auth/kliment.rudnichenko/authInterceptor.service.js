@@ -5,10 +5,10 @@ angular.module('routeApp')
     .service('AuthInterceptor', LoginInterceptorService);
 
 
-function LoginInterceptorService($location, authService) {
+function LoginInterceptorService($location, userService) {
 
     this.response = (response) => {
-        if (!authService.auth && $location.path() !== '/reg') {
+        if (!userService.auth && $location.path() !== '/reg') {
             $location.path('/auth');
         }
         return response;

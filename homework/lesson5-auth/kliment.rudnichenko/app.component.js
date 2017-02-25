@@ -4,15 +4,18 @@ angular.module('routeApp')
         controller: RouteAppController
     });
 
-function RouteAppController(authService, $state) {
+function RouteAppController(userService, $state) {
     this.$onInit = function () {
-        this.authUser = authService;
+        this.authUser = userService;
     };
 
     this.auth = function (auth) {
         this.authUser.auth = auth;
 
-        if(!auth){
+        if (!auth) {
+            this.authUser.user.name = '';
+            this.authUser.user.email = '';
+            this.authUser.user.password = '';
             $state.go('auth')
         }
     }

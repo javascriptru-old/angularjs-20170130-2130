@@ -7,7 +7,7 @@
         <input type="text"
                id="email"
                name="email"
-               ng-model="$ctrl.email"
+               ng-model="$ctrl.authUser.user.email"
                ng-minlength="7"
                ng-pattern="$ctrl.regexp.email"
                ng-required="true">
@@ -22,7 +22,7 @@
                id="password"
                name="password"
                ng-minlength="8"
-               ng-model="$ctrl.password"
+               ng-model="$ctrl.authUser.user.password"
                ng-required="true">
         <div class="red" ng-show="$ctrl.loginForm.password.$invalid && $ctrl.loginForm.password.$touched">
             длинна пароля должна быть больше восьми символов

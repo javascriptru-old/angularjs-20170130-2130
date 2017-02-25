@@ -4,9 +4,9 @@ angular.module('reg')
         controller: regCtrl
     });
 
-function regCtrl(authService, $state) {
+function regCtrl(userService, $state) {
     this.$onInit = function () {
-        this.authUser = authService;
+        this.authUser = userService;
 
         this.regexp = {
             emial: /^[^\s@]+@[^\s@]+\.[^\s@]{2,3}$/
