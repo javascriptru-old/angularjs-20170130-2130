@@ -1,0 +1,32 @@
+<form id="loginForm">
+    <div class="panel panel-info m-2">
+        <div class="panel-body list-group">
+            <div class="panel-heading">
+                <div class="row list-group-item lavender blue">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-1">
+                        <label for="userid">User name:</label>
+                    </div>
+                    <div class="col-sm-1">
+                        <input class="input" id="userid" ng-model="userid" placeholder="user name" type="text" />
+                    </div>
+                    </div>
+                    <div class="row list-group-item lavender blue">
+                        <div class="col-sm-2"></div>
+                        <div class="col-sm-1">
+                            <label for="password">Password:</label>
+                        </div>
+                        <div class="col-sm-1">
+                            <input class="input" id="password" ng-model="password" placeholder="password" type="password" />
+                        </div>
+                    </div>
+                    <div class="row list-group-item lavender blue">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-1">
+                        <button type="submit" ng-click="login()">Log in</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

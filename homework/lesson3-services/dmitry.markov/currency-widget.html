@@ -1,0 +1,43 @@
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <h1>Currency converter</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <form name="currForm"
+          class="form-inline">
+      <div class="form-group">
+        <label for="curr_from"> from:&nbsp;&nbsp;</label>
+        <select name="curr_from"
+                ng-model="$ctrl.from"
+                ng-change="$ctrl.result = $ctrl.to[1] / $ctrl.from[1]"
+                class="form-control">
+          <option ng-repeat="(key, option) in $ctrl.data.rates"
+                  ng-value="[key, option]">{{ $ctrl.names[key].name }}</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="curr_to">&nbsp;&nbsp;to:&nbsp;&nbsp;</label>
+        <select name="curr_to"
+                ng-model="$ctrl.to"
+                ng-change="$ctrl.result = $ctrl.to[1] / $ctrl.from[1]"
+                class="form-control">
+          <option ng-repeat="(key, option) in $ctrl.data.rates"
+                  ng-value="[key, option]">{{ $ctrl.names[key].name }}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+</div>
+<div class="row"
+     ng-show="$ctrl.result">
+  <div class="col-xs-12 text-center">
+    <h3 class="bg-info">
+      <strong>1</strong> {{ $ctrl.names[$ctrl.from[0]].name }} =
+      <strong>{{ $ctrl.result | currency:$ctrl.names[$ctrl.to[0]].symbol:$ctrl.names[$ctrl.to[0]].decimal_digits }}</strong>
+      {{ $ctrl.names[$ctrl.to[0]].name_plural }}
+    </h3>
+  </div>
+</div>

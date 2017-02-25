@@ -1,0 +1,30 @@
+<table>
+  <tr>
+    <td>
+        <select ng-model="$ctrl.from_c" ng-change="$ctrl.convert($ctrl.from_c, $ctrl.to_c, $ctrl.from_v)">
+          <option value="EUR">EUR</option>
+          <option value="RUB">RUB</option>
+          <option value="USD">USD</option>
+        </select>
+    </td>
+    <td>
+      <select ng-model="$ctrl.to_c"  ng-change="$ctrl.convert($ctrl.from_c, $ctrl.to_c, $ctrl.from_v)">
+        <option value="EUR">EUR</option>
+        <option value="RUB">RUB</option>
+        <option value="USD">USD</option>
+      </select> 
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="text"  ng-model="$ctrl.from_v"  ng-change="$ctrl.convert($ctrl.from_c, $ctrl.to_c, $ctrl.from_v)"/>
+    </td>
+    <td>
+      <input type="text" ng-model="$ctrl.to_v" readonly/>
+    </td>
+  </tr>
+</table>
+
+
+
+

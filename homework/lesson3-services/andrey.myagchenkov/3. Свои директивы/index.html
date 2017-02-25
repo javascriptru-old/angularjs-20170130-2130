@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Свои директивы</title>
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+	<div class="main">
+		<h3>Свои директивы</h3>
+		<hr>		
+		<ul style="float: left">
+			<li>
+				<table>
+					<tr>
+						<td><span>ng-show example 1</span></td>
+						<td><button name="show" value="1+1">1+1</button><button name="show" value="1-1">1-1</button></td>
+						<td><span ng-show="false">ng-show</span></td>
+					</tr>
+					<tr>
+						<td><span>ng-show example 2</span></td>
+						<td><button name="show2" value="true">true</button><button name="show2" value="false">false</button></td>
+						<td><span ng-show="false">ng-show2</span></td>
+					</tr>
+					<tr>
+						<td><span>ng-hide example 1</span></td>
+						<td><button name="hide" value="1+1">1+1</button><button name="hide" value="1-1">1-1</button></td>
+						<td><span ng-hide="false">ng-hide</span></td>
+					</tr>
+					<tr>
+						<td><span>ng-hide example 2</span></td>
+						<td><button name="hide2" value="true">true</button><button name="hide2" value="false">false</button></td>
+						<td><span ng-hide="false">ng-hide</span></td>
+					</tr>
+				</table>
+			</li>
+			<li>
+				<span>ng-click</span>
+				<img src="./pencil.png" width="70%" ng-click="toFlip($event,39)">
+			</li>
+			<li>
+				<span>ng-change example 1</span>
+				<input type="text" ng-model="text2" ng-change="alertThrough1sec('text2')">
+			</li>
+			<li>
+				<span>ng-change example 2</span>
+				<input type="checkbox" ng-model="check" ng-change="alertCheck($modelName)">
+			</li>
+		</ul>
+	</div>
+
+<script src="directives.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+</body>
+</html>

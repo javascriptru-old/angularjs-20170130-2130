@@ -1,0 +1,21 @@
+h3 {
+	margin: 0;
+	text-align: center;
+}
+
+input {
+	width: 15em;
+}
+
+span {
+	float: right;
+}
+
+.center {
+	margin: auto;
+	width: 30em;
+}
+
+.rubl {
+	font-family: 'PT Sans', serif;
+}

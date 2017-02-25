@@ -1,0 +1,10 @@
+<div class="main">
+	<select class="select" ng-model="$ctrl.select" ng-options="item.firstName + ' ' + item.surname for item in $ctrl.users">
+	</select><br><br>
+	<div ng-show="$ctrl.select">
+		<img class="image" ng-src="{{$ctrl.select.photo || './avatar.png'}}">
+		<div>Фамилия: {{$ctrl.select.surname}}</div>
+		<div>Имя: {{$ctrl.select.firstName}}</div>
+		<div>Гражданство: {{$ctrl.select.country.toUpperCase()}}</div>
+	</div>
+</div>

@@ -9,6 +9,7 @@
 
 <body>
   <user-card></user-card>
+  <user-card2></user-card2>
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
@@ -42,6 +43,19 @@
 
       this.x = 5;
     });
+    app.service('UserService2', function (UserService) {
+      this.random = UserService.random;
+
+      this.getOne = (id) => { };
+      this.getAll = () => { };
+      this.getUser = () => ({ name: 'Bob' });
+
+      this.setRandomUser = function () {
+
+      }
+
+      this.x = 5;
+    });
     /*
         app.service('CarService', function(WeelService) {
           this.random = Math.random();
@@ -52,8 +66,26 @@
         });
     */
     app.component('userCard', {
-      template: '<div>{{$ctrl.random}}{{$ctrl.getRandom()}}</div>',
-      controller: function () {
+      template: '<div> | {{$ctrl.componentR}} <input ng-model="$ctrl.componentR"></div>',
+      controller: function (UserService) {
+        this.componentR = UserService.random;
+
+        this.getRandom = () => Math.random();
+
+        //fetch()
+        //Promise()
+        /*
+                $http.get('http://ya.ru').then((data) => {
+                  this.users = data;
+                });
+                this.random = UserService.random;
+                UserService.x  = 10;*/
+      }
+    });
+    app.component('userCard2', {
+      template: '<div> | {{$ctrl.componentR2}} <input ng-model="$ctrl.componentR2"></div>',
+      controller: function (UserService2) {
+        this.componentR2 = UserService2.random;
 
         this.getRandom = () => Math.random();
 

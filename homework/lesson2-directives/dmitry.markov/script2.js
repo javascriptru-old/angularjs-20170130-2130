@@ -5,7 +5,7 @@
   angular.module('mailBox', ['ngAnimate', 'toastr'])
   let app = angular.module('mailBox')
 
-  app.config(function (toastrConfig) {
+  app.config((toastrConfig) => {
     angular.extend(toastrConfig, {
       positionClass: 'toast-bottom-center',
       timeOut: 2500
@@ -20,7 +20,7 @@
 
   app.component('mailBox', {
     templateUrl: 'mail-box.html',
-    controller: function ($interval) {
+    controller () {
       this.mailList = [{
         from: 'Marie-Antoanette',
         subject: 'Waiting for you in the back of the palace',
@@ -53,8 +53,9 @@
 
   app.component('mailHeader', {
     templateUrl: 'mail-header.html',
-    controller: function (toastr) {
+    controller ($interval, toastr) {
       this.$onDestroy = () => {
+        $interval.cancel(noopInterval)
         const ttl = (Date.now() - this.mail.creationDate) / 1000
 
         const seconds = Math.round(ttl % 60)
@@ -70,6 +71,8 @@
         $event.stopPropagation()
         this.callbackDelete({index})
       }
+
+      let noopInterval = $interval(angular.noop, 2000)
     },
     bindings: {
      mail: '<',
@@ -78,9 +81,8 @@
     }
   })
 
-  app.filter('myDate', function () {
-    return (date) => {
-      console.log('CALL')
+  app.filter('myDate', () => {
+    function filter (date) {
       let formattedDate
       const now = (Date.now() - date) / 1000
 
@@ -91,12 +93,13 @@
       else formattedDate = 'прямо сейчас'
       return formattedDate
     }
+    filter.$stateful = true
+    return filter
   })
 
-  app.filter('mySearch', function () {
-    return (array, search) => {
+  app.filter('mySearch', () => {
+     return (array, search) => {
       let filtered = []
-
       angular.forEach(array, (element) => {
         if (element['from'].toLowerCase().includes(search.toLowerCase()) ||
             element['subject'].toLowerCase().includes(search.toLowerCase())) {
