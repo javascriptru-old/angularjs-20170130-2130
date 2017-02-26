@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <h1>Список пользователей</h1>
+  </div>
+</div>
+<div ng-if="$ctrl.users"
+     class="row">
+  <div class="col-xs-12">
+    <table class="table table-hover">
+     <thead>
+       <tr>
+         <th>Фото</th>
+         <th>Имя</th>
+         <th>Фамилия</th>
+         <th>Страна</th>
+       </tr>
+     </thead>
+     <tbody class="clicable">
+       <tr ng-repeat="(index, user) in $ctrl.users"
+           ng-click="$ctrl.goUserCard(index)"
+           user="user"
+           index="index">
+         <td><img ng-src="{{ user.photo ? user.photo : 'https://top.kz/assets/empty-avatar-c8775f1f4a1c5f0be17dfe4ae0de5fad.png' }}"
+                  alt="{{ ::user.firstName }}"
+                  width="50"
+                  height="50"
+                  class="img-circle"></td>
+         <td><a ui-sref="user.card({id: index})">{{ ::user.firstName }}</a></td>
+         <td>{{ ::user.surname }}</td>
+         <td>{{ ::user.country }}</td>
+       </tr>
+     </tbody>
+    </table>
+  </div>
+</div>

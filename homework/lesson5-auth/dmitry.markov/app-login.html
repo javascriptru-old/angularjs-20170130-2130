@@ -1,0 +1,46 @@
+<div class="row">
+  <div class="col-xs-12 text-center">
+    <h1>Вход в систему</h1>
+  </div>
+  <div ng-if="!$ctrl.isAuthed"
+       class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 text-center">
+    <p class="well">Пожалуйста, залогиньтесь.</p>
+    <form>
+      <div class="form-group">
+        <label for="login">Логин</label>
+        <input ng-model="$ctrl.login"
+               type="text"
+               class="form-control"
+               id="login"
+               name="login"
+               placeholder="admin"
+               required
+               autofocus />
+      </div>
+      <div class="form-group">
+        <label for="password">Пароль</label>
+        <input ng-model="$ctrl.password"
+               type="password"
+               class="form-control"
+               id="password"
+               name="password"
+               placeholder="admin"
+               required />
+      </div>
+      <button ng-if="!$ctrl.loginSuccess"
+              ng-click="$ctrl.doLogin()"
+              ng-disabled="!($ctrl.login && $ctrl.password)"
+              type="submit"
+              class="btn btn-primary"
+              ladda="$ctrl.loginLoading"
+              data-style="expand-left">Войти</button>
+    </form>
+  </div>
+  <div ng-if="$ctrl.isAuthed"
+       class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4 text-center">
+    <p class="well">Вы уже вошли в систему.</p>
+    <button ng-click="$ctrl.logout($event)"
+            type="submit"
+            class="btn btn-primary">Выйти</button>
+  </div>
+</div>
