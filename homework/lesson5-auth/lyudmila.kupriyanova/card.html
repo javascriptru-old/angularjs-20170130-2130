@@ -1,0 +1,35 @@
+<div class="col-sm-12 iYm0K"><b><a ui-sref="cards">Вернуться к списку</a></b></div>
+<div class="col-sm-6">
+    <form name="userForm" ng-submit="submitForm()" novalidate>
+    <div><img class="photo" ng-src="{{$ctrl.user.photo}}"></div>
+        <!-- FIRSTNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+            <label>Имя</label>
+            <input type="text" name="name" class="form-control" ng-model="$ctrl.user.firstName" required>
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Необходимо задать имя</p>
+        </div>
+        <!-- SURNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.surname.$invalid && !userForm.surname.$pristine }">
+            <label>Фамилия</label>
+            <input type="text" name="surname" class="form-control" ng-model="$ctrl.user.surname" required>
+            <p ng-show="userForm.surname.$invalid && !userForm.surname.$pristine" class="help-block">Необходимо задать фамилию</p>
+        </div>
+        <!-- USERNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+            <label>Имя входа</label>
+            <input type="text" name="username" class="form-control" ng-model="$ctrl.user.username" ng-minlength="3" ng-maxlength="8">
+            <p ng-show="userForm.username.$error.minlength" class="help-block">Имя входа слишком короткое</p>
+            <p ng-show="userForm.username.$error.maxlength" class="help-block">Имя входа слишком длинное</p>
+        </div>
+        
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+            <label>Email</label>
+            <input type="email" name="email" class="form-control" ng-model="$ctrl.user.email">
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Неверный формат Email</p>
+        </div>
+        
+        <button type="submit" class="btn btn-primary" ng-disabled="userForm.$invalid">Сохранить</button>
+        
+    </form>
+  </div>

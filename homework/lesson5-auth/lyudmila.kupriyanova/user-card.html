@@ -1,0 +1,16 @@
+            <li class="email-item row {{$ctrl.rowcss}}">
+              <div class="people col-sm-12">
+                <ul class="mail-icons list-inline">
+                  <li>
+                    <span class="glyphicon glyphicon-star-empty"></span>
+                  </li>
+                  <li>
+                    <span class="glyphicon glyphicon-pencil" style="cursor:pointer" ui-sref="user({userId: $ctrl.person.id})"></span>
+                  </li>
+                  <li>
+                  	<span ng-click="$ctrl.deleteItem({item: $ctrl.person});" class="glyphicon glyphicon-remove" style="color:red;cursor:pointer;"></span>
+                  </li>
+                </ul>
+                	<span ui-sref="user({userId: $ctrl.person.id})" class="people-names" style="cursor:pointer">{{$ctrl.person.surname}} {{$ctrl.person.firstName}}</span>
+              </div>
+            </li>
