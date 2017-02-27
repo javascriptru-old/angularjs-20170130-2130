@@ -2,21 +2,9 @@
  * Created by y.masyan on 20.02.2017.
  */
 angular.module('app').config(($stateProvider, $urlRouterProvider) => {
+
   // An array of state definitions
   var states = [
-    {
-      name: 'people',
-      url: '/people',
-      component: 'people',
-      // This state defines a 'people' resolve
-      // It delegates to the PeopleService to HTTP fetch (async)
-      // The people component receives this via its `bindings: `
-      resolve: {
-        people: function(PeopleService) {
-          return PeopleService.getAllPeople();
-        }
-      }
-    },
     {
       name: 'contacts',
       url: '/contacts',
@@ -29,7 +17,6 @@ angular.module('app').config(($stateProvider, $urlRouterProvider) => {
       }
     },
     {
-
       name: 'user',
       url: '/contacts/{userId}',
       component: 'userCardComponent',
@@ -37,9 +24,6 @@ angular.module('app').config(($stateProvider, $urlRouterProvider) => {
         card: function(PeopleService, $transition$) {
           return PeopleService.getPersonById($transition$.params().userId);
         }
-        // card: function (PeopleService, $transition$) {
-        //   return PeopleService.getPerson($transition$.params().userId);
-        // }
       },
 
       // template: '<user-card user-id="userId"></user-card>', //templateUrl

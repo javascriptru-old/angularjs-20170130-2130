@@ -57,8 +57,8 @@ angular.module('app').component('userCardComponent', {
                 <table class="table table-user-information">
                     <tbody>
                     <tr><td>fullName:</td><td>{{$ctrl.card.fullName}}</td></tr>
-                    <tr><td>email:</td><td>{{$ctrl.card.email}}:</td></tr>
-                    <tr><td>birthdate:</td><td>{{$ctrl.card.birthdate | date: 'dd.MM.yyyy'}}:</td>                           
+                    <tr><td>email:</td><td>{{$ctrl.card.email}}</td></tr>
+                    <tr><td>birthdate:</td><td>{{$ctrl.card.birthdate | date: 'dd.MM.yyyy'}}</td>                           
                     </tbody>
                 </table>
             </div>

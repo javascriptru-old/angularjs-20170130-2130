@@ -3,37 +3,18 @@
  */
 
 angular.module('app', ['ui.router', 'ngMaterial'])
-.run(function($http) {
-  $http.get('data/people.json', { cache: true });
+.run(function($http, $transitions) {
+  // $transitions.onEnter({ entering: 'admin' }, function(transition, state) {
+  //   var AuditService = trans.injector().get('AuditService');
+  //   AuditService.log("Entered " + state.name + " module while transitioning to " + transition.to().name);
+  // })
+  // $http.get('data/people.json', { cache: true });
 })
-// .service('PeopleService', function($http) {
-//   var service = {
-//     getAllPeople: function() {
-//       return $http.get('http://test-api.javascript.ru/v1/iliakan/users/', { cache: true }).then(function(resp) {
-//         console.log('Данные получены3!');
-//         return resp.data;
-//       });
-//     },
-//
-//     getPerson: function(id) {
-//       function personMatchesParam(person) {
-//         return person._id === id;
-//       }
-//
-//       return service.getAllPeople().then(function (people) {
-//         return people.find(personMatchesParam)
-//       });
-//     }
-//   }
-//
-//   return service;
-// })
   .service('PeopleService', function($http) {
     var service = {
       getAllPeople: function() {
         return $http.get('http://test-api.javascript.ru/v1/iliakan/users/', { cache: true }).then(function(resp) {
           console.log(resp);
-
           return resp.data;
         });
       },
