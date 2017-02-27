@@ -1,0 +1,17 @@
+<div class="who-are-you" ng-if="$ctrl.isAuthorized()">
+    <div class="center-block">You are logged in as {{ $ctrl.getUserData() | capitalize }}</div>
+</div>
+<header>
+    <div class="center-block app-nav">
+        <a ui-sref='root.home' ui-sref-active="active">Home</a>
+        <a ui-sref='root.users' ui-sref-active="active" >Users</a>
+        <a ui-sref='root.createUser' ui-sref-active="active" ng-if="$ctrl.isAuthorized()">Create new user</a>
+        <a ui-sref='root.login' ui-sref-active="active" ng-if="!$ctrl.isAuthorized()">Login</a>
+        <a ui-sref='root.logout' ui-sref-active="active" ng-if="$ctrl.isAuthorized()">Logout</a>
+    </div>
+</header>
+<main>
+    <div class="center-block">
+        <ui-view></ui-view>
+    </div>
+</main>

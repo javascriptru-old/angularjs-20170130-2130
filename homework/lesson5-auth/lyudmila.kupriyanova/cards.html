@@ -1,0 +1,37 @@
+    <div class="container-fluid">
+      <header class="row">
+        <div class="logo col-sm-2">
+          <h5>Список пользователей</h5>
+        </div>
+        <div class="search-bar col-sm-6">
+          <div class="input-group">
+            <input class="form-control" placeholder="Поиск..." type="text" ng-model="searchstr">
+            <span class="input-group-btn">
+              <button class="btn btn-main">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+          </div>
+          <span class="arrow caret"></span>
+        </div>
+        <div class="col-sm-3">
+        </div>
+
+        <div class="col-sm-1">
+          <div role="button" class="XHsn7e TRApmc" ui-sref="user({userId: ''})" title="Add user">
+              <content class="Ip8zfc">
+                <div class="iYm0K"></div>
+              </content>
+          </div>
+        </div>
+      </header>
+
+      <div class="mail row">
+        <div class="inbox col-sm-12">
+          <ul class="list-unstyled" ng-repeat="student in $ctrl.users | filter:searchstr">
+        <user-card user="student" delcard="$ctrl.deleteItem(item)">
+        </user-card>          
+          </ul>
+        </div>
+      </div>
+    </div>
