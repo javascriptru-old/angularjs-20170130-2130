@@ -14,6 +14,7 @@
 http://plnkr.co/edit/?p=preview
 
 ### TODO:
+- [ ] add user form
 - [ ] interseptors
 - [ ] sign up form
 - [ ] firebase integration
@@ -26,3 +27,4 @@ http://plnkr.co/edit/?p=preview
 - [ ] restore password
 - [ ] debounce form
 - [ ] tests
+- [ ] image loading

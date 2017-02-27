@@ -2,35 +2,6 @@
 'use strict'
 
 /**
- * @desc Главное меню
- */
-const appNav = {
-  templateUrl: 'app-nav.html',
-  controller ($state, authService) {
-    this.isNavCollapsed = true
-    this.isAuthed = authService.isAuthorized()
-
-    /**
-     * @desc Проверяем, не залогинился ли пользователь, чтобы сменить Login на Logout
-     */
-    this.$doCheck = () => {
-      this.isAuthed = authService.isAuthorized()
-    }
-
-    /**
-     * @desc Отправляем команду выхода из системы в authService
-     */
-    this.logout = $event => {
-      $event.stopPropagation()
-      if (authService.logout()) {
-        this.isAuthed = null
-        $state.go('login')
-      }
-    }
-  }
-}
-
-/**
  * @desc Страница авторизации
  */
 const appLogin = {
@@ -133,6 +104,5 @@ function authService ($q, $timeout, $localStorage, toastr) {
 
 angular
   .module('userList')
-  .component('appNav', appNav)
   .component('appLogin', appLogin)
   .service('authService', authService)

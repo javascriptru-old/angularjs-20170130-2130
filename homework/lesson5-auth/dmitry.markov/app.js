@@ -62,6 +62,14 @@ function appConfig ($stateProvider, $urlRouterProvider, toastrConfig) {
         index: $transition$ => $transition$.params().id
       }
     })
+    .state('user.add', {
+      name: 'userAdd',
+      url: '/user/add',
+      data: { pageTitle: 'User Add' },
+      component: 'userAdd',
+      resolve: {
+      }
+    })
     .state('login', {
       name: 'login',
       url: '/login',
@@ -105,53 +113,14 @@ function appRun ($rootScope, $state, $transitions, toastr) {
   })
 }
 
-/**
- * @name spinnerService
- * @desc Возвращает спиннер
- * @returns {Object}
- */
-function spinnerService () {
-  let count = 0
-
-  /**
-   * @desc Добавляет спиннер на страницу при смене раута
-   */
-  function showSpinner () {
-    let elem = angular.element(document.querySelector('body'))
-    elem.append(`
-      <div class="text-center" id="mySpinner">
-        <div class="spinner">
-          <div class="bounce1"></div>
-          <div class="bounce2"></div>
-          <div class="bounce3"></div>
-        </div>
-        <div class="loading-text">Загрузка</div>
-      </div>
-    `)
-  }
-
-  /**
-   * @desc Удаляет спиннер при смене раута
-   */
-  function hideSpinner () {
-    let elem = angular.element(document.querySelector('#mySpinner'))
-    elem.detach()
-  }
-
-  return {
-    transitionStart () { if (++count > 0) showSpinner() },
-    transitionEnd () { if (--count <= 0) hideSpinner() }
-  }
-}
-
 angular
-  .module('userList', ['angular-ladda',
-                       'ngAnimate',
-                       'ngStorage',
-                       'toastr',
-                       'ui.bootstrap',
-                       'ui.router'])
+  .module('userList',
+         ['angular-ladda',
+          'ngAnimate',
+          'ngStorage',
+          'toastr',
+          'ui.bootstrap',
+          'ui.router'])
   .config(appConfig)
   .run(appRun)
   .component('appRoot', appRoot)
-  .service('spinnerService', spinnerService)

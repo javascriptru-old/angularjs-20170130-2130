@@ -33,7 +33,7 @@ const userCard = {
       // получаем полное имя
       this.fullName = this.user.firstName + ' ' + this.user.surname
       // получаем название страны по коду
-      this.country = countryService[this.user.country]
+      this.country = countryService.getCountry(this.user.country)
       // задаем аватар по-умолчанию, если нет фото
       this.avatar = this.user.photo ? this.user.photo : 'https://top.kz/assets/empty-avatar-c8775f1f4a1c5f0be17dfe4ae0de5fad.png'
       // задаем рандомный беграунд
@@ -46,6 +46,30 @@ const userCard = {
     this.deleteUser = ($event, index) => {
       $event.stopPropagation()
       userService.deleteUser(index)
+      $state.go('user.list', null, { reload: 'user.list' })
+    }
+  }
+}
+
+/**
+ * @desc Добавление пользователя
+ */
+const userAdd = {
+  templateUrl: 'user-add.html',
+  bindings: {
+  },
+  controller (userService, countryService) {
+    this.$onInit = () => {
+      // получаем список стран
+      this.countries = countryService.getCountries()
+    }
+
+    /**
+     * @desc Добавление пользователя через сервис и переход на список пользователей
+     */
+    this.addUser = ($event, object) => {
+      $event.stopPropagation()
+      userService.addUser(object)
       $state.go('user.list', null, { reload: 'user.list' })
     }
   }
@@ -92,12 +116,20 @@ function userService ($http, $q, toastr) {
     const deleted = users.splice(id, 1)
     toastr.error(`Пользователь ${deleted[0].firstName} удален`)
   }
+
+  /**
+   * @desc Добавление пользователя в локальный массив
+   * @param {Object} object - объект с данными формы
+   */
+  this.addUser = object => {
+    users.push(object)
+    toastr.error(`Пользователь ${object.firstName} добавлен`)
+  }
 }
 
 /**
  * @name countryService
- * @desc Возвращает коллекцию стран
- * @returns {Object}
+ * @desc Возвращает название стран
  */
 function countryService () {
   // TODO: make service
@@ -107,7 +139,15 @@ function countryService () {
     ua: 'Украина'
   }
 
-  return countries
+  /**
+   * @desc Возвращает коллекцию стран
+   */
+  this.getCountries = () => countries
+
+  /**
+   * @desc Возвращает название страны по коду
+   */
+  this.getCountry = (country) => countries[country]
 }
 
 /**
@@ -134,6 +174,7 @@ angular
   .module('userList')
   .component('userList', userList)
   .component('userCard', userCard)
+  .component('userAdd', userAdd)
   .service('userService', userService)
-  .factory('countryService', countryService)
+  .service('countryService', countryService)
   .service('backgroundService', backgroundService)
