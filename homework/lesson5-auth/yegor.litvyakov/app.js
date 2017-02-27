@@ -82,6 +82,7 @@ app.run(function run($transitions) {
 
 app.factory('AuthService', authService);
 
+authService.$inject = ['$q', '$localStorage'];
 function authService($q, $localStorage) {
     return {
         isAuthenticated: _isAuthenticated,

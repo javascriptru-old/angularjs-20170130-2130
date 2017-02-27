@@ -32,7 +32,7 @@
 			,
 			resolve: {
 				usersInit: function(loadUsers) {
-					return loadUsers.getUsers().then((data) => { 
+					return loadUsers.getUsers().then((data) => {
 						return data.data });
 				}
 			},
@@ -63,7 +63,7 @@
 
 	app.run(($transitions, AuthService) => {
 
-				
+
 		$transitions.onEnter({to: 'usersList'}, ($transition$, $state$) => {
 			if($state$.name != 'login' && !AuthService.isAuth()) {
 				return $transition$.router.stateService.target('login');
@@ -130,12 +130,12 @@
 			<div class="main">
 				<button class="create" ng-if="!+$ctrl.userId" ng-click="$ctrl.toCreateUser()">Создать пользователя</button>
 				<p ng-if="!+$ctrl.userId">Добавьте в конец url номер пользователя для отображения его профиля</p>
-				<user-card ng-if="+$ctrl.userId" user="$ctrl.usersInit[+$ctrl.userId-1]"></user-card>	
-				<user-card ng-if="!+$ctrl.userId" ng-repeat="item in $ctrl.usersInit" user="item"></user-card>	
+				<user-card ng-if="+$ctrl.userId" user="$ctrl.usersInit[+$ctrl.userId-1]"></user-card>
+				<user-card ng-if="!+$ctrl.userId" ng-repeat="item in $ctrl.usersInit" user="item"></user-card>
 			</div>
 		`,
 		controller: function($state) {
-			
+
 			this.toCreateUser = () => {
 				$state.go('createUser');
 			};
@@ -144,7 +144,7 @@
 			usersInit: '<',
 			userId: '<'
 		}
-		
+
 	})
 	.component('userCard', {
 		template: `
@@ -178,7 +178,7 @@
 				<input type="text" name="firstname" required ng-model="$ctrl.newUser.firstname">
 				<div ng-messages="createUser.firstname.$dirty && createUser.firstname.$error">
 					<div ng-message="required">поле не заполнено</div>
-				</div>	
+				</div>
 
 				Гражданство<br>
 				<input type="text" name="country" ng-model="$ctrl.newUser.country"><br>
@@ -193,12 +193,12 @@
 
 				<input type="submit" value="Создать">
 				<input type="button" value="Отмена" ng-click="$ctrl.cancel()">
-				
+
 			</fieldset>
 			</form>
 		`,
 
-		controller: function($state, $scope) {			
+		controller: function($state, $scope) {
 			this.newUser = {};
 
 			this.cancel = () => {
