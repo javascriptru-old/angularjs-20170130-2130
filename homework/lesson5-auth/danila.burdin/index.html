@@ -4,275 +4,16 @@
 	<meta charset="UTF-8">
 	<script>document.write('<base href="' + document.location + '" />');</script>
 	<title>Lesson 5 - authorization & form validation</title>
-	<style>
-		.active {
-			color: red;
-		}
-	</style>
+	<link rel="stylesheet" href="./style.css">
 </head>
 <body>
-	<div ui-view>loading</div>
+	<div ui-view><div class="spinner"><span></span></div></div>
 	<script src="https://code.angularjs.org/1.6.2/angular.min.js"></script>
 	<script src="https://code.angularjs.org/1.6.2/angular-messages.min.js"></script>
 	<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
 	<script>
 
 		const app = angular.module( 'app', ['ui.router', 'ngMessages']);
-
-
-		app.service('UserService', function($q, $http, $state){
-
-			var userData = null
-
-			this.isAuthorized = () => {
-				return userData == null ? false : true
-			}
-
-			this.getUserData = () => {
-				return userData == null ? false : userData.login
-			}
-
-			this.login = (login, pass) => {
-				return $q((resolve) => {
-					userData = {
-						login: login,
-						password: pass
-					}
-					resolve(true)
-				})
-			}
-
-			this.logout = () => {
-				return $q((resolve, reject) => { userData = null })
-			}
-
-			this.getList = () => {
-				return $http.get(`http://test-api.javascript.ru/v1/burdin/users?delay=700`)
-					.then( response => response.data, () => {
-						$state.go('root.home')
-					});
-			}
-
-			this.getOne = ( userId ) => {
-				return $http.get(`http://test-api.javascript.ru/v1/burdin/users/${ userId }`)
-					.then( response => response.data, () => {
-						$state.go('root.home')
-					});
-			}
-
-			this.createUser = ( fullName, email ) => {
-				return $http.post(`http://test-api.javascript.ru/v1/burdin/users/`, { fullName: fullName, email: email })
-					.then( response => response.data, (reason) => {
-						console.log( reason )
-					});
-			}
-
-			this.deleteUser = ( userId ) => {
-				return $http.delete(`http://test-api.javascript.ru/v1/burdin/users/${ userId }`)
-					.then( response => response.data, (reason) => {
-						alert( reason )
-					});
-			}
-		})
-
-		app.component('loginForm', {
-			template: 
-			`
-				<form name="loginform" novalidate ng-submit="$ctrl.submitForm()">
-					<div>
-						<strong>Username</strong>
-						<input type="text" name="username" ng-model="$ctrl.username" required>
-						<div ng-messages="loginform.username.$error" ng-show="loginform.username.$touched">
-							<div ng-message="required">Fill the field</div>
-						</div>
-					</div>
-					<div>
-						<strong>Password</strong>
-						<input type="password" name="password" ng-model="$ctrl.password" required>
-						<div ng-messages="loginform.password.$error" ng-show="loginform.password.$touched">
-							<div ng-message="required">Fill the field</div>
-						</div>
-					</div>
-					<button type="submit" ng-disabled="!loginform.password.$valid">Login</button>
-				</login>
-			`,
-			controller: function( UserService, $state ){
-				this.submitForm = () => {
-					let redirectAfterAuth =  $state.current.data.redirectAfterAuth || 'root.home'
-					let redirectAfterAuthParams =  $state.current.data.redirectAfterAuthParams || null
-					let promise = UserService.login( this.username, this.password );
-					promise.then((result) => {
-						$state.current.data = {}
-						$state.go( redirectAfterAuth, { userId: redirectAfterAuthParams })
-					})
-				}
-			}
-		})
-
-		app.component('root', {
-			bindings: {
-				user: '<'
-			},
-			template: 
-			`
-				<div ng-if="$ctrl.user.isAuthorized()">You are logged in as {{ $ctrl.user.getUserData() | capitalize }}</div>
-				<a ui-sref='root.home' ui-sref-active="active">Home</a>
-				<a ui-sref='root.users' ui-sref-active="active" >Users</a>
-				<a ui-sref='root.createUser' ui-sref-active="active" ng-if="$ctrl.user.isAuthorized()">Create new user</a>
-				<a ui-sref='root.login' ui-sref-active="active" ng-if="!$ctrl.user.isAuthorized()">Login</a>
-				<a ui-sref='root.logout' ui-sref-active="active" ng-if="$ctrl.user.isAuthorized()">Logout</a>
-				<ui-view></ui-view>
-			`
-		})
-
-		app.filter('capitalize', function() {
-			return function (input) {
-				return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
-			};
-		});
-
-		app.component('userList', {
-			template:
-			`
-				<div ng-if=" $ctrl.loading ">Loading</div>
-				<div ng-if="!$ctrl.loading">
-					<div class="user-list">
-						<ui-view>
-							<button ui-sref="root.createUser">Add</button>
-							<span ng-if="!$ctrl.isAuthorized()">you should be logged in to apply this action</span>
-							<div ng-repeat="user in $ctrl.users" class="user-list__user">
-								<a ui-sref="root.profile({userId: user._id})">
-									{{user.fullName}}
-								</a>
-							</div>
-						</ui-view>
-					</div>
-				</div>
-			`,
-			controller: function( UserService ){
-
-				this.loading = true
-
-				this.isAuthorized = () => {
-					return UserService.isAuthorized()
-				}
-
-				this.$onInit = () => {
-					return UserService.getList()
-						.then(response => {
-							return sortByVal( response, 'fullName' )
-						})
-						.then( response => {
-							this.users = response
-							this.loading = false
-						});
-				}
-			}
-		});
-
-		app.component('userProfile', {
-			bindings: {
-				userId: '<',
-			},
-			template:
-			`
-				<ui-view>
-					<div ng-if=" $ctrl.loading ">Loading</div>
-					<div ng-if=" !$ctrl.loading ">
-						<h4>User profile</h4>
-						<div class="user-profile__row">id: {{ $ctrl.user._id }}</div>
-						<div class="user-profile__row">name: {{ $ctrl.user.fullName }}</div>
-						<div class="user-profile__row">email: {{ $ctrl.user.email }}</div>
-						<button class="main" ng-click="$ctrl.back()">Go to user list</button>
-						<button class="main" ng-click="$ctrl.deleteUser()">Delete user</button>
-					</div>
-				</ui-view>
-			`,
-			controller: function(UserService, $state){
-				this.loading = true
-
-				this.back = () => {
-					$state.go('root.users');
-				}
-
-				this.$onInit = () => {
-					return UserService.getOne( this.userId ).then( response => {
-						this.user = response
-						this.loading = false
-					});
-				}
-
-				this.deleteUser = () => {
-					this.loading = true
-					return UserService.deleteUser( this.userId ).then( response => {
-						$state.go('root.users');
-					});
-				}
-			}
-		});
-
-		app.component('createUser', {
-			template:
-			`
-				<div ng-if=" $ctrl.loading ">Loading</div>
-				<div ng-if=" !$ctrl.loading ">
-					<form name="user" novalidate ng-submit="$ctrl.submitForm()">
-						<div>
-							<strong>Full name</strong>
-							<input type="text" name="fullName" ng-model="$ctrl.fullName" required>
-							<div ng-messages="user.fullName.$error" ng-show="user.fullName.$touched">
-								<div ng-message="required">Fill the field</div>
-							</div>
-						</div>
-						<div>
-							<strong>Email</strong>
-							<input type="email" name="email" ng-model="$ctrl.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
-							<div ng-messages="user.email.$error" ng-show="user.email.$dirty">
-								<div ng-message="required">Fill the field</div>
-								<div ng-message="pattern">Your email address is invalid</div>
-							</div>
-						</div>
-						<button type="submit" ng-disabled="!user.$valid">Ok</button>
-					</form>
-				</div>
-			`,
-			controller: function(UserService, $state){
-				this.loading = false
-				this.submitForm = () => {
-					this.loading = true
-					UserService.createUser( this.fullName, this.email ).then( data => {
-						$state.go( 'root.profile', { userId: data._id })
-					})
-				}
-			}
-		})
-
-		app.run(function($rootScope, $state, UserService){
-
-			$rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
-
-				if( toState.data.authRequired && !UserService.isAuthorized() ) {
-					// если аноним заходит на роут,
-					// который требует авторизации
-					event.preventDefault()
-					// запоминаем роут и редиректим на него после авторизации
-					let data = {
-						redirectAfterAuth : toState.name,
-						redirectAfterAuthParams : toParams.userId
-					}
-					$state.get('root.login').data = data
-					// показываем login
-					$state.go('root.login')
-
-				} else if( toState.data.hiddenForAuthorized && UserService.isAuthorized()) {
-					// если авторизованный юзер заходит на роут,
-					// который показывается только анонимам
-					event.preventDefault()
-					// редиректим на home
-					$state.go('root.home')
-				}
-			});
-		})
 
 		app.config(function($stateProvider, $locationProvider, $urlRouterProvider){
 
@@ -282,32 +23,21 @@
 				.state('root', {
 					abstract: true,
 					url: '',
-					template: '<root user="user"></root>',
-					resolve: {
-						user: function( UserService ){
-							return {
-								isAuthorized: UserService.isAuthorized,
-								getUserData: UserService.getUserData
-							}
-						}
-					},
-					controller: function($scope, user){
-						$scope.user = user
-					}
+					template: '<root></root>'
 				})
 				.state('root.home', {
 					url: '/',
 					data: {
 						authRequired: false
 					},
-					template: '<div>Home</div>'
+					template: '<h2>Home</h2>'
 				})
 				.state('root.users', {
 					url: '/users',
 					data: {
 						authRequired: false
 					},
-					template: `<user-list></user-list>`
+					template: '<user-list></user-list>'
 				})
 				.state('root.profile', {
 					url: '/user/:userId',
@@ -332,22 +62,225 @@
 						authRequired: false,
 						hiddenForAuthorized: true
 					},
-					template: `<div><login-form></login-form><div>`
+					template: '<div><login-form></login-form><div>'
 				})
 				.state('root.logout', {
 					url: '/logout',
 					data: {
 						authRequired: false
 					},
-					template:
-					`
-						<div>Loading</div>
-					`,
-					controller: function($timeout, $state, UserService){
-						UserService.logout().then( $state.go('root.home') )
+					template:'<div><spinner></spinner></div>',
+					controller: function($timeout, $state, AuthService){
+						AuthService.logout().then( $state.go('root.home') )
 					}
 				})
+		});
+
+
+
+
+
+
+		app.service('AuthService', function($q, $state){
+			let userData = null
+
+			this.isAuthorized = () => {
+				return userData == null ? false : true
+			}
+
+			this.getUserData = () => {
+				return userData == null ? false : userData.login
+			}
+
+			this.login = (login, pass) => {
+				return $q((resolve) => {
+					userData = {
+						login: login,
+						password: pass
+					}
+					resolve(true)
+				})
+			}
+
+			this.logout = () => {
+				return $q((resolve, reject) => { userData = null })
+			}
+		});
+
+
+
+
+
+
+		app.service('UserService', function($q, $http, $state){
+
+			this.getList = () => {
+				return $http.get(`http://test-api.javascript.ru/v1/burdin/users?delay=700`)
+					.then( response => response.data, () => {
+						$state.go('root.home')
+					});
+			}
+
+			this.getOne = ( userId ) => {
+				return $http.get(`http://test-api.javascript.ru/v1/burdin/users/${ userId }`)
+					.then( response => response.data, () => {
+						$state.go('root.home')
+					});
+			}
+
+			this.createUser = ( fullName, email ) => {
+				return $http.post(`http://test-api.javascript.ru/v1/burdin/users/`, { fullName: fullName, email: email })
+					.then( response => response, reason => reason);
+			}
+
+			this.deleteUser = ( userId ) => {
+				return $http.delete(`http://test-api.javascript.ru/v1/burdin/users/${ userId }`)
+					.then( response => response.data, (reason) => {
+						alert( reason )
+					});
+			}
+		});
+
+
+		app.component('spinner', {
+			template: '<div class="spinner"><span></span></div>'
+		});
+
+
+		app.component('loginForm', {
+			templateUrl: 'login.tpl.html',
+			controller: function( AuthService, $state ){
+				this.submitForm = () => {
+					let redirectAfterAuth =  $state.current.data.redirectAfterAuth || 'root.home'
+					let redirectAfterAuthParams =  $state.current.data.redirectAfterAuthParams || null
+					let promise = AuthService.login( this.username, this.password );
+					promise.then((result) => {
+						$state.current.data = {}
+						$state.go( redirectAfterAuth, { userId: redirectAfterAuthParams })
+					})
+				}
+			}
 		})
+
+		app.component('root', {
+			bindings: {
+				user: '<'
+			},
+			templateUrl: 'root.tpl.html',
+			controller: function(AuthService){
+				this.isAuthorized = () => {
+					return AuthService.isAuthorized()
+				}
+				this.getUserData = () => {
+					return AuthService.getUserData()
+				}
+			}
+		});
+
+		app.component('userList', {
+			templateUrl: 'user-list.tpl.html',
+			controller: function( UserService, AuthService ){
+
+				this.loading = true
+
+				this.isAuthorized = () => {
+					return AuthService.isAuthorized()
+				}
+
+				this.$onInit = () => {
+					return UserService.getList()
+						.then(response => {
+							return sortByVal( response, 'fullName' )
+						})
+						.then( response => {
+							this.users = response
+							this.loading = false
+						});
+				}
+			}
+		});
+
+		app.component('userProfile', {
+			bindings: {
+				userId: '<',
+			},
+			templateUrl: 'user-profile.tpl.html',
+			controller: function(UserService, $state){
+				this.loading = true
+
+				this.back = () => {
+					$state.go('root.users');
+				}
+
+				this.$onInit = () => {
+					return UserService.getOne( this.userId ).then( response => {
+						this.user = response
+						this.loading = false
+					});
+				}
+
+				this.deleteUser = () => {
+					this.loading = true
+					return UserService.deleteUser( this.userId ).then( response => {
+						$state.go('root.users');
+					});
+				}
+			}
+		});
+
+		app.component('createUser', {
+			templateUrl: 'create-user.tpl.html',
+			controller: function(UserService, $state, $scope){
+				this.loading = false
+				this.submitForm = () => {
+					this.loading = true
+					UserService.createUser( this.fullName, this.email ).then( response => {
+						if(response.status == 200) {
+							$state.go('root.profile', { userId: response.data._id })
+						} else {
+							alert( response.statusText )
+							$state.go($state.current, {}, {reload: true})
+						}
+					})
+				}
+			}
+		});
+
+		app.run(function($rootScope, $state, AuthService){
+
+			$rootScope.$on('$stateChangeStart', (event, toState, toParams, fromState, fromParams) => {
+
+				if( toState.data.authRequired && !AuthService.isAuthorized() ) {
+					// если аноним заходит на роут,
+					// который требует авторизации
+					event.preventDefault()
+					// запоминаем роут и редиректим на него после авторизации
+					let data = {
+						redirectAfterAuth : toState.name,
+						redirectAfterAuthParams : toParams.userId
+					}
+					$state.get('root.login').data = data
+					// показываем login
+					$state.go('root.login')
+
+				} else if( toState.data.hiddenForAuthorized && AuthService.isAuthorized()) {
+					// если авторизованный юзер заходит на роут,
+					// который показывается только анонимам
+					event.preventDefault()
+					// редиректим на home
+					$state.go('root.home')
+				}
+			});
+		});
+
+		app.filter('capitalize', function() {
+			return function (input) {
+				return (!!input) ? input.charAt(0).toUpperCase() + input.substr(1).toLowerCase() : '';
+			};
+		});
+
+
+
 
 		function sortByVal( arr, val, desc ){
 			arr = arr.sort(function(a, b) {

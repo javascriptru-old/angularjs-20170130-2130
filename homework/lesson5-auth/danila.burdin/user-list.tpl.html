@@ -1,0 +1,15 @@
+<div ng-if=" $ctrl.loading "><spinner></spinner></div>
+<div ng-if="!$ctrl.loading">
+    <div class="user-list">
+        <h2>User list</h2>
+        <div class="toolbar">
+            <button ui-sref="root.createUser" class="main">Add</button>
+            <span ng-if="!$ctrl.isAuthorized()">you should be logged in to apply this action</span>
+        </div>
+        <div ng-repeat="user in $ctrl.users" class="user-list__user">
+            <a ui-sref="root.profile({userId: user._id})">
+                {{user.fullName}}
+            </a>
+        </div>
+    </div>
+</div>
