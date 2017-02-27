@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html ng-app="usersList">
+<head>
+	<title>Список пользователей</title>
+	<meta charset="utf-8">
+	<link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+	<ui-view></ui-view>
+
+<script>document.write('<base href="' + document.location + '" />');</script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="//code.angularjs.org/snapshot/angular-messages.js"></script>
+<script src="https://unpkg.com/angular-ui-router@1.0.0-rc.1/release/angular-ui-router.js"></script>
+<script>
+	let app = angular.module('usersList', ['ui.router', 'ngMessages']);
+
+	app.config(($stateProvider, $urlRouterProvider) => {
+		$stateProvider.state({
+			name: 'common',
+			url: '',
+			template: '<common></common>'
+		}).state('usersList', {
+			name: 'usersList',
+			url: '/userslist/:userId',
+			params: {
+				newUser: null
+			},
+			template: `
+				<users-list users-init="usersInit" user-id="userId"></users-list>`
+			,
+			resolve: {
+				usersInit: function(loadUsers) {
+					return loadUsers.getUsers().then((data) => { 
+						return data.data });
+				}
+			},
+			controller: function($scope, usersInit, $stateParams) {
+				if($stateParams.newUser) usersInit.push($stateParams.newUser);
+				$scope.usersInit = usersInit;
+				$scope.userId = $stateParams.userId;
+			}
+		}).state({
+			name: 'login',
+			url: '/login',
+			template: '<login></login>',
+		})
+		.state({
+			name: 'createUser',
+			url: '/create',
+			template: '<create-user></create-user>'
+		}).state({
+			name: '404',
+			url: '/404',
+			template: `
+				<h1>404: ЗАПРАШИВАЕМАЯ СТРАНИЦА НЕ НАЙДЕНА</h1>
+			`,
+		})
+
+		$urlRouterProvider.otherwise('404');
+	});
+
+	app.run(($transitions, AuthService) => {
+
+				
+		$transitions.onEnter({to: 'usersList'}, ($transition$, $state$) => {
+			if($state$.name != 'login' && !AuthService.isAuth()) {
+				return $transition$.router.stateService.target('login');
+			}
+		});
+
+	});
+
+	app.service('AuthService', function() {
+		var statusAuth;
+
+		this.checkAuth = (login, pass) => {
+			if(login == '1' && pass == '1') statusAuth = true;
+			else statusAuth = false;
+		}
+
+		this.isAuth = () => statusAuth;
+	})
+	.service('loadUsers', function($http) {
+		let url = './users.json';
+
+		this.getUsers = () => $http.get(url);
+	});
+
+	app.directive('uniqueEmail', function(loadUsers) {
+		return {
+			require: 'ngModel',
+			link: function(scope, elem, attrs, ctrl) {
+				scope.$watch(attrs.ngModel, function(value) {
+					loadUsers.getUsers().then((data) => {
+						let usersArr = data.data;
+						for(let i = 0; i < usersArr.length; i++) {
+							if(usersArr[i].email == value) {
+								ctrl.$setValidity('unique', false);
+								return;
+							}
+						}
+						ctrl.$setValidity('unique', true);
+					}, () => {console.log('Ошибка загрузки пользователей')});
+				});
+			}
+		}
+	});
+
+	app.component('common', {
+		template: `
+			<div class="common">
+				<button ng-click="$ctrl.getUsersList()">Вывести список пользователей</button>
+				<button ng-click="$ctrl.toCreateUser()">Создать пользователя</button>
+			</div>
+			`,
+		controller: function($state) {
+			this.getUsersList = () => {
+				$state.go('usersList', {userId: 0});
+			};
+
+			this.toCreateUser = () => {
+				$state.go('createUser');
+			};
+		}
+	})
+	.component('usersList', {
+		template: `
+			<div class="main">
+				<button class="create" ng-if="!+$ctrl.userId" ng-click="$ctrl.toCreateUser()">Создать пользователя</button>
+				<p ng-if="!+$ctrl.userId">Добавьте в конец url номер пользователя для отображения его профиля</p>
+				<user-card ng-if="+$ctrl.userId" user="$ctrl.usersInit[+$ctrl.userId-1]"></user-card>	
+				<user-card ng-if="!+$ctrl.userId" ng-repeat="item in $ctrl.usersInit" user="item"></user-card>	
+			</div>
+		`,
+		controller: function($state) {
+			
+			this.toCreateUser = () => {
+				$state.go('createUser');
+			};
+		},
+		bindings: {
+			usersInit: '<',
+			userId: '<'
+		}
+		
+	})
+	.component('userCard', {
+		template: `
+			<p ng-if="!$ctrl.user">Пользователя с таким id не найдено</p>
+			<div ng-show="$ctrl.user">
+				<img class="image" ng-src="{{$ctrl.user.photo || 'avatar.png'}}">
+				<div>Фамилия: {{$ctrl.user.surname}}</div>
+				<div>Имя: {{$ctrl.user.firstname}}</div>
+				<div>Гражданство: {{$ctrl.user.country.toUpperCase()}}</div>
+				<div>email: {{$ctrl.user.email}}</div>
+				<hr>
+			</div>
+		`,
+
+		bindings: {
+			user: '<',
+		}
+	})
+	.component('createUser', {
+		template: `
+			<form class="create" name="createUser" ng-submit="$ctrl.addUser()">
+			<fieldset>
+				<legend>Заполните форму</legend>
+				Фамилия*<br>
+				<input type="text" name="surname" required ng-model="$ctrl.newUser.surname">
+				<div ng-messages="createUser.surname.$dirty && createUser.surname.$error">
+					<div ng-message="required">поле не заполнено</div>
+				</div>
+
+				Имя*<br>
+				<input type="text" name="firstname" required ng-model="$ctrl.newUser.firstname">
+				<div ng-messages="createUser.firstname.$dirty && createUser.firstname.$error">
+					<div ng-message="required">поле не заполнено</div>
+				</div>	
+
+				Гражданство<br>
+				<input type="text" name="country" ng-model="$ctrl.newUser.country"><br>
+
+				email*<br>
+				<input type="email" name="email" required unique-email ng-model="$ctrl.newUser.email">
+				<div ng-messages="createUser.email.$dirty && createUser.email.$error">
+					<div ng-message="required">поле не заполнено</div>
+					<div ng-message="email">неверный формат</div>
+					<div ng-message="unique">не уникальный email</div>
+				</div>
+
+				<input type="submit" value="Создать">
+				<input type="button" value="Отмена" ng-click="$ctrl.cancel()">
+				
+			</fieldset>
+			</form>
+		`,
+
+		controller: function($state, $scope) {			
+			this.newUser = {};
+
+			this.cancel = () => {
+				$state.go('usersList', {userId: 0})
+			}
+
+			this.addUser = () => {
+				for(item in $scope.createUser.$error) var notEmpty = true;
+				if(notEmpty) return;
+
+				$state.go('usersList', {userId: 0, newUser: this.newUser});
+			}
+		}
+	})
+	.component('login', {
+	template: `
+		<div class="login">
+			<span>Login:</span><input type="text" ng-model="$ctrl.login">
+			<br><br>
+			<span>Password:</span><input type="password" ng-model="$ctrl.pass">
+			<br><br>
+			<button ng-click="$ctrl.checkAuth($ctrl.login, $ctrl.pass)">Log in</button>
+		</div>
+		`,
+		controller: function($state, AuthService) {
+			this.login = 1;
+			this.pass = 1;
+			this.checkAuth = (login, pass) => {
+				AuthService.checkAuth(login, pass);
+				$state.go('usersList', {userId: 0});
+			}
+		}
+	});
+</script>
+</body>
+</html>
