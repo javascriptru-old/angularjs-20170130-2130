@@ -20,7 +20,7 @@
 
 [6.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
-  - Андрей Мягченков [https://github.com/AndreyJS/andreyjs.github.io] [https://andreyjs.github.io/] пока в черновом варианте и без тестов, к занятию будет чище и с тестами
+  - [Андрей Мягченков] [https://github.com/AndreyJS/andreyjs.github.io] [https://andreyjs.github.io/] пока в черновом варианте и без тестов, к занятию будет чище и с тестами
 
 [9.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
