@@ -1,4 +1,4 @@
-# angularjs-20170130-2130
+﻿# angularjs-20170130-2130
 
 ## Что подготовить/знать?
 
@@ -20,6 +20,7 @@
 
 [6.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
+  - Латухина Екатерина [https://github.com/ekaterinalatukhina/ekaterinalatukhina.github.io]  [https://ekaterinalatukhina.github.io]
 
 [9.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
