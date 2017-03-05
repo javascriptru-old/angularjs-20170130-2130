@@ -21,6 +21,8 @@
 [6.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
   - Латухина Екатерина [https://github.com/ekaterinalatukhina/ekaterinalatukhina.github.io]  [https://ekaterinalatukhina.github.io]
+  - [Андрей Мягченков] [https://github.com/AndreyJS/andreyjs.github.io] [https://andreyjs.github.io/] пока в черновом варианте и без тестов, к занятию будет чище и с тестами
 
 [9.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
+  Max Ivanov https://github.com/chat-du-cheshire/ng-course
