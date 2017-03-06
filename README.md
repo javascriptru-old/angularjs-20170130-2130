@@ -25,4 +25,5 @@
 
 [9.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
-  Max Ivanov https://github.com/chat-du-cheshire/ng-course
+  - Max Ivanov https://github.com/chat-du-cheshire/ng-course
+  - Юрий Масьян; github: https://github.com/YuriMasyanISS/angularjs-course-project;
