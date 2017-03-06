@@ -17,3 +17,30 @@ app.service('UserService', function($http) {
   this.getAll = () => $http.get('/users')
     .then(response => response.data);
 });
+
+app.directive('userCard', function(UserService) {
+  return {
+    scope: {
+      user: '<'
+    },
+    template: '<div>{{user.name}}</div>',
+    link: function($scope) {
+      $scope.someMethod = () => {
+        return UserService.getOne(1).then( user => $scope.user = user);
+      };
+    }
+  };
+});
+
+app.component('userProfile', {
+  bindings: {
+    user: '<'
+  },
+  template: '<div>{{$ctrl.user.name}}</div>',
+  controller: function(UserService) {
+    this.someMethod = () => {
+      UserService.getOne(1).then( user => this.user = user);
+    };
+  }
+
+});
