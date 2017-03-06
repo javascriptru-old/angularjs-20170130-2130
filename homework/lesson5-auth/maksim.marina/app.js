@@ -2,15 +2,18 @@
 let app = angular.module('usersApp', ['ui.router']);
 
 app.config(($stateProvider, $urlRouterProvider) => {
-    $stateProvider.state({
+    $stateProvider
+    .state({
         name: 'home',
         url: '',
         template: '<home></home>',
-    }).state({
+    })
+    .state({
         name: 'login',
         url: '/login',
         template: '<login></login>',
-    }).state({
+    })
+    .state({
         name: 'user',
         abstract: true,
         template: '<ui-view/>',
@@ -23,15 +26,18 @@ app.config(($stateProvider, $urlRouterProvider) => {
         controller: function($scope, $stateParams, usersData) {
             $scope.usersData = usersData;
         }
-    }).state({
+    })
+    .state({
         name: 'user.list',
         url: '/list',
         template: '<users user-data="usersData"></users>'
-    }).state({
+    })
+    .state({
         name: 'user.detail',
         url: '/:userId',
-        template: '<user  user-data="usersData"></user>',
-    }).state({
+        template: '<user user-data="usersData"></user>',
+    })
+    .state({
         name: 'error',
         url: '/404',
         template: 'Error 404',
@@ -57,14 +63,9 @@ app.component('users', {
     templateUrl: 'template/users.tmp.html',
     controller: function (UserService, $state) {
 
-        this.$onInit = function() {  //1.6
-           console.log(this.userData);
+        this.$onInit = function() {
+            this.users = this.userData;
         }
-
-        this.users = [];
-        UserService.getUsers().then( (data)  => {
-            this.users = data;
-        });
 
         this.selectUser = (user) => {
             let userId = this.users.indexOf(user);
@@ -79,8 +80,9 @@ app.component('user', {
     },
     templateUrl: 'template/user.tmp.html',
     controller: function (UserService, $state) {
-        //Делаем выборку данных по пользователю с указанным ID
-        console.log("Делаем выборку данных по пользователю с ID: " + $state.params.userId);
+        this.$onInit = function() {
+            this.user = this.userData[$state.params.userId];
+        }
     },
 });
 

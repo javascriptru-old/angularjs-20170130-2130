@@ -1,2 +1,3 @@
-Страница выбранного пользователя
-<b style="color: red">Не работает! ВОПРОС В QUESTIONS.MD</b>
+{{ $ctrl.user.firstName }}
+{{ $ctrl.user.surname }}
+<img ng-src="{{$ctrl.user.photo || 'no_image.png'}}" class="img-responsive">

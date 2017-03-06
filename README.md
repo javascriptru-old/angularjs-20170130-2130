@@ -26,3 +26,4 @@
 [9.03]
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
   Max Ivanov https://github.com/chat-du-cheshire/ng-course
+  - [Maxim Marina] [https://github.com/maximmarina/angular-mailbox] [http://mailbox.marinams.ru/]
