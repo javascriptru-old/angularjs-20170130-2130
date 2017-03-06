@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="usersApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Список пользователей</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/main.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
+</head>
+<body>
+<div clss="container">
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a ui-sref="login" ui-sref-active="active">Login</a></li>
+                    <li><a ui-sref="user.list" ui-sref-active="active">UserList</a></li>
+                    <li><a ui-sref="user.detail" ui-sref-active="active">UserDetail</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+<ui-view></ui-view>
+
+</div>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://unpkg.com/angular-ui-router@0.4.2/release/angular-ui-router.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
