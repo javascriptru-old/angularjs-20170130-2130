@@ -96,7 +96,7 @@ function appRun ($rootScope, $state, $transitions, toastr) {
    * @desc Если пользователь не залогинен, посылаем на логин
    */
   $transitions.onStart({ to: 'user.**' }, trans => {
-    let auth = trans.injector().get('authService')
+    let auth = trans.injector().get('authService') // inject in header
     if (!auth.isAuthorized()) {
       toastr.warning(`Пожалуйста, залогиньтесь`)
       return trans.router.stateService.target('login')

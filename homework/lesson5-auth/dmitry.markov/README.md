@@ -28,3 +28,4 @@ http://plnkr.co/edit/?p=preview
 - [ ] debounce form
 - [ ] tests
 - [ ] image loading
+- [ ] localStorage or pouchDB
