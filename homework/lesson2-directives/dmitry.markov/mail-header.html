@@ -1,0 +1,8 @@
+<li class="list-group-item">
+  <button ng-click="$ctrl.deleteMessage($event, $ctrl.index)" type="button" class="close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  <span class="mail-from">{{ ::$ctrl.mail.from }}</span>
+  <span class="mail-time">{{ $ctrl.mail.creationDate | myDate }}</span>
+  <span class="mail-subject">{{ ::$ctrl.mail.subject }}</span>
+</li>

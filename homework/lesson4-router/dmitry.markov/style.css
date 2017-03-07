@@ -1,0 +1,159 @@
+.clicable {
+  cursor: pointer
+}
+
+.m-b-lg {
+  margin-bottom: 45px !important
+}
+
+.p-b-0 {
+  padding-bottom: 0 !important
+}
+
+.m-b {
+  margin-bottom: 15px !important
+}
+
+.panel {
+  min-height: 320px;
+  border-color: #ccc !important;
+  box-shadow: 0 0 14px 0px rgba(0, 0, 0, 0.3)
+}
+
+.panel-default {
+}
+
+.panel-primary {
+  box-shadow: 0 0 8px 0 #80b2dd
+}
+
+.panel-profile .panel-title {
+  margin-bottom: 5px
+}
+
+.panel-profile .panel-heading {
+  height: 150px;
+  background-size: cover
+}
+
+.panel-profile-img {
+  min-width: 100px;
+  max-width: 100px;
+  margin-top: -70px;
+  margin-bottom: 5px;
+  border: 3px solid #fff;
+  border-radius: 100%;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1)
+}
+
+.btn {
+  display: inline-block;
+  font-size: 14px;
+  padding: 7px 24px;
+  border-radius: 4px;
+  color: #fff;
+  font-weight: 400
+}
+
+.btn.focus,
+.btn:focus {
+  color: #fff;
+  background: #6b15a1
+}
+
+.btn-sm {
+  font-size: 12px;
+  padding: 5px 15px
+}
+
+.row-padded {
+  padding-top: 80px;
+  padding-bottom: 90px
+}
+
+.loading-text {
+  margin-top: 15px
+}
+
+.spinner {
+  margin: 100px auto 0;
+  width: 70px;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 18px;
+  height: 18px;
+  background-color: #333;
+
+  border-radius: 100%;
+  display: inline-block;
+  -webkit-animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  -webkit-animation-delay: -0.32s;
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  -webkit-animation-delay: -0.16s;
+  animation-delay: -0.16s;
+}
+
+@-webkit-keyframes sk-bouncedelay {
+  0%, 80%, 100% { -webkit-transform: scale(0) }
+  40% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bouncedelay {
+  0%, 80%, 100% {
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 40% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+  }
+}
+
+[ui-view].ng-enter, [ui-view].ng-leave {
+  transition:all .5s ease-in-out
+}
+
+[ui-view].ng-enter {
+  opacity: 0
+}
+
+[ui-view].ng-enter-active {
+  opacity: 1
+}
+
+[ui-view].ng-leave {
+  opacity: 1
+}
+
+[ui-view].ng-leave-active {
+  opacity: 0
+}
+
+
+.panel.ng-enter, .panel.ng-leave {
+  transition:all .5s ease-in-out
+}
+
+.panel.ng-enter {
+  opacity: 0
+}
+
+.panel.ng-enter-active {
+  opacity: 1
+}
+
+.panel.ng-leave {
+  opacity: 1
+}
+
+.panel.ng-leave-active {
+  opacity: 0
+}

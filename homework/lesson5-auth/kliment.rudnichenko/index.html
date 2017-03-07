@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        div{
+            padding-bottom: 10px;
+        }
+
+        .active{
+            color: green;
+        }
+
+        .red{
+            color: red;
+        }
+
+        label{
+            display: block;
+        }
+
+        .homer div{
+            font-size: 10px;
+            padding: 0;
+        }
+    </style>
+</head>
+<body ng-app="routeApp">
+
+<route-app>
+    Загрузка...
+</route-app>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+
+<script src="app.module.js"></script>
+<script src="app.component.js"></script>
+<script src="user.service.js"></script>
+<script src="authInterceptor.service.js"></script>
+<script src="currencyConverter/main.js"></script>
+<script src="currencyConverter/services/currencyApi.service.js"></script>
+<script src="currencyConverter/components/currency.component.js"></script>
+<script src="usersApp/main.js"></script>
+<script src="auth/auth.module.js"></script>
+<script src="auth/auth.component.js"></script>
+<script src="reg/reg.module.js"></script>
+<script src="reg/reg.component.js"></script>
+
+</body>
+</html>

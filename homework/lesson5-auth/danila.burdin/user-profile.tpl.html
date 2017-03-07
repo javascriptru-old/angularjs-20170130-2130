@@ -1,0 +1,9 @@
+<div ng-if=" $ctrl.loading "><spinner></spinner></div>
+<div ng-if=" !$ctrl.loading ">
+    <h2>User profile</h2>
+    <div class="user-profile__row">id: {{ $ctrl.user._id }}</div>
+    <div class="user-profile__row">name: {{ $ctrl.user.fullName }}</div>
+    <div class="user-profile__row">email: {{ $ctrl.user.email }}</div>
+    <button class="main" ng-click="$ctrl.back()">Go to user list</button>
+    <button class="main" ng-click="$ctrl.deleteUser()">Delete user</button>
+</div>

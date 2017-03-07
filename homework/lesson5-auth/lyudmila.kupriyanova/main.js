@@ -9,11 +9,12 @@
     this.isAuth = () => auth
     this.Authorize = (l,p) => {
       let request = $q.defer();
+      //$timeout() => $q.resove()
       // setTimeout вместо запроса к БД
       setTimeout(() => {
-        if (l===creds.l && p===creds.p) {auth = 1; $localStorage.auth = 1; 
+        if (l===creds.l && p===creds.p) {auth = 1; $localStorage.auth = 1;
         request.resolve(true);}
-        else request.reject(new Error("Ошибка авторизации")); 
+        else request.reject(new Error("Ошибка авторизации"));
          }, 1000);
       return request.promise;
     }
@@ -55,7 +56,7 @@
         user.id = maxId;
         users.push(user);
       }
-    }; 
+    };
     this.deleteUser = item => {
       users.splice(users.indexOf(item), 1);
     };

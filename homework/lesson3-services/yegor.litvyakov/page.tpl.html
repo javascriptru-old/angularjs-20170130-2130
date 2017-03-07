@@ -1,0 +1,7 @@
+<main class="page container">
+    <ul class="list-group">
+        <li class="list-group-item" ng-repeat="user in $ctrl.users track by $index" ng-bind="user.firstName + ' ' + user.surname"></li>
+    </ul>
+
+    <currency-converter></currency-converter>
+</main>

@@ -1,0 +1,127 @@
+<html ng-app="myApp">
+<head>
+    <title>User List</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet">
+    <!--<base href="/larissa.smirnova/">-->
+    <style>
+        .active {box-shadow: 0 0 12px 1px blue}
+        .lavender {background-color: lavender}
+        .blue {color: royalblue}
+        .grey {color: darkslategrey}
+        .user-card {
+            display: block;
+            background: white;
+            margin-bottom: 8px;
+            border-radius: 1px;
+        }
+    </style>
+</head>{{1+1}}
+<body>
+    
+<ui-view></ui-view>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+<script src="https://unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script>
+    let app = angular.module('myApp', ['ui.router']);
+
+    app.config(($stateProvider, $urlRouterProvider) => {
+
+        $stateProvider
+        .state('login', {
+            name: 'login',
+            url: '',
+            template: '<login></login>',
+        })
+        .state('userList', {
+            name: 'userList',
+            url: '/userList',
+            resolve: {
+                users: function(UserService) {
+                    return UserService.getAll();
+                }
+            },
+            template: '<user-list users="users"></user-list>',
+            controller: function($stateParams, $scope, users) {
+                $scope.users = users;
+            }
+        })
+        .state('userCard', {
+            name: 'userCard',
+            url: '/userCard/:id',
+            resolve: {
+                user: function(UserService, $stateParams) {
+                return UserService.getById($stateParams.id);
+                }
+            },
+            template: '<user-card user="user" id="id"></user-card>',
+            controller: function($stateParams,$scope, user) {
+                $scope.id = $stateParams.id;
+                $scope.user = user;
+            }
+        })
+    });
+
+    app.service('UserService', function( $http ){
+        const URL = 'https://learn.javascript.ru/courses/groups/api/participants?key=1gvlw0r';
+
+        let users = null;
+
+        this.getAll = () => {
+            return $http.get( URL ).then(res => {
+                    this.users = res.data;
+                return this.users
+            }, err => { console.log(err.data) })
+        }
+
+        this.getById = (id) => {
+            return $http.get( URL ).then(res => {
+                this.users = res.data;
+                return this.users[id]
+            }, err => { console.log(err.data) })
+        }
+    });
+
+    app.component('login', {
+        templateUrl: 'login.html',
+        controller: function ($state){
+            this.login = () => {
+                $state.go('userList');
+            }
+        },
+    });
+
+    app.component('userList', {
+        bindings: {
+            users: '<'
+        },
+        templateUrl: 'user-list.html',
+        controller: function ($state){
+
+            this.activeIndex = null;
+
+            this.goUserCard = function (index) {
+                $state.go('userCard', { id: index });
+                this.activeIndex = null;
+                console.log("1 go to card Index " + index);
+            }
+
+            this.setActiveIndex = function (index) {
+                if (!this.openCard) {
+                    this.activeIndex = index;
+                    console.log("active card Index " + this.activeIndex);
+                }
+            }
+        },
+    });
+
+    app.component('userCard', {
+        bindings: {
+            user: '<'
+        },
+        templateUrl: 'user-card.html',
+    })
+</script>
+</body>
+</html>

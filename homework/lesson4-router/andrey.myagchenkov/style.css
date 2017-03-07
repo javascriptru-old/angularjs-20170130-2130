@@ -1,0 +1,28 @@
+h1 {
+	font-family: roboto;
+	padding: 0.5em 0;
+	color: #57A4DB;
+	font-size: 40px;
+	text-align: center
+}
+
+.home {
+	margin: auto; 
+	width: 20em
+}
+
+.main, .login {	margin: auto; width: 18em }
+
+span {
+	margin-right: 0.55em;
+}
+
+span:first-child {
+	margin-right: 2em;
+}
+
+.image { float:left; margin: 0 1em; width: 4em; height: 4em; border-radius: 200px }
+
+hr {
+	margin: 2em 0 1em 0;
+}

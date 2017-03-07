@@ -1,0 +1,128 @@
+<html ng-app="mailBox">
+<head>
+    <title>Mail Box</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .active {box-shadow: 0 0 12px 1px blue;}
+        .lavender {background-color: lavender;}
+        .blue {color: royalblue}
+        .grey {color: darkslategrey}
+        .user-card {
+            display: block;
+            background: white;
+            margin-bottom: 10px;
+            border-radius: 1px;
+        }
+    </style>
+</head>{{1+1}}
+<body>
+
+<div class="container">
+    <com-inbox></com-inbox>
+</div>
+
+<script>
+    'use strict';
+    var app = angular.module('mailBox', []);
+
+    app.component('comInbox', {
+        templateUrl: 'com-inbox.html',
+
+        controller: function ($http) {
+
+            this.emails = [];
+            this.activeIndex = null;
+            this.searchCriteria = '';
+
+            $http.get("emails.json").then((response) => {
+                    this.emails = angular.fromJson(response.data);
+                });
+
+            this.deleteEmail = function (email) {
+                this.emails = this.emails.filter((a) => {
+                    return a !== email
+                });
+            };
+
+            this.setActiveIndex = function (index) {
+                this.activeIndex = index;
+                console.log("active Index " + this.activeIndex);
+            }
+        }
+    });
+
+    app.component('comEmail', {
+        templateUrl: 'com-email.html',
+        bindings: {
+            email: '<',
+            deleteEmail: '&',
+            index: '<',
+            setActiveIndex: '&set',
+            activeIndex: '<'
+        },
+        controller: function () {
+            //this.email
+            //this.index
+            //this.activeIndex
+
+            this.$onDestroy = function(){
+
+                console.log('$onDestroy');
+                //debugger
+
+                var lifetime = new Date() - this.email.dateReceived;
+                var minutes = Math.floor(lifetime / 60000);
+                if (minutes < 60) {
+                    console.log('Email deleted after: ' + minutes + ' minutes');
+                } else {
+                    var hours = Math.floor(lifetime / 60000 / 60);
+                    if (hours < 24) {
+                        console.log('Email deleted after: ' +  hours + ' hours');
+                    } else {
+                        var days = Math.floor(lifetime / 60000 / 60 / 24);
+                        console.log('Email deleted after: ' +  days + ' days');
+                    }
+                }
+            }
+        }
+    });
+
+    app.filter('emailLifetime', function () {
+        return function (date) {
+            var lifetime = new Date() - date;
+
+            var minutes = Math.floor(lifetime / 60000);
+            if (minutes < 60) {
+                return minutes + ' minutes';
+            }
+
+            var hours = Math.floor(lifetime / 60000 / 60);
+            if (hours < 24) {
+                return hours + ' hours';
+            }
+
+            var days = Math.floor(lifetime / 60000 / 60 / 24);
+            return days + ' days';
+        }
+    });
+
+    app.filter('containsFilter', function () {
+        return function (emails, searchCriteria) {
+
+            var filtered = [];
+            emails.forEach(function(email, index) {
+                if (email['from'].toLowerCase().includes(searchCriteria.toLowerCase())
+                || email['subject'].toLowerCase().includes(searchCriteria.toLowerCase())
+                || email['text'].toLowerCase().includes(searchCriteria.toLowerCase())
+                )
+                {filtered.push(email)
+                }
+            })
+            return filtered;
+        }
+     });
+
+</script>
+</body>
+</html>

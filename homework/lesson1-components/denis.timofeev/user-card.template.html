@@ -1,0 +1,20 @@
+<div class="panel panel-info" ng-class="$ctrl.getClass()" ng-click="$ctrl.toggleColor()">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{$ctrl.user.surname}} {{$ctrl.user.firstName}}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div>
+                <table class="table table-user-information">
+                    <tbody>
+                    <tr><td width="200">Фотография</td><td><img ng-src="{{$ctrl.user.photo}}" width="200" height="200" /></td>
+                    <tr><td>Страна</td><td>{{$ctrl.user.country}}</td></tr>
+                    <tr><td></td><td><button ng-click="$ctrl.deleteFunc()">Удалить</button></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+    </div>
+</div>

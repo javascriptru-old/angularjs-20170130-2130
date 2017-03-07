@@ -1,0 +1,8 @@
+<div class="row list-group-item" placeholder="Search...">
+    <div class="col-sm-3">{{$ctrl.email.from | emailNameFilter}}</div>
+    <div class="col-sm-6">{{$ctrl.email.subject}}</div>
+    <div class="col-sm-2">{{$ctrl.email.dateReceived | timeAgoFilter}}</div>
+    <div class="col-sm-1">
+        <a href="#" class="btn btn-sm btn-default" ng-click="$ctrl.deleteEmail({email: $ctrl.email})"><span class="glyphicon glyphicon-trash"></span> </a>
+    </div>
+</div>

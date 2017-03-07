@@ -1,0 +1,154 @@
+* {
+	box-sizing: border-box;
+}
+html {
+	overflow-y: scroll;
+	
+}
+.page-body {
+	margin: 0;
+	font-family: Arial, sans-serif;
+	line-height: 20px;
+	font-size: 14px;
+	min-width: 540px;
+}
+label {
+	display: inline-block;
+	vertical-align: top;
+	padding: 10px 10px 10px 20px;
+	cursor: pointer;
+	position: relative;
+}
+
+input[type="radio"]{
+	position: absolute;
+	top: 50%;
+	left: 0;
+	margin: -7px 0 0 0
+}
+
+tabs {
+	display: block;
+	margin: auto;
+	width: 500px
+}
+currency-converter {
+	display: block;
+	margin: 50px auto;
+	width: 500px
+}
+
+.converter {
+	position: relative;
+	background: #f3f3f3;
+	display: flex;
+	align-items: stretch;
+	transition: 0.2s;
+}
+.converter.loading {
+	opacity: 0.5;
+	color: #222;
+}
+.converter.loading:after {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+}
+.converter > div {
+	width: 50%;
+	padding: 20px
+}
+.converter input {
+	display: block;
+	width: 100%;
+	border: none;
+	padding: 30px 0;
+	line-height: 50px;
+	font-size: 45px;
+	text-align: center;
+	background: transparent;
+	outline: none;
+}
+.converter input:focus {
+	background: rgba( 255, 255, 255, 0.8 )
+}
+.converter input::-webkit-outer-spin-button,
+.converter input::-webkit-inner-spin-button {
+	-webkit-appearance: none;
+}
+
+.converter select {
+	display: block;
+	width: 100%;
+	margin-bottom: 10px;
+	height: 30px;
+	line-height: 28px;
+	padding: 0;
+	border: 1px solid #aaa;
+	cursor: pointer;
+}
+.converter button {
+	position: absolute;
+	width: 25px;
+	top: 20px;
+	left: 50%;
+	height: 30px;
+	line-height: 28px;
+	padding: 0;
+	border: 1px solid #aaa;
+	margin: 0;
+	margin-left: -12.5px;
+	background: white;
+	cursor: pointer;
+	font-size: 16px
+}
+.converter button:active {
+	background: white;
+}
+
+user-list {
+	display: block;
+	width: 500px;
+	margin: 50px auto;
+}
+.user-card {
+	border: 1px solid #aaa;
+	margin-bottom: 10px;
+	background: #f3f3f3;
+}
+.user-card__header {
+	display: flex;
+	align-items: stretch;
+	margin: -1px;
+	background: #0e0c0e;
+	color: white;
+	line-height: 30px;
+}
+.user-card__header-col {
+	padding: 5px 15px;
+}
+.user-card__header-col:last-child {
+	text-align: right;
+	flex: 1 0 auto;
+	color: #91c8de;
+}
+
+.user-card__row {
+	display: flex;
+	align-items: stretch;
+	border-bottom: 1px solid #d8d8d8;
+}
+.user-card__row:last-of-type {
+	border-bottom: none;
+}
+.user-card__col {
+	padding: 5px;
+}
+.user-card__col:first-child {
+	width: 70px;
+	text-align: right;
+	color: #888;
+}

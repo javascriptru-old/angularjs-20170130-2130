@@ -1,0 +1,29 @@
+<div>
+    <span>Сумма: </span>
+    <span><input type="number" ng-model="$ctrl.summ"></span>
+</div>
+
+<div>
+    <span>Из: </span>
+    <span><select ng-model="$ctrl.from" ng-change="$ctrl.resetResult()">
+        <option ng-repeat="option in $ctrl.currencyArray">{{option}}</option>
+    </select></span>
+</div>
+
+<div>
+    <span>В: </span>
+    <span><select ng-model="$ctrl.to" ng-change="$ctrl.resetResult()">
+        <option ng-repeat="option in $ctrl.currencyArray">{{option}}</option>
+    </select></span>
+</div>
+
+
+<div>
+    <button ng-click="$ctrl.getCurrency()" ng-disabled="$ctrl.from==$ctrl.to">Перевести</button>
+</div>
+
+<div ng-if="$ctrl.result">
+    Итого: {{$ctrl.result * $ctrl.summ}}
+</div>
+
+<div ng-show="$ctrl.from==$ctrl.to" class="error">Выберите разные валюты</div>

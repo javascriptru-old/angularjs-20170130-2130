@@ -1,0 +1,6 @@
+<user-card class="profile-card col-xs-12 col-sm-4 col-md-3"
+        ng-repeat="item in $ctrl.users"
+        user="item"
+        index="$index"
+        delete="$ctrl.deleteUserCard(index)"
+></user-card>

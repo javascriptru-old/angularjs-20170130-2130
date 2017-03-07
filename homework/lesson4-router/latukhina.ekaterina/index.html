@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>user List</title>
+    <base href="/latukhina.ekaterina/">
+    <style>
+    .active {
+      color: red;
+    }
+  </style>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <h3>user List</h3>
+      <a ui-sref="home" ui-sref-active="active">user List</a>
+      <a ui-sref="login" ui-sref-active="active">Login page</a>
+      <ui-view></ui-view>
+
+
+    </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+ <script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>
+<script src="./app.js"></script>
+
+</body>
+</html>

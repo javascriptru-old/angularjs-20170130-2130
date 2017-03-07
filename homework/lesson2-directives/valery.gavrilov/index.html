@@ -1,0 +1,59 @@
+<html>
+<head>
+<script src='angular.js'></script>
+<script>
+
+const m = angular.module('hw2', []);
+
+m.filter('timePart', function(){
+	return function(t){
+		return t.substr(11);
+	};
+});
+
+
+m.filter('receivedAgo', function(){
+return function(t){
+    var ms1 = (new Date()).getTime();
+    var ms2 = (new Date(t)).getTime();
+    var msd = ms1 - ms2;
+    var hours = Math.floor(msd / (1000 * 3600) );
+
+    var days = Math.floor(hours / 24);
+
+    hours = hours - days * 24;
+    return {days: days, hours: hours};
+};
+});
+
+m.filter('criterion', function(){
+return function(items, searchText){
+	// items are the whole array !
+	
+	if(!searchText){
+		return items;
+	}
+	var res = [];
+	for (var i =0; i < items.length; i++){
+		if (items[i].from.indexOf(searchText) !=-1){
+			res.push(items[i]);
+		}
+	}
+	return res;
+}
+});
+
+
+</script>
+
+<script src='app-root.js'></script>
+<script src='mail-box.js'></script>
+<script src='mail-item.js'></script>
+<head>
+</head>
+<body ng-app='hw2'>
+
+<app-root></app-root>
+
+</body>
+</html>

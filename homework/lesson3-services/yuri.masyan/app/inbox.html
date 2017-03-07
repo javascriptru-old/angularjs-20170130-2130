@@ -1,0 +1,14 @@
+<!--<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <user-card cardcar="cardcard" ng-repeat="cardcard in $ctrl.cards" ></user-card>
+        </div>
+    </div>
+</div>-->
+<div class="inbox col-sm-10">
+    <input type="text" class="form-control" placeholder="Temporary search field" ng-model="text">
+    <currency-converter-component></currency-converter-component>
+    <ul class="list-unstyled">
+        <message-component card="card" time="$ctrl.currentTime" delete="$ctrl.deleteItem(x)" ng-repeat="card in $ctrl.cards.data | orderBy: 'messageReceived' : true | filter: text" ></message-component>
+    </ul>
+</div>

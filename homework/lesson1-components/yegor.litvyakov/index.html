@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="lesson1">
+<head>
+    <meta charset="UTF-8">
+    <title>Lesson 1</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 15px 25px;
+        }
+
+        .user.active {
+            background: #3170A2;
+        }
+
+        .user.active .panel-body {
+            color: #fff;
+        }
+
+        .user__title {
+            display: inline-block;
+            width: calc(100% - 30px);
+        }
+        .user__remove {
+            display: inline-block;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body ng-controller="mainCtrl as ctrl">
+
+<main class="container">
+    <div class="row" ng-repeat="user in ctrl.users track by $index">
+        <div class="col-md-6">
+            <user-card model="user" remove="ctrl.remove(user)" ng-click="ctrl.click(user)"></user-card>
+        </div>
+    </div>
+</main>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.min.js"></script>
+    <script src="index.js"></script>
+</body>
+</html>

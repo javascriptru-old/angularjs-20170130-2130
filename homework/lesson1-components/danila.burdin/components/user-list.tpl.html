@@ -1,0 +1,8 @@
+<user-card
+	ng-repeat="user in $ctrl.users"
+	user="user"
+	set-active-user="$ctrl.setActiveUser(index)"
+	detach-user="$ctrl.detachUser(index)"
+	index="$index"
+	ng-class="$ctrl.activeUser == $index ? 'user-card user-card--active' : 'user-card'"
+></user-card>

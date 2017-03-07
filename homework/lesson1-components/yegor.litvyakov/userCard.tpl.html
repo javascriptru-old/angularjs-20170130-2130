@@ -1,0 +1,17 @@
+<div class="user panel panel-info" ng-class="{active: vm.user.active}">
+    <div class="panel-heading">
+        <h3 class="user__title panel-title">{{vm.user.firstName}} {{vm.user.surname}}</h3>
+        <i class="user__remove glyphicon glyphicon-trash" ng-click="vm.remove({user: vm.user})"></i>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class=" col-md-9 col-lg-9 ">
+                <img width="100"ng-src="{{vm.user.photo}}" ng-if="vm.user.photo"/>
+                <p ng-if="!vm.user.photo">Фотографии нет =(</p>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        Страна: {{vm.user.country}}
+    </div>
+</div>

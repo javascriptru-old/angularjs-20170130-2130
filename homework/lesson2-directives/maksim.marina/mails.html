@@ -1,0 +1,33 @@
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ $ctrl.mail.subject }}</h3>
+    </div>
+    <div class="panel-body">
+        <div class="row">
+            <div class=" col-md-9 col-lg-9 ">
+                <table class="table table-user-information">
+                    <tbody>
+                    <tr><td>Кому</td><td>{{ $ctrl.mail.to }}</td></tr>
+                    <tr><td>От кого</td><td>{{ $ctrl.mail.from }}</td></tr>
+                    <tr><td>Сообщение</td><td>{{ $ctrl.mail.body }}</td></tr>
+                    <tr><td>Время получения</td><td>{{ $ctrl.mail.datetime | dateAgoFilter}}</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer">
+        <button class="btn-danger" ng-click="$ctrl.deleteMail({index: $ctrl.mail})">delete</button>
+    </div>
+</div>
+
+<!--<div class="row">-->
+    <!--<div class="col-md-3">{{ $ctrl.mail.subject }}</div>-->
+    <!--<div class="col-md-2">{{ $ctrl.mail.to }}</div>-->
+    <!--<div class="col-md-2">{{ $ctrl.mail.from }}</div>-->
+    <!--<div class="col-md-2">{{ $ctrl.mail.body }}</div>-->
+    <!--<div class="col-md-2">{{ $ctrl.mail.datetime | dateAgoFilter}}</div>-->
+    <!--<div class="col-md-1"> <button ng-click="$ctrl.deleteMail({index: $ctrl.mail})">delete</button></div>-->
+<!--</div>-->
+
+

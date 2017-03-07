@@ -1,0 +1,43 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+header {
+  background-color: #f1f1f1;
+  padding: 13px 0;
+}
+
+.search-bar {
+  padding-left: 0;
+  position: relative;
+}
+
+.email-item {
+  padding: 10px 0;
+  border-bottom: 1px solid #d0d0d0;
+  background-color: #f3f3f3;
+  font-weight: normal;
+}
+
+
+.mail-icons {
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.message h3 {
+  font-size: 13px;
+  font-weight: normal;
+  display: inline;
+}
+
+.clipper {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.message p {
+  font-size: 13px;
+  font-weight: normal;
+  display: inline;
+}

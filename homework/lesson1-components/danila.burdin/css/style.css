@@ -1,0 +1,98 @@
+.page-body {
+	min-width: 320px;
+	margin: 0;
+	font-family: Arial, sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	background: #f1f1f1;
+}
+
+.center-block {
+	max-width: 600px;
+	margin: 10px auto;
+	display: block;
+	padding-left: 10px;
+	padding-right: 10px;
+}
+
+.user-card {
+	display: block;
+	background: white;
+	margin-bottom: 10px;
+	border-radius: 1px;
+}
+
+.user-card__inner {
+	position: relative;
+	padding-top: 25px;
+	padding-bottom: 25px;
+	padding-left: 70px;
+	padding-right: 70px;
+	box-shadow: 0 1px 0 0 #d7d8db, 0 0 0 1px #e3e4e8;
+	border-radius: 1px;
+}
+
+.user-card--active {
+	box-shadow: 0 0 12px 1px #75c2ef;
+}
+
+.user-card__media {
+	width: 50px;
+	height: 50px;
+	background: #cccccc;
+	position: absolute;
+	top: 50%;
+	margin-top: -25px;
+	left: 10px;
+}
+.user-card__avatar {
+	display: block;
+	position: absolute;
+	top: 0;
+	left:0;
+	right: 0;
+	bottom: 0;
+	margin: auto;
+	max-width: 100%;
+	max-height: 100%;
+}
+
+.user-card__text {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
+.user-card__name {
+	display: inline;
+}
+
+.user-card__location {
+	display: inline;
+	color: #888888;
+}
+
+.user-card__detach {
+	position: absolute;
+	right: 10px;
+	font-size: 20px;
+	line-height: 21px;
+	border-radius: 50px;
+	border: none;
+	width: 40px;
+	height: 40px;
+	line-height: 40px;
+	top: 50%;
+	margin-top: -20px;
+	padding: 0;
+	background: white;
+	outline: none;
+	cursor: pointer;
+	color: #cccccc;
+}
+
+.user-card__detach:hover {
+	color: red;
+}
+
+

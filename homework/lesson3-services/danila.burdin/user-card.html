@@ -1,0 +1,25 @@
+<h3>Список пользователей</h3>
+<div ng-repeat=" user in $ctrl.users " class="user-card">
+	<header class="user-card__header">
+		<div class="user-card__header-col">
+			<span>{{ user.name.first }}</span> <span>{{ user.name.last }}</span>
+		</div>
+		<div class="user-card__header-col">{{ user.balance }}</div>
+	</header>
+	<div class="user-card__row">
+		<div class="user-card__col">Email:</div>
+		<div class="user-card__col">{{ user.email }}</div>
+	</div>
+	<div class="user-card__row">
+		<div class="user-card__col">Phone:</div>
+		<div class="user-card__col">{{ user.phone }}</div>
+	</div>
+	<div class="user-card__row">
+		<div class="user-card__col">Address:</div>
+		<div class="user-card__col">{{ user.address }}</div>
+	</div>
+	<div class="user-card__row">
+		<div class="user-card__col">Age:</div>
+		<div class="user-card__col">{{ user.age }}</div>
+	</div>
+</div>

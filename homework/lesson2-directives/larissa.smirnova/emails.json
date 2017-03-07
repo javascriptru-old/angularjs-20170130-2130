@@ -1,0 +1,58 @@
+[
+  {
+    "from": "Java Script.Ru",
+    "address": "<angularjs@java.script.ru>",
+    "to": "'Larissa Smirnova' <larissa.smirnova@hotmail.com>",
+    "subject": "Добавлены материалы курса",
+    "text": "Вы можете скачать файл по прямой ссылке",
+    "dateReceived": 1486745250000
+  },
+  {
+    "from": "iCloud",
+    "address": "<info@icloud.com>",
+    "to": "'Larissa Smirnova' <larissa.smirnova@ls.com>",
+    "subject": "Welcome to iCloud",
+    "text": "iCloud makes sure you always have the latest versions of your most important things",
+    "dateReceived": 1486701250000
+  },
+  {
+    "from": "Facebook",
+    "address": "<notification@facebook.com>",
+    "to": "'Larissa Smirnova' <larissa.smirnova@hotmail.com>",
+    "subject": "Do you know Sarah Michaely?",
+    "text": "Find more of your friends.",
+    "dateReceived": 1486591250000
+  },
+  {
+    "from": "PRESTO Customer Service",
+    "address": "<prestomailer@prestocard.ca>",
+    "to": "'Larissa Smirnova' <larissa.smirnova@ls.com>",
+    "subject": "Order confirmation",
+    "text": "Thank you for using PRESTO",
+    "dateReceived": 1485418450000
+  },
+  {
+    "from": "National Ballet of Canada",
+    "address": "<no-reply@national.ballet.ca>",
+    "to": "'Larissa Smirnova' <larissa.smirnova@ls.com>",
+    "subject": "Tickets make a perfect gifts!",
+    "text": "The Christmas season is here!",
+    "dateReceived": 1482640050000
+  },
+  {
+    "from": "Apple",
+    "address": "<noreply@insideicloud.icloud.com>",
+    "to": "'Larissa Smirnova' <larissa.smirnova@ls.com>",
+    "subject": "Your Apple ID was used",
+    "text": "Your Apple ID was used to sign in to FaceTime and iMessage.",
+    "dateReceived": 1480061659000
+  },
+  {
+    "from": "Surf Dreams Canada",
+    "address": "<invite@surfdreamscanada.ca>",
+    "to": "'Larissa Smirnova' <larissa.smirnova@ls.com>",
+    "subject": "Surf Shack, Giant Thursday, Workshop",
+    "text": "You are invited to our Surf Shack this Saturday",
+    "dateReceived": 1470071658000
+  }
+]

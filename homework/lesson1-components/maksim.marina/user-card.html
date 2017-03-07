@@ -1,0 +1,22 @@
+<div class="panel panel-info {{ $ctrl.user.selectedStyle }}" ng-click="$ctrl.selectUser({user: $ctrl.user})">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{$ctrl.user.name}}</h3>
+  </div>
+  <div class="panel-body">
+    <div class="row">
+      <div class=" col-md-9 col-lg-9 ">
+        <table class="table table-user-information">
+          <tbody>
+          <tr><td>Дата рождения</td><td>{{$ctrl.user.birthday}}</td></tr>
+          <tr><td>Пол</td><td>{{$ctrl.user.gender}}</td></tr>
+          <tr><td>Адрес</td><td>{{$ctrl.user.address}}</td></tr>
+          <tr><td>Email</td><td><a href="mailto:{{$ctrl.user.email}}">{{$ctrl.user.email}}</a></td>
+          </tbody>
+        </table>
+      </div>
+  </div>
+  </div>
+  <div class="panel-footer">
+    <button ng-click="$ctrl.deleteUser({index: $ctrl.user})">delete</button>
+  </div>
+</div>

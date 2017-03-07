@@ -3,7 +3,7 @@
 
   app.service('UsersList', function($http) {
     this.list = () => $http.get('users.json',
-       { 
+       {
          transformResponse: function (data) {
            data = JSON.parse(data);
            for (var i = 0; i < data.length; i++){
@@ -21,12 +21,10 @@
    $stateProvider.state({
       name: 'login',
       url: '',
-      template: '<login></login>',
-      controller: function($state) {
-      }
-    });
-
-    $stateProvider.state({
+      template: '<login></login>'
+    }).state({
+      name: 'cards',
+      url: 'cards',
       resolve: {
           users: function(UsersList) {
           return UsersList.list().then((res) => {
@@ -35,17 +33,15 @@
           });
         }
       },
-      name: 'cards',
-      url: 'cards',
       template: '<cards users="users" visible="visible"></cards>',
       controller: function($state, $scope, $stateParams, users) {
             $scope.visible = users.visible;
             $scope.users = users;
             $scope.userId = $stateParams.userId;
       }
-    });
-
-    $stateProvider.state({
+    }).state({
+      name: 'user',
+      url: '/user/:userId',
       resolve: {
           users: function(UsersList) {
           return UsersList.list().then((res) => {
@@ -54,8 +50,6 @@
           });
         }
       },
-      name: 'user',
-      url: '/user/:userId',
       template: '<user user-id="userId" user="user" visible="visible"></user>',
       controller: function($state, $scope, $stateParams, users) {
             $scope.visible = users.visible;

@@ -1,0 +1,6 @@
+<div ng-repeat="user in $ctrl.userlist">        
+  <user-card user="user" 
+             deleteuser="$ctrl.deleteUser(user)" 
+             selectuser="$ctrl.selectUser(user)"
+  ></user-card>
+</div>

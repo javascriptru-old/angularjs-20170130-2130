@@ -1,0 +1,7 @@
+            <ul>
+              <li ng-repeat="person in $ctrl.users">
+                <a ui-sref="user({ userId: person.id })">
+                  {{person.firstName}}
+                </a>
+              </li>
+            </ul>
