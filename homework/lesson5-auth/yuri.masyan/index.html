@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Gmail clone</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="public/css/bootstrap.css">
+    <link rel="stylesheet" href="public/css/bootstrap-theme.css">
+    <link rel="stylesheet" href="public/css/main.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-cookies.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-aria.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-messages.min.js"></script>
+
+    <!--<script src="//unpkg.com/angular-ui-router/release/angular-ui-router.min.js"></script>-->
+    <!--<script src="//npmcdn.com/angular-ui-router@1.0.0-rc.1/release/angular-ui-router.js"></script>-->
+    <script src="https://unpkg.com/angular-ui-router@0.4.2/release/angular-ui-router.js"></script>
+
+
+    <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.css">
+    <script src="http://ajax.googleapis.com/ajax/libs/angular_material/1.1.0/angular-material.min.js"></script>
+    <script src="app/app.js"></script>
+
+    <script src="app/app.config.js"></script>
+    <!--<base href="/">-->
+
+    <style>
+        .active {
+            color: #d14836;
+        }
+    </style>
+    <script src="app/userCardComponent.js"></script>
+    <script src="app/userListComponent.js"></script>
+    <script src="app/loginComponent.js"></script>
+    <script src="asset/angular-breadcrumb.js"></script>
+    <script src="app/loginLogoutComponent.js"></script>
+    <script src="app/registerComponent.js"></script>
+</head>
+<body ng-app="app">
+
+<!--          !!!        СМОТРЕТЬ ВНИЗУ              !!!        -->
+
+<div class="container-fluid">
+    <div ncy-breadcrumb></div>7777777777777
+
+    <header class="row">
+        <div class="logo col-sm-2">
+            <img src="public/img/google.png" alt="Google">
+        </div><!-- logo -->
+
+        <div class="search-bar col-sm-6">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search for...">
+                <span class="input-group-btn">
+              <button class="btn btn-main">
+                <span class="glyphicon glyphicon-search"></span>
+              </button>
+            </span>
+            </div><!-- /input-group -->
+
+            <span class="arrow caret"></span>
+        </div><!-- search-bar -->
+
+        <div class="profile col-sm-4">
+            <ul class="profile-icons list-inline pull-right">
+                <login-logout-component></login-logout-component>
+
+                <li>
+                    <span class="glyphicon glyphicon-th"></span>
+                </li>
+                <li class="bell">
+                    <span class="glyphicon glyphicon-bell"></span>
+                </li>
+                <li>
+                    <img src="public/img/profile.jpg" class="img-circle">
+                </li>
+            </ul>
+        </div><!-- profile -->
+    </header>
+
+    <div class="control-bar row">
+        <div class="menu col-sm-2" style="border: solid red">
+            <!--Gmail-->
+            <!--<span class="caret"></span>-->
+<!--
+                <md-select ng-init="users=[{name:'Gmail'},{name:'Contacts'}];user={name:'Gmail'}" ng-model="user.name" ng-model-options="{trackBy: '$value.id'}">
+                    <md-option ng-value="user.name" ng-repeat="user in users">{{ user.name }}</md-option>
+                </md-select>
+-->
+            <a ui-sref="gmail"  ui-sref-active="active">Gmail</a>
+            <a ui-sref="contacts"  ui-sref-active="active">Contacts</a>
+
+        </div><!-- menu -->
+
+        <div class="controls col-sm-10">
+            <ul class="control-list list-inline">
+                <li>
+                    <button class="btn btn-control">
+                        <input type="checkbox" class="mail-select">
+                        <span class="caret"></span>
+                    </button>
+                </li>
+                <li>
+                    <button class="btn btn-control" ng-click="$state.go($state.current, {}, {reload: true})">
+                        <span class="glyphicon glyphicon-repeat"></span>
+                        <!--<md-progress-circular style="margin: auto" ng-disabled="false && !vm.activated" class="md-hue-2" md-diameter="20px"></md-progress-circular>-->
+                    </button>
+                </li>
+                <li show-during-resolve>
+                    <md-progress-circular style="margin: auto"  class="md-hue-2" md-diameter="20px"></md-progress-circular>
+
+                </li>
+                <li>
+                    <button class="text-btn btn btn-control">
+                        <strong>More</strong>
+                        <span class="caret"></span>
+                    </button>
+                </li>
+            </ul>
+        </div><!-- controls -->
+    </div><!-- control-bar -->
+
+    <div class="mail row">
+        <div class="sidebar col-sm-2">
+            <button class="compose btn btn-danger">
+                Compose
+            </button>
+
+            <ul class="inbox-sections list-unstyled">
+                <li class="active">
+                    Inbox (100)
+                </li>
+                <li>Sent Mail</li>
+                <li class="pending">
+                    Drafts (7)
+                </li>
+                <li>All Mail</li>
+                <li class="pending">
+                    Spam (1)
+                </li>
+            </ul>
+        </div><!-- sidebar -->
+
+
+<!--          !!!        СМОТРЕТЬ ЗДЕСЬ              !!!        -->
+
+
+        <ui-view></ui-view>
+
+
+<!-- inbox -->
+    </div><!-- mail -->
+</div>
+
+</body>
+</html>

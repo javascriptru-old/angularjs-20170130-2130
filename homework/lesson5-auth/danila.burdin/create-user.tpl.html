@@ -1,0 +1,22 @@
+<div ng-if=" $ctrl.loading ">Loading</div>
+<div ng-if=" !$ctrl.loading ">
+    <h2>New User</h2>
+    <form name="user" novalidate ng-submit="$ctrl.submitForm()" class="user-form">
+        <div>
+            <strong>Full name</strong>
+            <input type="text" name="fullName" ng-model="$ctrl.fullName" required>
+            <div ng-messages="user.fullName.$error" ng-show="user.fullName.$touched">
+                <div ng-message="required">Fill the field</div>
+            </div>
+        </div>
+        <div>
+            <strong>Email</strong>
+            <input type="email" name="email" ng-model="$ctrl.email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$">
+            <div ng-messages="user.email.$error" ng-show="user.email.$dirty">
+                <div ng-message="required">Fill the field</div>
+                <div ng-message="pattern">Your email address is invalid</div>
+            </div>
+        </div>
+        <button type="submit" ng-disabled="!user.$valid" class="main">Ok</button>
+    </form>
+</div>

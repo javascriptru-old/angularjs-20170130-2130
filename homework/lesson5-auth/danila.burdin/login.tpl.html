@@ -1,0 +1,17 @@
+<form name="loginform" novalidate ng-submit="$ctrl.submitForm()" class="user-form">
+    <div>
+        <strong>Username</strong>
+        <input type="text" name="username" ng-model="$ctrl.username" required>
+        <div ng-messages="loginform.username.$error" ng-show="loginform.username.$touched">
+            <div ng-message="required">Fill the field</div>
+        </div>
+    </div>
+    <div>
+        <strong>Password</strong>
+        <input type="password" name="password" ng-model="$ctrl.password" required>
+        <div ng-messages="loginform.password.$error" ng-show="loginform.password.$touched">
+            <div ng-message="required">Fill the field</div>
+        </div>
+    </div>
+    <button type="submit" ng-disabled="!loginform.password.$valid" class="main">Login</button>
+</login>

@@ -1,0 +1,64 @@
+h1 {
+	font-family: roboto;
+	padding: 0.5em 0;
+	color: #57A4DB;
+	font-size: 40px;
+	text-align: center
+}
+
+.common {
+	margin: auto; 
+	width: 20em
+}
+
+.main, .login {	margin: auto; width: 20em }
+
+span {
+	margin-right: 0.55em;
+}
+
+span:first-child {
+	margin-right: 2em;
+}
+
+.image { float:left; margin: 0 2em 0 1em; width: 5em; height: 5em; border-radius: 200px }
+
+hr {
+	margin: 2.5em 0 1em 0;
+}
+
+form.create {
+	margin: auto; 
+	width: 22em;
+}
+
+.create input:focus {
+	outline: none;
+}
+
+/*.create input {
+	float: right;
+}
+
+.create input:last-child {
+	float: left;
+}*/
+
+button.create{
+	float: left; 
+	margin-right: 1em;
+	padding: 10px;
+	width: 110px; 
+	text-align: center;
+	border: none;
+	background-color: #eeeeee;
+}
+
+.ng-active {
+	float: right;
+	color: rgba(255, 0, 0, 0.5);
+}
+
+.create input.ng-invalid.ng-touched {
+	background-color: rgba(255, 0, 0, 0.5);
+}
