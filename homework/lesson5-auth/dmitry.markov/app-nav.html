@@ -1,0 +1,34 @@
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+
+    <div class="navbar-header">
+      <button ng-click="isNavCollapsed = !isNavCollapsed"
+              type="button"
+              class="navbar-toggle collapsed">Меню</button>
+      <a ui-sref="user.list"
+         class="navbar-brand">UserList App</a>
+    </div>
+
+    <div uib-collapse="!isNavCollapsed"
+         class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li ui-sref-active="active"
+            title="Показать пользователей">
+          <a ui-sref="user.list"><span class="glyphicon glyphicon-user"></span> Пользователи</a>
+        </li>
+        <li ng-if="!$ctrl.isAuthed"
+            ui-sref-active="active"
+            title="Войти">
+          <a ui-sref="login"><span class="glyphicon glyphicon-log-in"></span> Логин</a>
+        </li>
+        <li ng-if="$ctrl.isAuthed"
+            ui-sref-active="active"
+            title="Выйти">
+          <a ng-click="$ctrl.logout($event)"
+             ui-sref="login"><span class="glyphicon glyphicon-log-out"></span> Выйти</a>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+  </div><!-- /.container-fluid -->
+</nav>
