@@ -28,3 +28,4 @@
   Max Ivanov https://github.com/chat-du-cheshire/ng-course
   - [Maxim Marina] [https://github.com/maximmarina/angular-mailbox] [http://mailbox.marinams.ru/]
   - Юрий Масьян; github: https://github.com/YuriMasyanISS/angularjs-course-project;
+  - Людмила Куприянова  https://github.com/l-kupr/l-kupr.github.io  https://l-kupr.github.io
