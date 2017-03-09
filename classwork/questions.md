@@ -1,16 +1,27 @@
 1. Вопросы производительности AngularJs +
 
 
-2. Переход на Angular2
-3. Какой style guide использовать
+2. Переход на Angular2 +
+3. Какой style guide использовать +
 4. Способы синхронизации приложения работающего в разных вкладках
-5. Angular и TypeScript хотя бы в общих чертах
+
+    app  <--СОКЕТЫ-->  app
+	$scope.$apply();
+
+5. Angular и TypeScript хотя бы в общих чертах +
 7. Сервис промисов $q.
+
+     --> Promise (EcmaSCript 2015) - https://learn.javascript.ru/promise
+
 + WebPack для сборки. ngAnnotate
 + Собираем тесты с помощью webpack
 + Проверяем покрытие кода тестами
-- Функциональные(e2e) тесты с использованием protractor.
 
+
+- Функциональные(e2e) тесты с использованием protractor. +
+
+<div ng-bind="userName"></div>
+<div>{{userName}}</div>
 
 
 

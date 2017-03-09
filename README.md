@@ -30,3 +30,6 @@
   - [Юрий Масьян] [github: https://github.com/YuriMasyanISS/angularjs-course-project] [github-pages: https://yurimasyaniss.github.io];
   - [Dmitry Markov] [https://github.com/DmitryMarkov/bookmark-angular] [https://dmitrymarkov.github.io/bookmark-angular/dist/]
   - Людмила Куприянова  https://github.com/l-kupr/l-kupr.github.io  https://l-kupr.github.io
+
+  [later]
+    - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
