@@ -27,6 +27,6 @@
   - [ИМЯ ФАМИЛИЯ] [github]  [github-pages]
   Max Ivanov https://github.com/chat-du-cheshire/ng-course
   - [Maxim Marina] [https://github.com/maximmarina/angular-mailbox] [http://mailbox.marinams.ru/]
-  - Юрий Масьян; github: https://github.com/YuriMasyanISS/angularjs-course-project;
+  - [Юрий Масьян] [github: https://github.com/YuriMasyanISS/angularjs-course-project] [github-pages: https://yurimasyaniss.github.io];
   - [Dmitry Markov] [https://github.com/DmitryMarkov/bookmark-angular] [https://dmitrymarkov.github.io/bookmark-angular/dist/]
   - Людмила Куприянова  https://github.com/l-kupr/l-kupr.github.io  https://l-kupr.github.io
